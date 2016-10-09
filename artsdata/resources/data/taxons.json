@@ -1,0 +1,824 @@
+{
+  "Taxons": [
+    {
+      "Id": 3846,
+      "DateTimeUpdated": "2016-01-23T17:46:25.603166",
+      "CategoryValue": "species",
+      "TaxonId": 3846,
+      "ValidScientificNameId": 3918,
+      "ValidScientificName": "Pandion haliaetus",
+      "ValidScientificNameAuthorship": "(Linnaeus, 1758)",
+      "PrefferedPopularname": "fiskeørn",
+      "TaxonGroup": "Fugler",
+      "TaxonGroupId": 8,
+      "ExistsInCountry": true,
+      "ScientificNames": [
+        {
+          "ScientificNameId": 3918,
+          "Accepted": true,
+          "ScientificName": "Pandion haliaetus",
+          "ScientificNameAuthorship": "(Linnaeus, 1758)"
+        }
+      ],
+      "PopularNames": [
+        {
+          "vernacularNameID": 1777,
+          "language": "nb-NO",
+          "Name": "fiskeørn",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 1777,
+          "language": "nn-NO",
+          "Name": "fiskeørn",
+          "Preffered": true
+        }
+      ],
+      "TaxonTags": [
+        {
+          "TagGroup": "Norsk Rødliste 2015",
+          "Prefix": "RL2015",
+          "Context": "N",
+          "Tag": "NT",
+          "Url": "http://data.artsdatabanken.no/Rodliste2015/rodliste2015/Norge/3918",
+          "ScientificName": ""
+        }
+      ],
+      "ScientificNameIdHiarchy": [
+        3918,
+        3917,
+        3916,
+        256,
+        252,
+        127715,
+        196,
+        1
+      ],
+      "TaxonIdHiarchy": [
+        3846,
+        3845,
+        3844,
+        256,
+        252,
+        84544,
+        196,
+        1
+      ],
+      "Kingdom": "Animalia",
+      "Phylum": "Chordata",
+      "Class": "Aves",
+      "Order": "Ciconiiformes",
+      "Family": "Pandionidae",
+      "Genus": "Pandion",
+      "Species": "haliaetus",
+      "SubSpecies": null,
+      "IsDeleted": false
+    },
+    {
+      "Id": 77987,
+      "DateTimeUpdated": "2016-01-23T17:46:28.8315301",
+      "CategoryValue": "species",
+      "TaxonId": 77987,
+      "ValidScientificNameId": 119762,
+      "ValidScientificName": "Bombus subterraneus",
+      "ValidScientificNameAuthorship": "(Linnaeus, 1758)",
+      "PrefferedPopularname": "slåttehumle",
+      "TaxonGroup": "Veps",
+      "TaxonGroupId": 28,
+      "ExistsInCountry": true,
+      "ScientificNames": [
+        {
+          "ScientificNameId": 119762,
+          "Accepted": true,
+          "ScientificName": "Bombus subterraneus",
+          "ScientificNameAuthorship": "(Linnaeus, 1758)"
+        }
+      ],
+      "PopularNames": [
+        {
+          "vernacularNameID": 26803,
+          "language": "nb-NO",
+          "Name": "slåttehumle",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 26803,
+          "language": "nn-NO",
+          "Name": "slåttehumle",
+          "Preffered": true
+        }
+      ],
+      "TaxonTags": [
+        {
+          "TagGroup": "Norsk Rødliste 2015",
+          "Prefix": "RL2015",
+          "Context": "N",
+          "Tag": "VU",
+          "Url": "http://data.artsdatabanken.no/Rodliste2015/rodliste2015/Norge/119762",
+          "ScientificName": ""
+        }
+      ],
+      "ScientificNameIdHiarchy": [
+        119762,
+        127407,
+        119737,
+        119736,
+        119728,
+        119685,
+        119359,
+        118964,
+        112787,
+        99,
+        89,
+        39,
+        1
+      ],
+      "TaxonIdHiarchy": [
+        77987,
+        84276,
+        77962,
+        77961,
+        77953,
+        77914,
+        77599,
+        77221,
+        71880,
+        99,
+        89,
+        39,
+        1
+      ],
+      "Kingdom": "Animalia",
+      "Phylum": "Arthropoda",
+      "Class": "Insecta",
+      "Order": "Hymenoptera",
+      "Family": "Apidae",
+      "Genus": "Bombus",
+      "Species": "subterraneus",
+      "SubSpecies": null,
+      "IsDeleted": false
+    },
+    {
+      "Id": 31113,
+      "DateTimeUpdated": "2016-01-23T17:43:26.8896118",
+      "CategoryValue": "species",
+      "TaxonId": 31113,
+      "ValidScientificNameId": 47969,
+      "ValidScientificName": "Erinaceus europaeus",
+      "ValidScientificNameAuthorship": "Linnaeus, 1758",
+      "PrefferedPopularname": "piggsvin",
+      "TaxonGroup": "Pattedyr",
+      "TaxonGroupId": 23,
+      "ExistsInCountry": true,
+      "ScientificNames": [
+        {
+          "ScientificNameId": 47969,
+          "Accepted": true,
+          "ScientificName": "Erinaceus europaeus",
+          "ScientificNameAuthorship": "Linnaeus, 1758"
+        }
+      ],
+      "PopularNames": [
+        {
+          "vernacularNameID": 4520,
+          "language": "nb-NO",
+          "Name": "piggsvin",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 4520,
+          "language": "nn-NO",
+          "Name": "piggsvin",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 4521,
+          "language": "nb-NO",
+          "Name": "pinnsvin",
+          "Preffered": false
+        },
+        {
+          "vernacularNameID": 4521,
+          "language": "nn-NO",
+          "Name": "pinnsvin",
+          "Preffered": false
+        }
+      ],
+      "TaxonTags": [
+        {
+          "TagGroup": "Norsk Rødliste 2015",
+          "Prefix": "RL2015",
+          "Context": "N",
+          "Tag": "LC",
+          "Url": "http://data.artsdatabanken.no/Rodliste2015/rodliste2015/Norge/47969",
+          "ScientificName": ""
+        }
+      ],
+      "ScientificNameIdHiarchy": [
+        47969,
+        47968,
+        47967,
+        47966,
+        304,
+        293,
+        127715,
+        196,
+        1
+      ],
+      "TaxonIdHiarchy": [
+        31113,
+        31112,
+        31111,
+        31110,
+        304,
+        293,
+        84544,
+        196,
+        1
+      ],
+      "Kingdom": "Animalia",
+      "Phylum": "Chordata",
+      "Class": "Mammalia",
+      "Order": "Erinaceomorpha",
+      "Family": "Erinaceidae",
+      "Genus": "Erinaceus",
+      "Species": "europaeus",
+      "SubSpecies": null,
+      "IsDeleted": false
+    },
+    {
+      "Id": 31133,
+      "DateTimeUpdated": "2016-01-23T17:44:44.6236571",
+      "CategoryValue": "species",
+      "TaxonId": 31133,
+      "ValidScientificNameId": 47990,
+      "ValidScientificName": "Nyctalus noctula",
+      "ValidScientificNameAuthorship": "(Schreber, 1774)",
+      "PrefferedPopularname": "storflaggermus",
+      "TaxonGroup": "Pattedyr",
+      "TaxonGroupId": 23,
+      "ExistsInCountry": true,
+      "ScientificNames": [
+        {
+          "ScientificNameId": 47990,
+          "Accepted": true,
+          "ScientificName": "Nyctalus noctula",
+          "ScientificNameAuthorship": "(Schreber, 1774)"
+        }
+      ],
+      "PopularNames": [
+        {
+          "vernacularNameID": 4542,
+          "language": "nb-NO",
+          "Name": "storflaggermus",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 4542,
+          "language": "nn-NO",
+          "Name": "storflaggermus",
+          "Preffered": true
+        }
+      ],
+      "TaxonTags": [
+        {
+          "TagGroup": "Norsk Rødliste 2015",
+          "Prefix": "RL2015",
+          "Context": "N",
+          "Tag": "VU",
+          "Url": "http://data.artsdatabanken.no/Rodliste2015/rodliste2015/Norge/47990",
+          "ScientificName": ""
+        }
+      ],
+      "ScientificNameIdHiarchy": [
+        47990,
+        47989,
+        47988,
+        47984,
+        47983,
+        298,
+        293,
+        127715,
+        196,
+        1
+      ],
+      "TaxonIdHiarchy": [
+        31133,
+        31132,
+        31131,
+        31127,
+        31126,
+        298,
+        293,
+        84544,
+        196,
+        1
+      ],
+      "Kingdom": "Animalia",
+      "Phylum": "Chordata",
+      "Class": "Mammalia",
+      "Order": "Chiroptera",
+      "Family": "Vespertilionidae",
+      "Genus": "Nyctalus",
+      "Species": "noctula",
+      "SubSpecies": null,
+      "IsDeleted": false
+    },
+    {
+      "Id": 31140,
+      "DateTimeUpdated": "2016-01-23T17:44:12.9642471",
+      "CategoryValue": "species",
+      "TaxonId": 31140,
+      "ValidScientificNameId": 47997,
+      "ValidScientificName": "Barbastella barbastellus",
+      "ValidScientificNameAuthorship": "(Schreber, 1774)",
+      "PrefferedPopularname": "bredøre",
+      "TaxonGroup": "Pattedyr",
+      "TaxonGroupId": 23,
+      "ExistsInCountry": true,
+      "ScientificNames": [
+        {
+          "ScientificNameId": 47997,
+          "Accepted": true,
+          "ScientificName": "Barbastella barbastellus",
+          "ScientificNameAuthorship": "(Schreber, 1774)"
+        }
+      ],
+      "PopularNames": [
+        {
+          "vernacularNameID": 4547,
+          "language": "nb-NO",
+          "Name": "bredøre",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 4548,
+          "language": "nn-NO",
+          "Name": "breiøyre",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 4549,
+          "language": "nb-NO",
+          "Name": "bredøreflaggermus",
+          "Preffered": false
+        },
+        {
+          "vernacularNameID": 4550,
+          "language": "nn-NO",
+          "Name": "breiøyreflaggermus",
+          "Preffered": false
+        },
+        {
+          "vernacularNameID": 4551,
+          "language": "nb-NO",
+          "Name": "bredøret flaggermus",
+          "Preffered": false
+        },
+        {
+          "vernacularNameID": 4552,
+          "language": "nn-NO",
+          "Name": "breiøyra flaggermus",
+          "Preffered": false
+        }
+      ],
+      "TaxonTags": [
+        {
+          "TagGroup": "Norsk Rødliste 2015",
+          "Prefix": "RL2015",
+          "Context": "N",
+          "Tag": "CR",
+          "Url": "http://data.artsdatabanken.no/Rodliste2015/rodliste2015/Norge/47997",
+          "ScientificName": ""
+        }
+      ],
+      "ScientificNameIdHiarchy": [
+        47997,
+        47996,
+        47995,
+        47984,
+        47983,
+        298,
+        293,
+        127715,
+        196,
+        1
+      ],
+      "TaxonIdHiarchy": [
+        31140,
+        31139,
+        31138,
+        31127,
+        31126,
+        298,
+        293,
+        84544,
+        196,
+        1
+      ],
+      "Kingdom": "Animalia",
+      "Phylum": "Chordata",
+      "Class": "Mammalia",
+      "Order": "Chiroptera",
+      "Family": "Vespertilionidae",
+      "Genus": "Barbastella",
+      "Species": "barbastellus",
+      "SubSpecies": null,
+      "IsDeleted": false
+    },
+    {
+      "Id": 31237,
+      "DateTimeUpdated": "2015-10-25T00:19:56.9121613",
+      "CategoryValue": "species",
+      "TaxonId": 31237,
+      "ValidScientificNameId": 48099,
+      "ValidScientificName": "Sus scrofa",
+      "ValidScientificNameAuthorship": "Linnaeus, 1758",
+      "PrefferedPopularname": "villsvin",
+      "TaxonGroup": "Pattedyr",
+      "TaxonGroupId": 23,
+      "ExistsInCountry": true,
+      "ScientificNames": [
+        {
+          "ScientificNameId": 48099,
+          "Accepted": true,
+          "ScientificName": "Sus scrofa",
+          "ScientificNameAuthorship": "Linnaeus, 1758"
+        }
+      ],
+      "PopularNames": [
+        {
+          "vernacularNameID": 25809,
+          "language": "nb-NO",
+          "Name": "villsvin",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 25809,
+          "language": "nn-NO",
+          "Name": "villsvin",
+          "Preffered": true
+        }
+      ],
+      "TaxonTags": [
+        {
+          "TagGroup": "Fremmede arter 2012",
+          "Prefix": "FA2012",
+          "Context": "N",
+          "Tag": "SE",
+          "Url": "http://databank.artsdatabanken.no/FremmedArt2012/N31237",
+          "ScientificName": ""
+        }
+      ],
+      "ScientificNameIdHiarchy": [
+        48099,
+        48098,
+        48097,
+        295,
+        293,
+        127715,
+        196,
+        1
+      ],
+      "TaxonIdHiarchy": [
+        31237,
+        31236,
+        31235,
+        295,
+        293,
+        84544,
+        196,
+        1
+      ],
+      "Kingdom": "Animalia",
+      "Phylum": "Chordata",
+      "Class": "Mammalia",
+      "Order": "Artiodactyla",
+      "Family": "Suidae",
+      "Genus": "Sus",
+      "Species": "scrofa",
+      "SubSpecies": null,
+      "IsDeleted": false
+    },
+    {
+      "Id": 31267,
+      "DateTimeUpdated": "2015-10-25T00:21:23.5998031",
+      "CategoryValue": "species",
+      "TaxonId": 31267,
+      "ValidScientificNameId": 48130,
+      "ValidScientificName": "Ovibos moschatus",
+      "ValidScientificNameAuthorship": "(Zimmermann, 1780)",
+      "PrefferedPopularname": "moskusfe",
+      "TaxonGroup": "Pattedyr",
+      "TaxonGroupId": 23,
+      "ExistsInCountry": true,
+      "ScientificNames": [
+        {
+          "ScientificNameId": 48130,
+          "Accepted": true,
+          "ScientificName": "Ovibos moschatus",
+          "ScientificNameAuthorship": "(Zimmermann, 1780)"
+        }
+      ],
+      "PopularNames": [
+        {
+          "vernacularNameID": 26572,
+          "language": "nb-NO",
+          "Name": "moskusfe",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 26572,
+          "language": "nn-NO",
+          "Name": "moskusfe",
+          "Preffered": true
+        }
+      ],
+      "TaxonTags": [
+        {
+          "TagGroup": "Fremmede arter 2012",
+          "Prefix": "FA2012",
+          "Context": "N",
+          "Tag": "LO",
+          "Url": "http://databank.artsdatabanken.no/FremmedArt2012/N31267",
+          "ScientificName": ""
+        }
+      ],
+      "ScientificNameIdHiarchy": [
+        48130,
+        48129,
+        48126,
+        48120,
+        295,
+        293,
+        127715,
+        196,
+        1
+      ],
+      "TaxonIdHiarchy": [
+        31267,
+        31266,
+        31263,
+        31257,
+        295,
+        293,
+        84544,
+        196,
+        1
+      ],
+      "Kingdom": "Animalia",
+      "Phylum": "Chordata",
+      "Class": "Mammalia",
+      "Order": "Artiodactyla",
+      "Family": "Bovidae",
+      "Genus": "Ovibos",
+      "Species": "moschatus",
+      "SubSpecies": null,
+      "IsDeleted": false
+    },
+    {
+      "Id": 31163,
+      "DateTimeUpdated": "2016-01-23T17:46:16.7457334",
+      "CategoryValue": "species",
+      "TaxonId": 31163,
+      "ValidScientificNameId": 48020,
+      "ValidScientificName": "Lynx lynx",
+      "ValidScientificNameAuthorship": "(Linnaeus, 1758)",
+      "PrefferedPopularname": "gaupe",
+      "TaxonGroup": "Pattedyr",
+      "TaxonGroupId": 23,
+      "ExistsInCountry": true,
+      "ScientificNames": [
+        {
+          "ScientificNameId": 48020,
+          "Accepted": true,
+          "ScientificName": "Lynx lynx",
+          "ScientificNameAuthorship": "(Linnaeus, 1758)"
+        }
+      ],
+      "PopularNames": [
+        {
+          "vernacularNameID": 4571,
+          "language": "nb-NO",
+          "Name": "gaupe",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 4571,
+          "language": "nn-NO",
+          "Name": "gaupe",
+          "Preffered": true
+        }
+      ],
+      "TaxonTags": [
+        {
+          "TagGroup": "Norsk Rødliste 2015",
+          "Prefix": "RL2015",
+          "Context": "N",
+          "Tag": "EN",
+          "Url": "http://data.artsdatabanken.no/Rodliste2015/rodliste2015/Norge/48020",
+          "ScientificName": ""
+        }
+      ],
+      "ScientificNameIdHiarchy": [
+        48020,
+        48019,
+        48016,
+        48015,
+        48014,
+        296,
+        293,
+        127715,
+        196,
+        1
+      ],
+      "TaxonIdHiarchy": [
+        31163,
+        31162,
+        31159,
+        31158,
+        31157,
+        296,
+        293,
+        84544,
+        196,
+        1
+      ],
+      "Kingdom": "Animalia",
+      "Phylum": "Chordata",
+      "Class": "Mammalia",
+      "Order": "Carnivora",
+      "Family": "Felidae",
+      "Genus": "Lynx",
+      "Species": "lynx",
+      "SubSpecies": null,
+      "IsDeleted": false
+    },
+    {
+      "Id": 31292,
+      "DateTimeUpdated": "2016-01-23T17:44:16.819677",
+      "CategoryValue": "species",
+      "TaxonId": 31292,
+      "ValidScientificNameId": 48155,
+      "ValidScientificName": "Delphinus delphis",
+      "ValidScientificNameAuthorship": "Linnaeus, 1758",
+      "PrefferedPopularname": "gulflankedelfin",
+      "TaxonGroup": "Pattedyr",
+      "TaxonGroupId": 23,
+      "ExistsInCountry": true,
+      "ScientificNames": [
+        {
+          "ScientificNameId": 48155,
+          "Accepted": true,
+          "ScientificName": "Delphinus delphis",
+          "ScientificNameAuthorship": "Linnaeus, 1758"
+        }
+      ],
+      "PopularNames": [
+        {
+          "vernacularNameID": 4675,
+          "language": "nb-NO",
+          "Name": "gulflankedelfin",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 4675,
+          "language": "nn-NO",
+          "Name": "gulflankedelfin",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 4676,
+          "language": "nb-NO",
+          "Name": "delfin",
+          "Preffered": false
+        },
+        {
+          "vernacularNameID": 4676,
+          "language": "nn-NO",
+          "Name": "delfin",
+          "Preffered": false
+        }
+      ],
+      "TaxonTags": [
+        {
+          "TagGroup": "Norsk Rødliste 2015",
+          "Prefix": "RL2015",
+          "Context": "N",
+          "Tag": "NA",
+          "Url": "http://data.artsdatabanken.no/Rodliste2015/rodliste2015/Norge/48155",
+          "ScientificName": ""
+        }
+      ],
+      "ScientificNameIdHiarchy": [
+        48155,
+        48153,
+        48152,
+        48151,
+        297,
+        293,
+        127715,
+        196,
+        1
+      ],
+      "TaxonIdHiarchy": [
+        31292,
+        31290,
+        31289,
+        31288,
+        297,
+        293,
+        84544,
+        196,
+        1
+      ],
+      "Kingdom": "Animalia",
+      "Phylum": "Chordata",
+      "Class": "Mammalia",
+      "Order": "Cetacea",
+      "Family": "Delphinidae",
+      "Genus": "Delphinus",
+      "Species": "delphis",
+      "SubSpecies": null,
+      "IsDeleted": false
+    },
+    {
+      "Id": 31222,
+      "DateTimeUpdated": "2016-01-23T17:46:21.4196328",
+      "CategoryValue": "species",
+      "TaxonId": 31222,
+      "ValidScientificNameId": 48083,
+      "ValidScientificName": "Mustela nivalis",
+      "ValidScientificNameAuthorship": "Linnaeus, 1766",
+      "PrefferedPopularname": "snømus",
+      "TaxonGroup": "Pattedyr",
+      "TaxonGroupId": 23,
+      "ExistsInCountry": true,
+      "ScientificNames": [
+        {
+          "ScientificNameId": 48083,
+          "Accepted": true,
+          "ScientificName": "Mustela nivalis",
+          "ScientificNameAuthorship": "Linnaeus, 1766"
+        }
+      ],
+      "PopularNames": [
+        {
+          "vernacularNameID": 4608,
+          "language": "nb-NO",
+          "Name": "snømus",
+          "Preffered": true
+        },
+        {
+          "vernacularNameID": 4608,
+          "language": "nn-NO",
+          "Name": "snømus",
+          "Preffered": true
+        }
+      ],
+      "TaxonTags": [
+        {
+          "TagGroup": "Norsk Rødliste 2015",
+          "Prefix": "RL2015",
+          "Context": "N",
+          "Tag": "LC",
+          "Url": "http://data.artsdatabanken.no/Rodliste2015/rodliste2015/Norge/48083",
+          "ScientificName": ""
+        }
+      ],
+      "ScientificNameIdHiarchy": [
+        48083,
+        48080,
+        48070,
+        48065,
+        48022,
+        296,
+        293,
+        127715,
+        196,
+        1
+      ],
+      "TaxonIdHiarchy": [
+        31222,
+        31219,
+        31209,
+        31204,
+        31165,
+        296,
+        293,
+        84544,
+        196,
+        1
+      ],
+      "Kingdom": "Animalia",
+      "Phylum": "Chordata",
+      "Class": "Mammalia",
+      "Order": "Carnivora",
+      "Family": "Mustelidae",
+      "Genus": "Mustela",
+      "Species": "nivalis",
+      "SubSpecies": null,
+      "IsDeleted": false
+    }
+  ]
+}
