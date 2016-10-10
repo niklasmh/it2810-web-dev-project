@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ListeContainer from './liste_container/ListeContainer'
+import ListeContainer from '../liste/ListeContainer'
 
 class ContentContainer extends Component {
   render() {

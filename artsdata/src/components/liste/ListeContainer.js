@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ListeElement from './liste_element/ListeElement'
-import ListeSearch from './liste_search/ListeSearch'
+import ListeElement from './ListeElement'
+import ListeSearch from './ListeSearch'
 
 class ListeContainer extends Component {
   constructor(props) {
