@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 
-const MenuButton = ({ btnText }) => {
-
-  let clickHandler = () => {
-    console.log(btnText)
+class MenuButton extends Component {
+  render() {
+    return (
+      <div>
+        <button onClick={ this.props.clickHandler }>{ this.props.btnText }</button>
+      </div>
+    )
   }
-
-  return (
-    <div>
-      <button onClick={ clickHandler }>{{ btnText }}</button>
-    </div>
-  )
 }
 
 export default MenuButton
