@@ -19,10 +19,10 @@ class ListeContainer extends Component {
       return response.json();
     })
     .then((data) => {
-      this.setState(Object.assign({}, self.state, { data: data }));
+      this.setState(Object.assign({}, this.state, { data: data }));
     })
     .catch((error) => {
-      this.setState(Object.assign({}, self.state, { error: error }));
+      this.setState(Object.assign({}, this.state, { error: error }));
     });
   }
 
