@@ -11,8 +11,7 @@ class Header extends Component {
     return(
       <div className="header">
         <h1>Sjeldne arter</h1>
-        <MenuButton clickHandler={ this.clickEvent } btnText="Knapp 1" />
-        <MenuButton clickHandler={ this.clickEvent } btnText="Knapp 2" />
+        <MenuButton clickHandler={ this.props.toggleHandler } btnText="Liste/Kart" />
       </div>
     )
   }
