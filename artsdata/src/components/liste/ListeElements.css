@@ -1,0 +1,18 @@
+.listeElements {
+  display: block;
+  min-height: 30em;
+  height: auto;
+  max-height: 30em;
+  min-width: 50em;
+  width: auto;
+  max-width: auto;
+  background-color: beige;
+  /* Seting the list-elements position on the page*/
+  margin-right: 50%;
+  margin-left: 30%;
+}
+
+li {
+  color: rgb(19, 205, 210);
+
+}

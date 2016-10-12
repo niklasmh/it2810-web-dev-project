@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './ListeElements.css'
 
 class ListeElement extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class ListeElement extends Component {
 
   render() {
     return(
-      <div>
+      <div className="listeElement">
         <li> {this.props.name} </li>
       </div>
     );
