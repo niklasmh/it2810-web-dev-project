@@ -56,9 +56,10 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/25451"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": null
-    },{
+    },
+    {
       "species": null,
       "Id": "observations/nof/so-birds/15054010",
       "Institution": null,
@@ -114,7 +115,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": null
     },
     {
@@ -173,7 +174,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "feeding"
       ]
@@ -234,7 +235,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "stationary"
       ]
@@ -295,7 +296,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "feeding"
       ]
@@ -356,7 +357,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "moving"
       ]
@@ -417,7 +418,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": null
     },
     {
@@ -476,7 +477,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "feeding"
       ]
@@ -537,7 +538,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "feeding"
       ]
@@ -598,7 +599,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "feeding"
       ]
@@ -659,7 +660,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "feeding"
       ]
@@ -720,7 +721,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "feeding"
       ]
@@ -781,7 +782,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "feeding"
       ]
@@ -842,7 +843,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "feeding"
       ]
@@ -903,7 +904,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34456"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": null
     },
     {
@@ -962,7 +963,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34456"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": null
     },
     {
@@ -1021,7 +1022,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34456"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": null
     },
     {
@@ -1080,7 +1081,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": null
     },
     {
@@ -1139,7 +1140,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": null
     },
     {
@@ -1198,7 +1199,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": null
     },
     {
@@ -1257,7 +1258,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": null
     },
     {
@@ -1316,7 +1317,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "feeding"
       ]
@@ -1377,7 +1378,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "moving"
       ]
@@ -1438,7 +1439,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "moving"
       ]
@@ -1499,7 +1500,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "moving"
       ]
@@ -1560,7 +1561,7 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "moving"
       ]
@@ -1621,10 +1622,11 @@
           "Url": "http://www.artsportalen.artsdatabanken.no/#/Rodliste2010/Vurderinger/dummy/34381"
         }
       ],
-      "ThumbImgUrls": [ ],
+      "ThumbImgUrls": [],
       "Behavior": [
         "moving"
       ]
-    },
+    }
+  ],
   "TotalCount": 27
 }
