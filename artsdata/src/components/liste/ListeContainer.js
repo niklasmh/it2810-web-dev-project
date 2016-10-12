@@ -6,9 +6,16 @@ class ListeContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: {'Observations': []}
+      data: {'Observations': []},
+      searchFilter: ''
     }
     this.fetchHandler()
+  }
+
+  changeEvent(event) {
+    this.setState({
+      searchFilter: event.target.value
+    })
   }
 
   fetchHandler() {
@@ -28,12 +35,15 @@ class ListeContainer extends Component {
 
   render() {
     var rows = []
-    for (var i = 0; i < this.state.data['Observations'].length; i++)
-      rows.push(<ListeElement name={ this.state.data['Observations'][i]['Name'] } key={ i } />)
-    
+    let observationsFiltered = this.state.data['Observations'].filter(
+      (item) => { return item.Name.indexOf(this.state.searchFilter) !== -1}
+    )
+    for (var i = 0; i < observationsFiltered.length; i++)
+      rows.push(<ListeElement name={ observationsFiltered[i].Name } key={ i } />)
+
     return(
       <div>
-        <ListeSearch />
+        <ListeSearch changeHandler={ this.changeEvent.bind(this) } />
         <ul>
         {rows}
         </ul>

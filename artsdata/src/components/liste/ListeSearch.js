@@ -4,7 +4,7 @@ class ListeSearch extends Component {
   render() {
     return(
       <div>
-        <input type="text" placeholder="search" />
+        <input onChange={ this.props.changeHandler } type="text" placeholder="search" />
       </div>
     )
   }
