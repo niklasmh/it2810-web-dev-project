@@ -10,7 +10,7 @@ class Header extends Component {
   render() {
     return(
       <div className="header">
-        <h1>OVERSKRIFT OOT OOT OOT</h1>
+        <h1>Sjeldne arter</h1>
         <MenuButton clickHandler={ this.clickEvent } btnText="Knapp 1" />
         <MenuButton clickHandler={ this.clickEvent } btnText="Knapp 2" />
       </div>
