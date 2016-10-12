@@ -8,6 +8,8 @@ coverage
 
 # production
 build
+*/components/*.js
+*/components/*.js.map
 
 # misc
 .DS_Store
