@@ -9,22 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var platform_browser_1 = require("@angular/platform-browser");
-var app_component_1 = require("./app.component");
-var content_container_component_1 = require("./components/content/content-container.component");
-var liste_container_component_1 = require("./components/liste/liste-container.component");
-var AppModule = (function () {
-    function AppModule() {
+var ListeContainerComponent = (function () {
+    function ListeContainerComponent() {
+        this.searchFilter = '';
+        // constructor(private http: Http) {
+        //   this.data = this.fetchHandler();
+        //   console.log(this.data)
+        // }
+        //
+        // fetchHandler() {
+        //   return this.http.request('http://artskart2.artsdatabanken.no/api/observations/list?Taxons=31113,77987&pageSize=50')
+        //   .map(res => res.json());
+        // }
     }
-    return AppModule;
+    return ListeContainerComponent;
 }());
-AppModule = __decorate([
-    core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule],
-        declarations: [app_component_1.AppComponent, content_container_component_1.ContentContainerComponent, liste_container_component_1.ListeContainerComponent],
-        bootstrap: [app_component_1.AppComponent]
+ListeContainerComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'liste-container',
+        templateUrl: 'liste-container.component.html'
     }),
     __metadata("design:paramtypes", [])
-], AppModule);
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+], ListeContainerComponent);
+exports.ListeContainerComponent = ListeContainerComponent;
+//# sourceMappingURL=liste-container.component.js.map
