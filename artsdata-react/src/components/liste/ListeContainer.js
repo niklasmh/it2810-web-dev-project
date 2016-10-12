@@ -77,15 +77,16 @@ class ListeContainer extends Component {
     let observationsFiltered = this.state.data['Observations'].filter(
       (item) => { return item.Name.indexOf(this.state.searchFilter) !== -1}
     )
+
     for (var i = 0; i < observationsFiltered.length; i++)
-      rows.push(<ListeElement name={ observationsFiltered[i].Name } key={ i } />)
+      rows.push(<ListeElement data={ observationsFiltered[i] } id={ 'element-' + i } key={ i } />)
 
     return(
       <div>
         <ListeSearch changeHandler={ this.changeEvent.bind(this) } />
-        <ul>
-        {rows}
-        </ul>
+        <div>
+          {rows}
+        </div>
       </div>
     );
   }
