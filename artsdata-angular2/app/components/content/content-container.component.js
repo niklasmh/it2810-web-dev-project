@@ -17,7 +17,7 @@ var ContentContainerComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'content-container',
-            templateUrl: 'content-container.component.html'
+            templateUrl: 'content-container.component.html',
         }), 
         __metadata('design:paramtypes', [])
     ], ContentContainerComponent);

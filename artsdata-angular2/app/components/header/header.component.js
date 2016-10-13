@@ -17,11 +17,10 @@ var HeaderComponent = (function () {
             moduleId: module.id,
             selector: 'header',
             templateUrl: 'header.component.html'
-        }),
+        }), 
         __metadata('design:paramtypes', [])
     ], HeaderComponent);
     return HeaderComponent;
 }());
 exports.HeaderComponent = HeaderComponent;
-
 //# sourceMappingURL=header.component.js.map

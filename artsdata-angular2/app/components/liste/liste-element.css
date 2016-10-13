@@ -1,0 +1,12 @@
+.listeElements {
+  display: block;
+  min-height: 30em;
+  height: auto;
+  max-height: 30em;
+  min-width: 50em;
+  width: auto;
+  max-width: auto;
+  /* Seting the list-elements position on the page*/
+  margin-right: 50%;
+
+}
