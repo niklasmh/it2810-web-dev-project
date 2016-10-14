@@ -19,6 +19,11 @@ export class ListeContainerComponent {
     console.log(this.dataValues);
   }
 
+  searchFieldUpdate(event:any) {
+    this.searchFilter = event.target.value;
+    console.log(this.searchFilter);
+  }
+
 
   getData() {
     this.http.get('http://artskart2.artsdatabanken.no/api/observations/list?Taxons=31113,77987&pageSize=50')

@@ -19,6 +19,10 @@ var ListeContainerComponent = (function () {
         this.data = this.getData();
         console.log(this.dataValues);
     }
+    ListeContainerComponent.prototype.searchFieldUpdate = function (event) {
+        this.searchFilter = event.target.value;
+        console.log(this.searchFilter);
+    };
     ListeContainerComponent.prototype.getData = function () {
         var _this = this;
         this.http.get('http://artskart2.artsdatabanken.no/api/observations/list?Taxons=31113,77987&pageSize=50')
