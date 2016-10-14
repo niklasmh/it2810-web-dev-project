@@ -1,9 +1,11 @@
 import {Component, Input, ChangeDetectorRef} from "@angular/core";
 import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
+//import { FilterPipe } from "../../common/filter.pipe";
 
 @Component({
   moduleId: module.id,
+  //pipes: [ FilterPipe ],
   selector: 'liste-container',
   templateUrl: 'liste-container.component.html'
 })
@@ -13,10 +15,19 @@ export class ListeContainerComponent {
   data: any;
   @Input()
   dataValues: any= [];
+  filteredDataValues: any = [];
 
   constructor(private http: Http) {
     this.data = this.getData();
     console.log(this.dataValues);
+  }
+
+  searchFieldUpdate(event:any) {
+    this.searchFilter = event.target.value;
+    this.filteredDataValues = this.dataValues.filter(
+      (item) => {return item.name.indexOf(this.searchFilter) !== -1}
+    )
+    console.log(this.searchFilter);
   }
 
 

@@ -11,7 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var HeaderComponent = (function () {
     function HeaderComponent() {
+        this.toggleChange = new core_1.EventEmitter();
     }
+    HeaderComponent.prototype.clicked = function () {
+        this.toggleChange.emit();
+    };
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], HeaderComponent.prototype, "toggleChange", void 0);
     HeaderComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

@@ -1,4 +1,7 @@
-<header>Loading...</header>
+<header (toggleChange)="toggleEvent($event)">Loading...</header>
+
 <content-container>Loading...</content-container>
 
-<liste-container>Loading... liste</liste-container>
+<liste-container *ngIf="toggle" ></liste-container>
+
+<kart-container *ngIf="!toggle"></kart-container>

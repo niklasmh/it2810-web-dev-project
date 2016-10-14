@@ -1,5 +1,4 @@
-import { Component } from "@angular/core";
-
+import { Component, Output, EventEmitter } from "@angular/core";
 
 @Component ({
   moduleId: module.id,
@@ -7,6 +6,11 @@ import { Component } from "@angular/core";
   templateUrl: 'liste-search.component.html'
 })
 
-export class ListeSearchContainer {
-  
+
+export class ListeSearchComponent {
+  @Output() searchField = new EventEmitter();
+
+  onChangeHandeler(value){
+    this.searchField.emit(event);
+  }
 }

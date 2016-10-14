@@ -6,4 +6,15 @@ import './rxjs-operators';
   selector: 'my-app',
   templateUrl: 'app.component.html'
 })
-export class AppComponent { }
+export class AppComponent {
+  toggle: boolean = true;
+
+  toggleEvent() {
+    if (this.toggle) {
+      this.toggle = false;
+
+    } else {
+      this.toggle = true;
+    }
+  }
+}

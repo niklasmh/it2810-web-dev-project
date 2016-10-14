@@ -1,18 +1,38 @@
-.listeElements {
+.listeElement {
   display: block;
-  min-height: 30em;
-  height: auto;
-  max-height: 30em;
-  min-width: 50em;
-  width: auto;
-  max-width: auto;
-  background-color: beige;
-  /* Seting the list-elements position on the page*/
-  margin-right: 50%;
-  margin-left: 30%;
+  overflow: hidden;
+  border-radius: 4px;
+  margin: 4px;
 }
 
-li {
-  color: rgb(19, 205, 210);
+.toggle-checkbutton {
+  display: none;
+}
 
+.toggle-checkbutton + label {
+  padding: 6px 8px;
+  box-sizing: border-box;
+  display: inline-block;
+  background-color: #eee;
+  transition: width .2s ease-in-out;
+  cursor: pointer;
+}
+
+.toggle-checkbutton + label:hover {
+  background-color: #dee;
+}
+
+.toggle-checkbutton:checked + label {
+  width: 100%;
+}
+
+.toggle-checkbutton + label + .notes {
+  transition: width .2s ease-in-out;
+  background-color: #ddd;
+  display: none;
+}
+
+.toggle-checkbutton:checked + label + .notes {
+  display: block;
+  width: 100%;
 }

@@ -11,11 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var ButtonsComponent = (function () {
     function ButtonsComponent() {
+        this.toggleClick = new core_1.EventEmitter();
     }
+    ButtonsComponent.prototype.emittClick = function () {
+        this.toggleClick.emit();
+    };
     __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], ButtonsComponent.prototype, "buttonTxt", void 0);
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], ButtonsComponent.prototype, "toggleClick", void 0);
     ButtonsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

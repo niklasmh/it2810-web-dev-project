@@ -1,6 +1,8 @@
 <h1>hei</h1>
 <link rel="stylesheet" rel="">
 
+<liste-search (searchField)="searchFieldUpdate($event)">Loading...</liste-search>
+
 <div class="listeElements">
   <ul>
     <li *ngFor="let ob of dataValues.Observations"> {{ob.Name}} </li>

@@ -4,11 +4,16 @@
   padding: 5px;
   color: #e6e3f2;
   margin: -1em;
-
+  display: flex;
+  flex-flow: column;
+}
+.header > h1 {
+  display: flex;
+  justify-content: center;
 }
 
-.header > h1  {
-  margin-left: auto;
-  margin-right: auto;
-  font-family: sans-serif;
+.header > buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2px;
 }
