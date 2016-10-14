@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component ({
   moduleId: module.id,
@@ -7,6 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 
 export class ButtonsComponent {
-  @Input() buttonTxt: string;
-
+  @Output() toggleClick = new EventEmitter();
+  emittClick(){
+    this.toggleClick.emit()
+  }
 }

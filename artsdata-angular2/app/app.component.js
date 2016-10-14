@@ -12,7 +12,16 @@ var core_1 = require('@angular/core');
 require('./rxjs-operators');
 var AppComponent = (function () {
     function AppComponent() {
+        this.toggle = true;
     }
+    AppComponent.prototype.toggleEvent = function () {
+        if (this.toggle) {
+            this.toggle = false;
+        }
+        else {
+            this.toggle = true;
+        }
+    };
     AppComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
