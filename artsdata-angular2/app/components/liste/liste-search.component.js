@@ -14,7 +14,7 @@ var ListeSearchComponent = (function () {
         this.searchField = new core_1.EventEmitter();
     }
     ListeSearchComponent.prototype.onChangeHandeler = function (value) {
-        this.searchField = event.target.value;
+        this.searchField.emit(event);
     };
     __decorate([
         core_1.Output(), 

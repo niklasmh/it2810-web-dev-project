@@ -8,9 +8,9 @@ import { Component, Output, EventEmitter } from "@angular/core";
 
 
 export class ListeSearchComponent {
-  @Output() searchField = new EventEmitter<string>();
+  @Output() searchField = new EventEmitter();
 
   onChangeHandeler(value){
-    this.searchField = event.target.value;
+    this.searchField.emit(event);
   }
 }
