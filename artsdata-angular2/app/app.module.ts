@@ -5,12 +5,12 @@ import { HttpModule } from "@angular/http";
 import { ContentContainerComponent } from './components/content/content-container.component';
 import { ListeContainerComponent } from "./components/liste/liste-container.component";
 import { HeaderComponent } from "./components/header/header.component";
-import { ListeSearchContainer } from "./components/liste/liste-search.component";
+import { ListeSearchComponent } from "./components/liste/liste-search.component";
 
 
 @NgModule({
   imports:      [ BrowserModule, HttpModule ],
-  declarations: [ AppComponent, ContentContainerComponent, ListeContainerComponent, HeaderComponent, ListeSearchContainer],
+  declarations: [ AppComponent, ContentContainerComponent, ListeContainerComponent, HeaderComponent, ListeSearchComponent],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

@@ -8,26 +8,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var platform_browser_1 = require("@angular/platform-browser");
-var app_component_1 = require("./app.component");
+var core_1 = require('@angular/core');
+var platform_browser_1 = require('@angular/platform-browser');
+var app_component_1 = require('./app.component');
 var http_1 = require("@angular/http");
-var content_container_component_1 = require("./components/content/content-container.component");
+var content_container_component_1 = require('./components/content/content-container.component');
 var liste_container_component_1 = require("./components/liste/liste-container.component");
 var header_component_1 = require("./components/header/header.component");
 var liste_search_component_1 = require("./components/liste/liste-search.component");
 var AppModule = (function () {
     function AppModule() {
     }
+    AppModule = __decorate([
+        core_1.NgModule({
+            imports: [platform_browser_1.BrowserModule, http_1.HttpModule],
+            declarations: [app_component_1.AppComponent, content_container_component_1.ContentContainerComponent, liste_container_component_1.ListeContainerComponent, header_component_1.HeaderComponent, liste_search_component_1.ListeSearchComponent],
+            bootstrap: [app_component_1.AppComponent]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], AppModule);
     return AppModule;
 }());
-AppModule = __decorate([
-    core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule, http_1.HttpModule],
-        declarations: [app_component_1.AppComponent, content_container_component_1.ContentContainerComponent, liste_container_component_1.ListeContainerComponent, header_component_1.HeaderComponent, liste_search_component_1.ListeSearchContainer],
-        bootstrap: [app_component_1.AppComponent]
-    }),
-    __metadata("design:paramtypes", [])
-], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map
