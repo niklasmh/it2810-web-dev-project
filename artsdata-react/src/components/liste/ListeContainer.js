@@ -62,7 +62,7 @@ class ListeContainer extends Component {
   /**
    * 
    * 
-   * @returns
+   * @returns JSX element
    * 
    * @memberOf ListeContainer
    */
