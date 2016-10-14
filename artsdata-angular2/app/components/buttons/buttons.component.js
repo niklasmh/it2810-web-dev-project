@@ -9,19 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var ContentContainerComponent = (function () {
-    function ContentContainerComponent() {
-        this.toggle = true;
+var ButtonsComponent = (function () {
+    function ButtonsComponent() {
     }
-    ContentContainerComponent = __decorate([
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], ButtonsComponent.prototype, "buttonTxt", void 0);
+    ButtonsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'content-container',
-            templateUrl: 'content-container.component.html',
+            selector: 'buttons',
+            templateUrl: 'buttons.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], ContentContainerComponent);
-    return ContentContainerComponent;
+    ], ButtonsComponent);
+    return ButtonsComponent;
 }());
-exports.ContentContainerComponent = ContentContainerComponent;
-//# sourceMappingURL=content-container.component.js.map
+exports.ButtonsComponent = ButtonsComponent;
+//# sourceMappingURL=buttons.component.js.map

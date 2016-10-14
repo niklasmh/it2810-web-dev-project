@@ -9,19 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var ContentContainerComponent = (function () {
-    function ContentContainerComponent() {
-        this.toggle = true;
+var HeaderComponent = (function () {
+    function HeaderComponent() {
     }
-    ContentContainerComponent = __decorate([
+    HeaderComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'content-container',
-            templateUrl: 'content-container.component.html',
+            selector: 'header',
+            templateUrl: 'header.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], ContentContainerComponent);
-    return ContentContainerComponent;
+    ], HeaderComponent);
+    return HeaderComponent;
 }());
-exports.ContentContainerComponent = ContentContainerComponent;
-//# sourceMappingURL=content-container.component.js.map
+exports.HeaderComponent = HeaderComponent;
+//# sourceMappingURL=header.component.js.map
