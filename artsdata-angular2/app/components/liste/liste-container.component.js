@@ -11,16 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
+//import { FilterPipe } from "../../common/filter.pipe";
 var ListeContainerComponent = (function () {
     function ListeContainerComponent(http) {
         this.http = http;
         this.searchFilter = '';
         this.dataValues = [];
+        this.filteredDataValues = [];
         this.data = this.getData();
         console.log(this.dataValues);
     }
     ListeContainerComponent.prototype.searchFieldUpdate = function (event) {
+        var _this = this;
         this.searchFilter = event.target.value;
+        this.filteredDataValues = this.dataValues.filter(function (item) { return item.name.indexOf(_this.searchFilter) !== -1; });
         console.log(this.searchFilter);
     };
     ListeContainerComponent.prototype.getData = function () {
@@ -41,6 +45,7 @@ var ListeContainerComponent = (function () {
     ListeContainerComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
+            //pipes: [ FilterPipe ],
             selector: 'liste-container',
             templateUrl: 'liste-container.component.html'
         }), 

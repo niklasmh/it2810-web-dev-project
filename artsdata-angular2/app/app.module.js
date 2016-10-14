@@ -17,13 +17,14 @@ var liste_container_component_1 = require("./components/liste/liste-container.co
 var kart_container_component_1 = require("./components/kart/kart-container.component");
 var header_component_1 = require("./components/header/header.component");
 var buttons_component_1 = require("./components/buttons/buttons.component");
+var liste_search_component_1 = require("./components/liste/liste-search.component");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, http_1.HttpModule],
-            declarations: [app_component_1.AppComponent, content_container_component_1.ContentContainerComponent, kart_container_component_1.KartContainerComponent, liste_container_component_1.ListeContainerComponent, header_component_1.HeaderComponent, buttons_component_1.ButtonsComponent],
+            declarations: [app_component_1.AppComponent, content_container_component_1.ContentContainerComponent, kart_container_component_1.KartContainerComponent, liste_container_component_1.ListeContainerComponent, header_component_1.HeaderComponent, buttons_component_1.ButtonsComponent, liste_search_component_1.ListeSearchComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

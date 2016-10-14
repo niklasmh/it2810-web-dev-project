@@ -6,20 +6,13 @@ import { ContentContainerComponent } from './components/content/content-containe
 import { ListeContainerComponent } from "./components/liste/liste-container.component";
 import { KartContainerComponent } from "./components/kart/kart-container.component";
 import { HeaderComponent } from "./components/header/header.component";
-<<<<<<< HEAD
 import { ButtonsComponent } from "./components/buttons/buttons.component";
-=======
 import { ListeSearchComponent } from "./components/liste/liste-search.component";
->>>>>>> a2aeb357e372e3eb04bd1558da6dac5a61cb1a23
 
 
 @NgModule({
   imports:      [ BrowserModule, HttpModule ],
-<<<<<<< HEAD
-  declarations: [ AppComponent, ContentContainerComponent, KartContainerComponent, ListeContainerComponent, HeaderComponent, ButtonsComponent],
-=======
-  declarations: [ AppComponent, ContentContainerComponent, ListeContainerComponent, HeaderComponent, ListeSearchComponent],
->>>>>>> a2aeb357e372e3eb04bd1558da6dac5a61cb1a23
+  declarations: [ AppComponent, ContentContainerComponent, KartContainerComponent, ListeContainerComponent, HeaderComponent, ButtonsComponent, ListeSearchComponent],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
