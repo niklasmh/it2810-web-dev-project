@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Output, EventEmitter } from "@angular/core";
 
 @Component ({
   moduleId: module.id,
@@ -8,12 +8,9 @@ import { Component } from "@angular/core";
 
 
 export class ListeSearchComponent {
-  searchFil: string = '';
+  @Output() searchField = new EventEmitter<string>();
 
   onChangeHandeler(value){
-    this.searchFil = event.target.value;
-    console.log(this.searchFil);
+    this.searchField = event.target.value;
   }
-
-
 }
