@@ -1,5 +1,6 @@
 .listeElement {
-  display: block;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   border-radius: 4px;
   margin: 4px;
@@ -13,7 +14,7 @@
   padding: 6px 8px;
   box-sizing: border-box;
   display: inline-block;
-  background-color: #eee;
+  background-color: #ddd;
   transition: width .2s ease-in-out;
   cursor: pointer;
 }
@@ -28,11 +29,26 @@
 
 .toggle-checkbutton + label + .notes {
   transition: width .2s ease-in-out;
-  background-color: #ddd;
+  background-color: #eee;
   display: none;
 }
 
 .toggle-checkbutton:checked + label + .notes {
   display: block;
   width: 100%;
+}
+
+dl {
+  margin: 16px;
+}
+
+dd {
+  margin: 0 0 4px 160px;
+  display: inline-grid;
+  text-align: left;
+}
+
+dt {
+  font-weight: bold;
+  float: left;
 }
