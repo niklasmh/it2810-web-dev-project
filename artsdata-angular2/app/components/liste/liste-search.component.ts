@@ -6,11 +6,14 @@ import { Component, Output, EventEmitter } from "@angular/core";
   templateUrl: 'liste-search.component.html'
 })
 
-
 export class ListeSearchComponent {
   @Output() searchField = new EventEmitter();
 
-  onChangeHandeler(value){
-    this.searchField.emit(event);
+  ngOnInit () {
+    this.searchField.emit('');
+  }
+
+  onChangeHandler(value){
+    this.searchField.emit();
   }
 }

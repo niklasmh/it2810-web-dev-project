@@ -1,4 +1,4 @@
-.header {
+/*.header {
   display: flex;
   background-color: #1b143d;
   padding: 5px;
@@ -16,4 +16,11 @@
   display: flex;
   justify-content: center;
   margin-bottom: 2px;
+}
+*/
+.header {
+  background-color: #1b143d;
+  padding: 5px;
+  color: #e6e3f2;
+  margin-bottom: 10px;
 }
