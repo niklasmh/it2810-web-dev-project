@@ -1,6 +1,20 @@
 import { Component } from '@angular/core';
+import './rxjs-operators';
+
 @Component({
+  moduleId: module.id,
   selector: 'my-app',
-  template: '<h1>My First Angular App</h1>'
+  templateUrl: 'app.component.html'
 })
-export class AppComponent { }
+export class AppComponent {
+  toggle: boolean = true;
+
+  toggleEvent() {
+    if (this.toggle) {
+      this.toggle = false;
+
+    } else {
+      this.toggle = true;
+    }
+  }
+}

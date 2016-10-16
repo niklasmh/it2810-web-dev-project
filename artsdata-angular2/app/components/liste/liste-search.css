@@ -1,0 +1,11 @@
+.liste-search {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  margin: 4px;
+}
+
+input {
+  padding: 4px;
+  text-align: center;
+}

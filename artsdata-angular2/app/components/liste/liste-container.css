@@ -1,3 +1,7 @@
+.listview{
+  margin: 0 20%;
+}
+
 .listeElement {
   display: flex;
   flex-direction: column;

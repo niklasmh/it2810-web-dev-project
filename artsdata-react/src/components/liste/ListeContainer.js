@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import ListeElement from './ListeElement'
 import ListeSearch from './ListeSearch'
+import './ListeContainer.css'
 
 /**
- * 
- * 
+ *
+ *
  * @class ListeContainer
  * @extends {Component}
  */
 class ListeContainer extends Component {
   /**
    * Creates an instance of ListeContainer.
-   * 
+   *
    * @param {any} props
-   * 
+   *
    * @memberOf ListeContainer
    */
   constructor(props) {
@@ -26,10 +27,10 @@ class ListeContainer extends Component {
   }
 
   /**
-   * 
-   * 
+   *
+   *
    * @param {any} event
-   * 
+   *
    * @memberOf ListeContainer
    */
   changeEvent(event) {
@@ -39,13 +40,16 @@ class ListeContainer extends Component {
   }
 
   /**
-   * 
-   * 
-   * 
+   *
+   *
+   *
    * @memberOf ListeContainer
    */
   fetchHandler() {
-    fetch('http://artskart2.artsdatabanken.no/api/observations/list?Taxons=31113,77987&pageSize=50', {
+    var speciesList = '31133,31140,31237,31267,31292';
+    var url = 'http://artskart2.artsdatabanken.no/api/observations/list?Taxons=';
+    var pageSize = 50;
+    fetch(`${url + speciesList}&pageSize=${pageSize}`, {
       method: 'GET'
     })
     .then((response) => {
@@ -60,17 +64,17 @@ class ListeContainer extends Component {
   }
 
   /**
-   * 
-   * 
-   * @returns
-   * 
+   *
+   *
+   * @returns JSX element
+   *
    * @memberOf ListeContainer
    */
   render() {
     var rows = []
     /**
-     * 
-     * 
+     *
+     *
      * @param {any} item
      * @returns
      */
@@ -82,7 +86,7 @@ class ListeContainer extends Component {
       rows.push(<ListeElement data={ observationsFiltered[i] } id={ 'element-' + i } key={ i } />)
 
     return(
-      <div>
+      <div className="listview">
         <ListeSearch changeHandler={ this.changeEvent.bind(this) } />
         <div>
           {rows}

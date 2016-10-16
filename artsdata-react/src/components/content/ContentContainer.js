@@ -8,19 +8,19 @@ class ContentContainer extends Component {
         super(props);
         this.state = {
             toggle: true,
-            toggleContainer: <KartContainer />
+            toggleContainer: <ListeContainer />
         }
     }
     toggleEvent(){
         if(this.state.toggle){
             this.setState({
                 toggle: false,
-                toggleContainer: <ListeContainer />
+                toggleContainer: <KartContainer />
             })
         }else {
             this.setState({
                 toggle: true,
-                toggleContainer: <KartContainer />
+                toggleContainer: <ListeContainer />
             })
         }
     }
