@@ -10,7 +10,7 @@ class Header extends Component {
   render() {
     return(
       <div className="header">
-        <h1>Sjeldne arter</h1>
+        <h1>Sjeldne arter!</h1>
         <MenuButton clickHandler={ this.props.toggleHandler } btnText="Liste/Kart" />
       </div>
     )
