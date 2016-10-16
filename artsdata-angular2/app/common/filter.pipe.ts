@@ -1,11 +1,16 @@
-// import {Injectable, Pipe} from '@angular/core';
-//
-// @Pipe({
-//     name: 'filter'
-// })
-// @Injectable()
-// export class FilterPipe implements PipeTransform {
-//     transform(items: any[], args: any[]): any {
-//         return items.filter(item => item.name.indexOf(args[0]) !== -1);
-//     }
-// }
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+    name: 'filter'
+})
+
+export class FilterPipe implements PipeTransform {
+    transform(list, search): any {
+        let filteredList = [];
+        for (let key in list) {
+            if (list[key].Name.indexOf(search) !== -1)
+                filteredList.push(list[key])
+        }
+        return filteredList;
+    }
+}
