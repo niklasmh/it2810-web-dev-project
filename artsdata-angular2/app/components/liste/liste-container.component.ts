@@ -19,7 +19,7 @@ export class ListeContainerComponent {
   }
 
   getData() {
-    this.http.get('http://artskart2.artsdatabanken.no/api/observations/list?Taxons=31113,77987&pageSize=50')
+    this.http.get('http://artskart2.artsdatabanken.no/api/observations/list?Taxons=31133,31140,31237,31267,31292&pageSize=50')
     .map((res) => res.json()).catch(this.handleError).subscribe(
       data => {this.dataValues = data},
       error => console.log(error),

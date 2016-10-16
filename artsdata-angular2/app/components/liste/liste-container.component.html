@@ -1,17 +1,27 @@
 <link rel="stylesheet" href="liste-container.css">
 
-<liste-search (searchField)="search = $event">Loading...</liste-search>
+<div class="listview">
+  <liste-search (searchField)="search = $event">Loading...</liste-search>
 
-<div class="listeElements">
-  <div *ngFor="let ob of dataValues.Observations | filter:search" class="listeElement">
-    <input type="checkbox" class="toggle-checkbutton" id={{ob.Id}} />
-    <label htmlFor={{ob.Id}}>{{ob.Name}}</label>
-    <div class="notes">
-      <b>Vitenskapelig navn:</b> {{ob.ScientificName}}
-      <br />
-      <b>Notater:</b> {{ob.Notes}}
-      <br />
-      <b>Koordinater:</b> {{ob.Latitude}}, {{ob.Longitude}}
+  <div class="listeElements">
+    <div *ngFor="let ob of dataValues.Observations | filter:search" class="listeElement">
+      <input type="checkbox" class="toggle-checkbutton" id={{ob.Id}} />
+      <label htmlFor={{ob.Id}}><strong>{{ob.Name}}</strong></label>
+      <div class="notes">
+        <dl>
+          <dt>Vitenskapelig navn</dt>
+          <dd>{{ob.ScientificName}}</dd>
+          <br/>
+          <dt>Dato</dt>
+          <dd>{{ob.CollectedDate}}</dd>
+          <dt>Sted</dt>
+          <dd>{{ob.Municipality}}, {{ob.County}}</dd>
+          <dt>Registrert av</dt>
+          <dd>{{ob.Collector}}&nbsp;</dd>
+          <dt>Beskrivelse</dt>
+          <dd>{{ob.Notes}}&nbsp;</dd>
+        </dl>
+      </div>
     </div>
   </div>
 </div>
