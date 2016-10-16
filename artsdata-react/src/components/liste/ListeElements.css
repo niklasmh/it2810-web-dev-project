@@ -40,12 +40,11 @@
 
 dl {
   margin: 16px;
+  text-align: left;
 }
 
 dd {
   margin: 0 0 4px 160px;
-  display: inline-grid;
-  text-align: left;
 }
 
 dt {
