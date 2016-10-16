@@ -1,12 +1,17 @@
-<h1>hei</h1>
-<link rel="stylesheet" rel="">
+<link rel="stylesheet" href="liste-container.css">
 
-<liste-search (searchField)="searchFieldUpdate($event)">Loading...</liste-search>
+<liste-search (searchField)="search = $event">Loading...</liste-search>
 
 <div class="listeElements">
-  <ul>
-    <li *ngFor="let ob of dataValues.Observations"> {{ob.Name}} </li>
-  </ul>
+  <div *ngFor="let ob of dataValues.Observations | filter:search" class="listeElement">
+    <input type="checkbox" class="toggle-checkbutton" id={{ob.Id}} />
+    <label htmlFor={{ob.Id}}>{{ob.Name}}</label>
+    <div class="notes">
+      <b>Vitenskapelig navn:</b> {{ob.ScientificName}}
+      <br />
+      <b>Notater:</b> {{ob.Notes}}
+      <br />
+      <b>Koordinater:</b> {{ob.Latitude}}, {{ob.Longitude}}
+    </div>
+  </div>
 </div>
-
-<h1>hade</h1>
