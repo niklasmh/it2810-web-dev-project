@@ -5,6 +5,8 @@ import { Component, Input } from "@angular/core";
   selector: 'liste-element',
   templateUrl: 'liste-element.component.html'
 })
+
 export class ListeElementComponent {
   @Input() name:string;
+  items: any = [];
 }

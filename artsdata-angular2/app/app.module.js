@@ -18,13 +18,25 @@ var kart_container_component_1 = require("./components/kart/kart-container.compo
 var header_component_1 = require("./components/header/header.component");
 var buttons_component_1 = require("./components/buttons/buttons.component");
 var liste_search_component_1 = require("./components/liste/liste-search.component");
+var liste_element_component_1 = require("./components/liste/liste-element.component");
+var filter_pipe_1 = require("./common/filter.pipe");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, http_1.HttpModule],
-            declarations: [app_component_1.AppComponent, content_container_component_1.ContentContainerComponent, kart_container_component_1.KartContainerComponent, liste_container_component_1.ListeContainerComponent, header_component_1.HeaderComponent, buttons_component_1.ButtonsComponent, liste_search_component_1.ListeSearchComponent],
+            declarations: [
+                app_component_1.AppComponent,
+                content_container_component_1.ContentContainerComponent,
+                kart_container_component_1.KartContainerComponent,
+                liste_container_component_1.ListeContainerComponent,
+                header_component_1.HeaderComponent,
+                buttons_component_1.ButtonsComponent,
+                liste_search_component_1.ListeSearchComponent,
+                liste_element_component_1.ListeElementComponent,
+                filter_pipe_1.FilterPipe,
+            ],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
