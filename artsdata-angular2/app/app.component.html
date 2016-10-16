@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="app.css">
 
-<header (toggleChange)="toggleEvent($event)">Loading...</header>
+<div class="App">
+  <header (toggleChange)="toggleEvent($event)">Loading...</header>
 
-<content-container>Loading...</content-container>
+  <liste-container *ngIf="toggle" ></liste-container>
 
-<liste-container *ngIf="toggle" ></liste-container>
-
-<kart-container *ngIf="!toggle"></kart-container>
+  <kart-container *ngIf="!toggle"></kart-container>
+</div>
