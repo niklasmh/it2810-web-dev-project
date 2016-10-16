@@ -7,7 +7,6 @@ import { KartContainerComponent } from "./components/kart/kart-container.compone
 import { HeaderComponent } from "./components/header/header.component";
 import { ButtonsComponent } from "./components/buttons/buttons.component";
 import { ListeSearchComponent } from "./components/liste/liste-search.component";
-import { ListeElementComponent } from "./components/liste/liste-element.component";
 import { FilterPipe } from "./common/filter.pipe";
 
 @NgModule({
@@ -19,7 +18,6 @@ import { FilterPipe } from "./common/filter.pipe";
     HeaderComponent,
     ButtonsComponent,
     ListeSearchComponent,
-    ListeElementComponent,
     FilterPipe,
   ],
   bootstrap: [ AppComponent ]
