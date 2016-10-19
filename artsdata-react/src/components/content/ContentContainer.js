@@ -6,9 +6,9 @@ import Header from '../header/Header'
 class ContentContainer extends Component {
   /**
    * Creates an instance of ContentContainer.
-   * 
+   *
    * @param {any} props
-   * 
+   *
    * @memberOf ContentContainer
    */
   constructor (props) {
@@ -19,9 +19,9 @@ class ContentContainer extends Component {
     }
   }
   /**
-   * 
-   * 
-   * 
+   * ToggleEvent toggles the veiw between the list and the map.
+   * If the toggle is false, the container will show the map, if it is True, the toggle will show the list
+   *
    * @memberOf ContentContainer
    */
   toggleEvent () {
@@ -39,10 +39,10 @@ class ContentContainer extends Component {
   }
 
   /**
-   * 
-   * 
+   * The render() function renders the div where the list and map-containers will appear in the code
+   *
    * @returns
-   * 
+   *
    * @memberOf ContentContainer
    */
   render () {
