@@ -82,10 +82,10 @@ class ListeContainer extends Component {
       (item) => { return item.Name.indexOf(this.state.searchFilter) !== -1 }
     )
 
-    for (var i = 0; i < observationsFiltered.length; i++)
+    for (var i = 0; i < observationsFiltered.length; i++) {
       rows.push(<ListeElement data={observationsFiltered[i]} id={'element-' + i} key={i} />)
-
-    return(
+    }
+    return (
       <div className="listview">
         <ListeSearch changeHandler={this.changeEvent.bind(this)} />
         <div>
