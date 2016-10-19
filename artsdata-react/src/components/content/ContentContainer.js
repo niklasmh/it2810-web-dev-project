@@ -4,20 +4,20 @@ import KartContainer from '../kart/KartContainer'
 import Header from '../header/Header'
 
 class ContentContainer extends Component {
-    constructor(props){
-        super(props);
+    constructor (props) {
+        super(props)
         this.state = {
             toggle: true,
             toggleContainer: <ListeContainer />
         }
     }
-    toggleEvent(){
-        if(this.state.toggle){
+    toggleEvent () {
+        if (this.state.toggle) {
             this.setState({
                 toggle: false,
                 toggleContainer: <KartContainer />
             })
-        }else {
+        } else {
             this.setState({
                 toggle: true,
                 toggleContainer: <ListeContainer />
@@ -25,13 +25,13 @@ class ContentContainer extends Component {
         }
     }
 
-    render() {
-        return(
+    render () {
+        return (
           <div>
             <Header toggleHandler={this.toggleEvent.bind(this)} />
             {this.state.toggleContainer}
           </div>
-    );
+    )
   }
 }
 

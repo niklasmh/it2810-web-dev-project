@@ -2,18 +2,18 @@ import React, { Component } from 'react'
 import './ListeElements.css'
 
 class ListeElement extends Component {
-  render() {
+  render () {
     return (
       <div className="listeElement">
         <input type="checkbox" className="toggle-checkbutton" id={this.props.id} />
-        <label htmlFor={ this.props.id }>
+        <label htmlFor={this.props.id}>
           <strong>{this.props.data.Name}</strong>
         </label>
         <div className="notes">
           <dl>
             <dt>Vitenskapelig navn</dt>
             <dd>{this.props.data.ScientificName}</dd>
-            <br/>
+            <br />
             <dt>Dato</dt>
             <dd>{this.props.data.CollectedDate}</dd>
             <dt>Sted</dt>
@@ -25,7 +25,7 @@ class ListeElement extends Component {
           </dl>
         </div>
       </div>
-    );
+    )
   }
 }
 

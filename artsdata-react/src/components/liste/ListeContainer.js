@@ -17,7 +17,7 @@ class ListeContainer extends Component {
    *
    * @memberOf ListeContainer
    */
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       data: {'Observations': []},
@@ -33,7 +33,7 @@ class ListeContainer extends Component {
    *
    * @memberOf ListeContainer
    */
-  changeEvent(event) {
+  changeEvent (event) {
     this.setState({
       searchFilter: event.target.value
     })
@@ -45,22 +45,22 @@ class ListeContainer extends Component {
    *
    * @memberOf ListeContainer
    */
-  fetchHandler() {
-    var speciesList = '31133,31140,31237,31267,31292';
-    var url = 'http://artskart2.artsdatabanken.no/api/observations/list?Taxons=';
-    var pageSize = 50;
+  fetchHandler () {
+    var speciesList = '31133,31140,31237,31267,31292'
+    var url = 'http://artskart2.artsdatabanken.no/api/observations/list?Taxons='
+    var pageSize = 50
     fetch(`${url + speciesList}&pageSize=${pageSize}`, {
       method: 'GET'
     })
     .then((response) => {
-      return response.json();
+      return response.json()
     })
     .then((data) => {
-      this.setState(Object.assign({}, this.state, { data: data }));
+      this.setState(Object.assign({}, this.state, { data: data }))
     })
     .catch((error) => {
-      this.setState(Object.assign({}, this.state, { error: error }));
-    });
+      this.setState(Object.assign({}, this.state, { error: error }))
+    })
   }
 
   /**
@@ -70,7 +70,7 @@ class ListeContainer extends Component {
    *
    * @memberOf ListeContainer
    */
-  render() {
+  render () {
     var rows = []
     /**
      *
@@ -79,20 +79,20 @@ class ListeContainer extends Component {
      * @returns
      */
     let observationsFiltered = this.state.data['Observations'].filter(
-      (item) => { return item.Name.indexOf(this.state.searchFilter) !== -1}
+      (item) => { return item.Name.indexOf(this.state.searchFilter) !== -1 }
     )
 
-    for (var i = 0; i < observationsFiltered.length; i++)
-      rows.push(<ListeElement data={ observationsFiltered[i] } id={ 'element-' + i } key={ i } />)
-
-    return(
+    for (var i = 0; i < observationsFiltered.length; i++) {
+      rows.push(<ListeElement data={observationsFiltered[i]} id={'element-' + i} key={i} />)
+    }
+    return (
       <div className="listview">
-        <ListeSearch changeHandler={ this.changeEvent.bind(this) } />
+        <ListeSearch changeHandler={this.changeEvent.bind(this)} />
         <div>
           {rows}
         </div>
       </div>
-    );
+    )
   }
 }
 
