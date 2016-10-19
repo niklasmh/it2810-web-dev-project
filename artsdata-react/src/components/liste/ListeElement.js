@@ -3,7 +3,9 @@ import './ListeElements.css'
 
 class ListeElement extends Component {
   /**
-   * 
+   * Recives obervation-information from ListeContainer and displays all the observations in a list.
+   * An observation is diplayed as a rectangular box with a title(name of the observed animal).
+   * If the box is clicked on, it will expand and show Latin Name, Date, Location, Observed by and Description
    * 
    * @returns
    * 

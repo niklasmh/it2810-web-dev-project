@@ -4,8 +4,10 @@ import './header.css'
 
 class Header extends Component {
   /**
-   * 
-   * 
+   * Creates an instance of Header
+   * Header contains a div-element with the title of the page and a toggle-button.
+   * When the button is pressed, it calls the toogleEvent-function in ContentContainer.
+   *
    * @param {any} evt
    * 
    * @memberOf Header
