@@ -4,6 +4,13 @@ import KartContainer from '../kart/KartContainer'
 import Header from '../header/Header'
 
 class ContentContainer extends Component {
+  /**
+   * Creates an instance of ContentContainer.
+   * 
+   * @param {any} props
+   * 
+   * @memberOf ContentContainer
+   */
   constructor (props) {
     super(props)
     this.state = {
@@ -11,6 +18,12 @@ class ContentContainer extends Component {
       toggleContainer: <ListeContainer />
     }
   }
+  /**
+   * 
+   * 
+   * 
+   * @memberOf ContentContainer
+   */
   toggleEvent () {
     if (this.state.toggle) {
       this.setState({
@@ -25,6 +38,13 @@ class ContentContainer extends Component {
     }
   }
 
+  /**
+   * 
+   * 
+   * @returns
+   * 
+   * @memberOf ContentContainer
+   */
   render () {
     return (
       <div>

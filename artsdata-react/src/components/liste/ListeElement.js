@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import './ListeElements.css'
 
 class ListeElement extends Component {
+  /**
+   * 
+   * 
+   * @returns
+   * 
+   * @memberOf ListeElement
+   */
   render () {
     return (
       <div className="listeElement">

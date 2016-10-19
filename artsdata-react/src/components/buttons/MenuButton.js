@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import './buttons.css'
 
 class MenuButton extends Component {
+  /**
+   * 
+   * 
+   * @returns
+   * 
+   * @memberOf MenuButton
+   */
   render () {
     return (
       <div>

@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 
 class KartContainer extends Component {
+  /**
+   * 
+   * 
+   * @returns
+   * 
+   * @memberOf KartContainer
+   */
   render () {
     return (
       <div>

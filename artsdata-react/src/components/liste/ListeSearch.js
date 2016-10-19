@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import './ListeSearch.css'
 
 class ListeSearch extends Component {
+  /**
+   * 
+   * 
+   * @returns
+   * 
+   * @memberOf ListeSearch
+   */
   render () {
     return (
       <div className="liste-search">
