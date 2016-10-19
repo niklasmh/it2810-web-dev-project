@@ -3,10 +3,10 @@ import './ListeSearch.css'
 
 class ListeSearch extends Component {
   /**
-   * 
-   * 
+   * ListeSearch renders an search-input at the top of the page that sends the search-query to the ListeContainer-component
+   * It takes and input and sends it to the ListeContainer-method changeHandler
    * @returns
-   * 
+   *
    * @memberOf ListeSearch
    */
   render () {
