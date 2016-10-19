@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import MenuButton from '../buttons/MenuButton'
-import "./header.css"
+import './header.css'
 
 class Header extends Component {
-  clickEvent(evt) {
+  clickEvent (evt) {
     console.log(evt.target.innerHTML)
   }
 
-  render() {
-    return(
+  render () {
+    return (
       <div className="header">
         <h1>Sjeldne arter!</h1>
-        <MenuButton clickHandler={ this.props.toggleHandler } btnText="Liste/Kart" />
+        <MenuButton clickHandler={this.props.toggleHandler} btnText="Liste/Kart" />
       </div>
     )
   }
