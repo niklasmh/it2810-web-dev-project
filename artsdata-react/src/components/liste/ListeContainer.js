@@ -4,7 +4,7 @@ import ListeSearch from './ListeSearch'
 import './ListeContainer.css'
 
 /**
- *
+ * ListeContainer fetches information from an open API and displays the information in an array of ListeElements components.
  *
  * @class ListeContainer
  * @extends {Component}
@@ -27,7 +27,7 @@ class ListeContainer extends Component {
   }
 
   /**
-   *
+   * Handles an event emitted from child component ListeElement.
    *
    * @param {any} event
    *
@@ -40,7 +40,7 @@ class ListeContainer extends Component {
   }
 
   /**
-   *
+   * Fetches the information from Artsdatabanken.
    *
    *
    * @memberOf ListeContainer
@@ -49,6 +49,7 @@ class ListeContainer extends Component {
     var speciesList = '31133,31140,31237,31267,31292'
     var url = 'http://artskart2.artsdatabanken.no/api/observations/list?Taxons='
     var pageSize = 50
+    //Fetch is a modern replacement for XMLHttpRequest.
     fetch(`${url + speciesList}&pageSize=${pageSize}`, {
       method: 'GET'
     })
@@ -64,7 +65,7 @@ class ListeContainer extends Component {
   }
 
   /**
-   *
+   * Displays the filtererd data in an array.
    *
    * @returns JSX element
    *
@@ -73,7 +74,7 @@ class ListeContainer extends Component {
   render () {
     var rows = []
     /**
-     *
+     * Filters the data on our searchfilter.
      *
      * @param {any} item
      * @returns
