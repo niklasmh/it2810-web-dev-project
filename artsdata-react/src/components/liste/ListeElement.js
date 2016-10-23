@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 import './ListeElements.css'
 
+/**
+ * ListeElement displays information about a JSON observation object.
+ *
+ * @class ListeElement
+ * @extends {Component}
+ */
 class ListeElement extends Component {
   /**
-   * Recives obervation-information from ListeContainer and displays all the observations in a list.
-   * An observation is diplayed as a rectangular box with a title(name of the observed animal).
-   * If the box is clicked on, it will expand and show Latin Name, Date, Location, Observed by and Description
-   * 
-   * @returns
-   * 
+   * Receives information about one observation from ListeContainer and displays the observation.
+   * The observation is displayed as a rectangular box with a title (name of the observed animal).
+   * If the box is clicked, it will expand and show Scientific Name, Date, Location, Observed by and Description.
+   *
+   * @returns JSX element
+   *
    * @memberOf ListeElement
    */
   render () {

@@ -3,6 +3,12 @@ import ListeContainer from '../liste/ListeContainer'
 import KartContainer from '../kart/KartContainer'
 import Header from '../header/Header'
 
+/**
+ * ContentContainer acts as a placeholder for the rest of the components in the application.
+ *
+ * @class ContentContainer
+ * @extends {Component}
+ */
 class ContentContainer extends Component {
   /**
    * Creates an instance of ContentContainer.
@@ -19,8 +25,10 @@ class ContentContainer extends Component {
     }
   }
   /**
-   * ToggleEvent toggles the veiw between the list and the map.
-   * If the toggle is false, the container will show the map, if it is True, the toggle will show the list
+   * ToggleEvent handles the toggleEvent from the child component Header.
+   * It toggles the view between the list and the map.
+   * If the property toggle is false, the container will show the map,
+   * if it is true, the container will show the list.
    *
    * @memberOf ContentContainer
    */
@@ -39,9 +47,9 @@ class ContentContainer extends Component {
   }
 
   /**
-   * The render() function renders the div where the list and map-containers will appear in the code
+   * Displays the div where the list-container (or map-container) will appear in the code.
    *
-   * @returns
+   * @returns JSX element
    *
    * @memberOf ContentContainer
    */

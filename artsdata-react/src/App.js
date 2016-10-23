@@ -4,10 +4,10 @@ import ContentContainer from './components/content/ContentContainer'
 
 class App extends Component {
   /**
-   * 
-   * 
-   * @returns
-   * 
+   * Displays the application.
+   *
+   * @returns JSX element
+   *
    * @memberOf App
    */
   render () {

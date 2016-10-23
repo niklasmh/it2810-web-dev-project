@@ -27,9 +27,9 @@ class ListeContainer extends Component {
   }
 
   /**
-   * Handles an event emitted from child component ListeElement.
+   * Handles an event emitted from the child component ListeElement.
    *
-   * @param {any} event
+   * @param {event} event
    *
    * @memberOf ListeContainer
    */
@@ -40,8 +40,7 @@ class ListeContainer extends Component {
   }
 
   /**
-   * Fetches the information from Artsdatabanken.
-   *
+   * Fetches the data from Artsdatabanken.
    *
    * @memberOf ListeContainer
    */

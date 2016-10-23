@@ -2,25 +2,29 @@ import React, { Component } from 'react'
 import MenuButton from '../buttons/MenuButton'
 import './header.css'
 
+/**
+ * Header is used to display a nagivation toggle button and a page title.
+ *
+ * @class Header
+ * @extends {Component}
+ */
 class Header extends Component {
   /**
-   * Creates an instance of Header
-   * Header contains a div-element with the title of the page and a toggle-button.
-   * When the button is pressed, it calls the toogleEvent-function in ContentContainer.
+   * This function only logs some information to the console.
+   * It has no other purpose now, but will be used later.
    *
-   * @param {any} evt
-   * 
-   * @memberOf Header
+   * @param  {event} evt An event
    */
   clickEvent (evt) {
     console.log(evt.target.innerHTML)
   }
 
   /**
-   * 
-   * 
-   * @returns
-   * 
+   * Displays a page title and a toggle button. The button exposes an onClick event
+   * where other components can listen and respond to button clicks.
+   *
+   * @returns JSX element
+   *
    * @memberOf Header
    */
   render () {

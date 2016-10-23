@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import './buttons.css'
 
 /**
- * Button used for navigation dynamic content
+ * Button used for navigation of dynamic content.
  *
  * @class MenuButton
  * @extends {Component}
  */
 class MenuButton extends Component {
   /**
-   * Render the MenuButton component
-   *
-   * This rendered element emits an event to the Header component on click.
+   * Renders the MenuButton component. The rendered button exposes an
+   * onClick event that other components can listen and respond to.
    *
    * @returns JSX element
    *
