@@ -31,7 +31,8 @@ class Header extends Component {
     return (
       <div className="header">
         <h1>Sjeldne arter!</h1>
-        <MenuButton clickHandler={this.props.toggleHandler} btnText="Liste/Kart" />
+        <MenuButton clickHandler={this.props.toggleListMap} btnText="Liste/Kart" />
+        <MenuButton clickHandler={this.props.toggleLogin} btnText="Login" />
       </div>
     )
   }

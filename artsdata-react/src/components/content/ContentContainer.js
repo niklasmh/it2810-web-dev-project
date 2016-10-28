@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ListeContainer from '../liste/ListeContainer'
 import KartContainer from '../kart/KartContainer'
+import LoginContainer from '../login/LoginContainer'
+import RegistrerContainer from '../login/RegistrerContainer'
 import Header from '../header/Header'
 
 /**
@@ -21,7 +23,7 @@ class ContentContainer extends Component {
     super(props)
     this.state = {
       toggle: true,
-      toggleContainer: <ListeContainer />
+      toggleContainer: <RegistrerContainer />
     }
   }
   /**
@@ -32,7 +34,7 @@ class ContentContainer extends Component {
    *
    * @memberOf ContentContainer
    */
-  toggleEvent () {
+  toggleListMapEvent () {
     if (this.state.toggle) {
       this.setState({
         toggle: false,
@@ -42,6 +44,20 @@ class ContentContainer extends Component {
       this.setState({
         toggle: true,
         toggleContainer: <ListeContainer />
+      })
+    }
+  }
+
+  toggleLoginEvent () {
+    if (this.state.toggle) {
+      this.setState({
+        toggle: false,
+        toggleContainer: <LoginContainer />
+      })
+    } else {
+      this.setState({
+        toggle: true,
+        toggleContainer: <RegistrerContainer />
       })
     }
   }
@@ -56,7 +72,7 @@ class ContentContainer extends Component {
   render () {
     return (
       <div>
-        <Header toggleHandler={this.toggleEvent.bind(this)} />
+        <Header toggleLogin={this.toggleLoginEvent.bind(this)} toggleListMap={this.toggleListMapEvent.bind(this)} />
         {this.state.toggleContainer}
       </div>
     )
