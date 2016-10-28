@@ -23,7 +23,7 @@ class ContentContainer extends Component {
     super(props)
     this.state = {
       toggle: true,
-      toggleContainer: <RegistrerContainer />
+      toggleContainer: <ListeContainer />
     }
   }
   /**
@@ -34,7 +34,7 @@ class ContentContainer extends Component {
    *
    * @memberOf ContentContainer
    */
-  toggleListMapEvent () {
+  toggleEvent () {
     if (this.state.toggle) {
       this.setState({
         toggle: false,
@@ -44,20 +44,6 @@ class ContentContainer extends Component {
       this.setState({
         toggle: true,
         toggleContainer: <ListeContainer />
-      })
-    }
-  }
-
-  toggleLoginEvent () {
-    if (this.state.toggle) {
-      this.setState({
-        toggle: false,
-        toggleContainer: <LoginContainer />
-      })
-    } else {
-      this.setState({
-        toggle: true,
-        toggleContainer: <RegistrerContainer />
       })
     }
   }
@@ -72,7 +58,7 @@ class ContentContainer extends Component {
   render () {
     return (
       <div>
-        <Header toggleLogin={this.toggleLoginEvent.bind(this)} toggleListMap={this.toggleListMapEvent.bind(this)} />
+        <Header toggleHandler={this.toggleEvent.bind(this)} />
         {this.state.toggleContainer}
       </div>
     )
