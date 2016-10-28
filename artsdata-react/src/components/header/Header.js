@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link, IndexLink } from 'react-router'
 import MenuButton from '../buttons/MenuButton'
 import './header.css'
 
@@ -31,7 +32,8 @@ class Header extends Component {
     return (
       <div className="header">
         <h1>Sjeldne arter!</h1>
-        <MenuButton clickHandler={this.props.toggleHandler} btnText="Liste/Kart" />
+        <IndexLink to="/">Liste</IndexLink>
+        <Link to="/kart">Kart</Link>
       </div>
     )
   }
