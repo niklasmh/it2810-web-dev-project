@@ -21,7 +21,8 @@ class ListeContainer extends Component {
     super(props)
     this.state = {
       data: {'Observations': []},
-      searchFilter: ''
+      searchFilter: {name: ''},
+      sort: ''
     }
     this.fetchHandler()
   }
@@ -35,7 +36,13 @@ class ListeContainer extends Component {
    */
   changeEvent (event) {
     this.setState({
-      searchFilter: event.target.value
+      searchFilter: {name: event.target.value}
+    })
+  }
+
+  sortHandlerName (event) {
+    this.setState({
+      sort: 'name'
     })
   }
 
@@ -71,6 +78,7 @@ class ListeContainer extends Component {
    * @memberOf ListeContainer
    */
   render () {
+    let date = new Date()
     var rows = []
     /**
      * Filters the data on our searchfilter.
@@ -79,14 +87,39 @@ class ListeContainer extends Component {
      * @returns
      */
     let observationsFiltered = this.state.data['Observations'].filter(
-      (item) => { return item.Name.indexOf(this.state.searchFilter) !== -1 }
+      (item) => { return item.Name.indexOf(this.state.searchFilter.name) !== -1 }
     )
+
+    //Find the different locations
+    var counties = []
+    this.state.data['Observations'].forEach(
+      (item) => {
+        if (counties.indexOf(item.County) == -1) {
+          counties.push(item.County)
+        }
+      }
+    )
+
+    //Sort the list by a criteria
+    switch (this.state.sort) {
+      case 'name':
+        observationsFiltered.sort(function(a, b) {
+          var x = a.Name.toLowerCase(), y = b.Name.toLowerCase()
+          return x < y ? -1 : x > y ? 1 : 0;
+        })
+        break;
+      default:
+    }
 
     for (var i = 0; i < observationsFiltered.length; i++) {
       rows.push(<ListeElement data={observationsFiltered[i]} id={'element-' + i} key={i} />)
     }
+    let date2 = new Date()
+    console.log('Loading time:');
+    console.log(date2 - date);
     return (
       <div className="listview">
+        Sorter på: <button onClick={this.sortHandlerName.bind(this)}>Navn</button>
         <ListeSearch changeHandler={this.changeEvent.bind(this)} />
         <div>
           {rows}
