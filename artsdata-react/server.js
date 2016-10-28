@@ -1,6 +1,7 @@
 var express = require('express')
 var app = express()
-var bodyParser = require("body-parser");
+var bodyParser = require("body-parser")
+var os = require("os")
 
 app.use(express.static(__dirname));
 app.use('/dist', express.static(__dirname + '/dist'))
@@ -26,9 +27,14 @@ router.get("/", function(req, res) {
 });
 
 // Register API routes
-app.use('/api', router);
+app.use('/api', router)
 
-// Start the server
-app.listen(3000, function() {
-  console.log('Artsdata app listening on port 3000');
-});
+// Start the server. But first check if it is online. Else we want to run a devserver at port 3000.
+// If we had the possibility to change the nginx og apache config, then we could have used the
+// same port.
+if (os.hostname() != 'it2810-04') {
+  app.listen(3000, function() {
+    console.log('Artsdata app listening on port 3000');
+  })
+} else
+  app.listen(80)
