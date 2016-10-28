@@ -16,6 +16,7 @@ class MyPage extends Component {
     return (
       <div>
         <p>Her kommer stuff relatert til min side</p>
+        <AddObservation />
       </div>
     )
   }

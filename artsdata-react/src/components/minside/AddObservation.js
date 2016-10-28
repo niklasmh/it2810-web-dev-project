@@ -19,7 +19,10 @@ class AddObservation extends Component {
   render () {
     return (
       <div className="add-observation">
-        <input onChange={this.props.changeHandler} type="text" placeholder="skriv inn artsnavn" />
+        <h3>Ny Observasjon </h3>
+        <input type="text" className ="inputfelt" placeholder="skriv inn artsnavn" />
+        <input type="text" className ="inputfelt" placeholder="skriv inn funnsted" />
+        <input type="text" className ="inputfelt" placeholder="skriv inn kommentar" />
       </div>
     )
   }
