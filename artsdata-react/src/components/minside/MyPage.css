@@ -28,10 +28,6 @@ h3{
 .toggle-checkbutton {
 }
 
-#skjulmeg{
-  visibility: visible;
-}
-
 .toggle-checkbutton:not(:checked) + label > .add-observation {
-  visibility: hidden;
+  display: none;
 }
