@@ -23,9 +23,7 @@
     "body-parser": "^1.15.2"
   },
   "scripts": {
-    "start": "webpack && node server.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "webpack -w",
+    "server": "node server.js"
   }
 }
