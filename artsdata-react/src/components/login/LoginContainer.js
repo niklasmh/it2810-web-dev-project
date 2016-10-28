@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link, IndexLink } from 'react-router'
 import './LoginContainer.css'
 
 class LoginContainer extends Component {
