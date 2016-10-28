@@ -17,7 +17,7 @@ class LoginContainer extends Component {
 
                 <div id="loginSubmit">
                     <button type="submit" id="loginBtn">Login</button>
-                    <p>Ikke registrert? Klikk her</p>
+                    <Link to="/registrer">Registrer deg her</Link>
                 </div>
             </div>
         )
