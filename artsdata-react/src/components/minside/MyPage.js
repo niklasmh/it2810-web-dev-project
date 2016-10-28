@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import AddObservation from './AddObservation'
+import MyObservations from './MyObservations'
+import UserInfo from './UserInfo'
 
 /**
  * My Page will be used to show and register information specific to a user,
@@ -15,11 +16,14 @@ class MyPage extends Component {
   render () {
     return (
       <div>
-        <p>Her kommer stuff relatert til min side</p>
-        <AddObservation />
+        <UserInfo />
+        <MyObservations />
+        
       </div>
     )
   }
+
+
 }
 
 export default MyPage

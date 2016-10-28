@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './AddObservation.css'
+import './MyPage.css'
 
 /**
  * AddObservation displays the registrate field.
