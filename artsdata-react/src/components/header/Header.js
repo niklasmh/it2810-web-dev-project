@@ -34,6 +34,9 @@ class Header extends Component {
         <h1>Sjeldne arter!</h1>
         <IndexLink to="/">Liste</IndexLink>
         <Link to="/kart">Kart</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/registrer">Registrer</Link>
+        <Link to="/minside">MIn SIde</Link>
       </div>
     )
   }

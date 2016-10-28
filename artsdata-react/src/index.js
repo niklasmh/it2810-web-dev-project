@@ -8,12 +8,16 @@ import styles from './index.css'
 
 import ListeContainer from './components/liste/ListeContainer'
 import KartContainer from './components/kart/KartContainer'
+import MyPage from './components/minside/MyPage'
 
 ReactDOM.render (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={ListeContainer} />
       <Route path="/kart" component={KartContainer} />
+      <Route path="/login" component={LoginContainer} />
+      <Route path="/registrer" component={RegistrerContainer} />
+      <Route path="/minside" component={MyPage} />
     </Route>
   </Router>,
   document.querySelector('#root')
