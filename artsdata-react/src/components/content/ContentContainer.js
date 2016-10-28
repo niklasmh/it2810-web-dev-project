@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ListeContainer from '../liste/ListeContainer'
-import KartContainer from '../kart/KartContainer'
+import MyPage from '../minside/MyPage'
 import Header from '../header/Header'
 
 /**
@@ -21,7 +21,7 @@ class ContentContainer extends Component {
     super(props)
     this.state = {
       toggle: true,
-      toggleContainer: <ListeContainer />
+      toggleContainer: <MyPage />
     }
   }
   /**
@@ -36,7 +36,7 @@ class ContentContainer extends Component {
     if (this.state.toggle) {
       this.setState({
         toggle: false,
-        toggleContainer: <KartContainer />
+        toggleContainer: <MyPage />
       })
     } else {
       this.setState({
