@@ -8,6 +8,8 @@ import styles from './index.css'
 
 import ListeContainer from './components/liste/ListeContainer'
 import KartContainer from './components/kart/KartContainer'
+import LoginContainer from './components/login/LoginContainer'
+import RegistrerContainer from './components/login/RegistrerContainer'
 import MyPage from './components/minside/MyPage'
 
 ReactDOM.render (
