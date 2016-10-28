@@ -14,6 +14,8 @@ ReactDOM.render (
     <Route path="/" component={App}>
       <IndexRoute component={ListeContainer} />
       <Route path="/kart" component={KartContainer} />
+      <Route path="/login" component={LoginContainer} />
+      <Route path="/registrer" component={RegistrerContainer} />
     </Route>
   </Router>,
   document.querySelector('#root')
