@@ -1,0 +1,43 @@
+#loginDiv{
+    margin: auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-content: center;
+    width: 15%;
+}
+
+.loginForm{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    margin: auto;
+    padding-bottom: 15px;
+}
+
+
+.loginLabel{
+    text-align: left;
+}
+
+.loginInput{
+    display: flex;
+    text-align: left;
+    border-radius:5px;
+    border:3px solid #eeeeee;
+    padding: 10px;
+
+}
+
+#loginBtn{
+    border-radius:5px;
+    padding: 10px;
+    width: 25%;
+    margin-right: 10px;
+}
+
+#loginSubmit{
+    display: flex;
+    flex-flow: row;
+}
