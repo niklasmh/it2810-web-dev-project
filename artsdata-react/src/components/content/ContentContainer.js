@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import ListeContainer from '../liste/ListeContainer'
 import KartContainer from '../kart/KartContainer'
-import LoginContainer from '../login/LoginContainer'
-import RegistrerContainer from '../login/RegistrerContainer'
 import Header from '../header/Header'
 
 /**
