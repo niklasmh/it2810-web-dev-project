@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+
+import Header from './components/header/Header'
 import './App.css'
-import ContentContainer from './components/content/ContentContainer'
 
 class App extends Component {
   /**
@@ -13,7 +14,8 @@ class App extends Component {
   render () {
     return (
       <div className="App">
-        <ContentContainer />
+        <Header />
+        {this.props.children}
       </div>
     )
   }
