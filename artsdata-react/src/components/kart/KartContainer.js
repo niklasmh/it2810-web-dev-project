@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 /**
  * KartContainer will be used to show and register information in a map.
  *
@@ -19,8 +18,8 @@ class KartContainer extends Component {
    */
   render () {
     return (
-      <div>
-        <p>Her kommer det kart etterhvert</p>
+      <div id="mapDiv">
+
       </div>
     )
   }
