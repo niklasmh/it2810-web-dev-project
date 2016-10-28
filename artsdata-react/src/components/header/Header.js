@@ -36,6 +36,7 @@ class Header extends Component {
         <Link to="/kart">Kart</Link>
         <Link to="/login">Login</Link>
         <Link to="/registrer">Registrer</Link>
+        <Link to="/minside">MIn SIde</Link>
       </div>
     )
   }
