@@ -80,7 +80,6 @@ class KartContainer extends Component {
                 let found = false
 
                 keys.forEach(key => {
-                  console.log(element[key])
                     if (element[key].toLowerCase().indexOf(search) !== -1) {
                         found = true
                     }
@@ -92,7 +91,6 @@ class KartContainer extends Component {
             return true
         })
         .map((element,i) =>{
-            console.log(element)
             return (<Marker position={[parseFloat(element.Latitude), parseFloat(element.Longitude)]} key={i}  />)
         });
 
