@@ -31,7 +31,6 @@ class ListeContainer extends Component {
       sort: '',
       counties: []
     }
-    this.fetchHandler()
   }
 
   /**
