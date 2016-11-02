@@ -95,11 +95,29 @@ class KartContainer extends Component {
             console.log(element)
             return (<Marker position={[parseFloat(element.Latitude), parseFloat(element.Longitude)]} key={i}  />)
         });
+        let maxLat = 0;
+        let minLat = 0;
+        let maxLng = 0;
+        let minLng = 0;
+
+        if (this.state.data['Observations'][0]) {
+            let obs = this.state.data['Observations']
+            maxLat = obs[0].Latitude;
+            minLat = obs[0].Latitude;
+            maxLng = obs[0].Longitude;
+            minLng = obs[0].Longitude;
+            this.state.data['Observations'].forEach(elemnt => {
+                maxLat = Math.max(elemnt.Latitude, maxLat);
+                minLat = Math.min(elemnt.Latitude, minLat);
+                maxLng = Math.max(elemnt.Longitude, maxLng);
+                minLng = Math.min(elemnt.Longitude, minLng);
+            });
+        }
 
         return (
             <div className="kart-container">
                 <KartSearch changeHandler={this.searchHandler.bind(this)} />
-                <Map center={[this.state.lat, this.state.lng]} zoom={this.state.zoom}>
+                <Map center={[this.state.lat, this.state.lng]} bounds={[[maxLat, maxLng], [minLat, minLng]]}>
                     <TileLayer
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
