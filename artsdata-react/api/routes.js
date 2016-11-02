@@ -6,14 +6,14 @@ var MongoClient = require('mongodb').MongoClient,
 const router = require('express').Router()
   // const taxons = require('resources/data/taxons.json')
 
-var database;
-var url = 'mongodb://torjuss:Stor2001@it2810-04.idi.ntnu.no:27017/test'
-MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err)
-  console.log("Connected successfully to the server")
-  database = db
-  db.close()
-})
+// var database;
+// var url = 'mongodb://localhost:27017/test'
+// MongoClient.connect(url, function(err, db) {
+//   // assert.equal(null, err)
+//   console.log("Connected successfully to the server")
+//   database = db
+//   db.close()
+// })
 
 
 /**
@@ -34,13 +34,13 @@ router.get('/test', (req, res) => {
 /**
  * OBSERVATION DATA
  */
-router.get('/observations', (req, res) => {
-  return database.collection('artsdata', function(err, collection) {
-    collection.find().toArray(function(err, items) {
-      res.send(items)
-    })
-  })
-})
+// router.get('/observations', (req, res) => {
+//   return database.collection('artsdata', function(err, collection) {
+//     collection.find().toArray(function(err, items) {
+//       res.send(items)
+//     })
+//   })
+// })
 
 /**
  * SPECIES DATA
