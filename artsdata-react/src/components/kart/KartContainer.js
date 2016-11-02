@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import './KartContainer.css'
+import KartSearch from './KartSearch'
 
 /**
  * KartContainer will be used to show and register information in a map.
@@ -57,14 +58,16 @@ class KartContainer extends Component {
         });
 
         return (
-            <Map center={[this.state.lat, this.state.lng]} zoom={this.state.zoom}>
-                <TileLayer
-                    attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
-                />
-                {observations}
-            </Map>
-
+            <div className="kart-container">
+                <KartSearch />
+                <Map center={[this.state.lat, this.state.lng]} zoom={this.state.zoom}>
+                    <TileLayer
+                        attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+                    />
+                    {observations}
+                </Map>
+            </div>
         )
     }
 }

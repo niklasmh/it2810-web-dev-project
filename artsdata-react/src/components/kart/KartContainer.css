@@ -1,5 +1,11 @@
 .leaflet-container {
     margin: auto;
     height: 800px;
-    width: 70%;
+    width: 100%;
+}
+
+.kart-container {
+    margin: auto;
+    width: calc(50% + 200px);
+    max-width: 100%;
 }
