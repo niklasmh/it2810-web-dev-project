@@ -70,7 +70,44 @@ class KartContainer extends Component {
       )
     }
 
+    findBounds(inputList){
+        if (inputList.length) {
+            let obs = inputList;
+            let maxLat = obs[0].Latitude;
+            let minLat = obs[0].Latitude;
+            let maxLng = obs[0].Longitude;
+            let minLng = obs[0].Longitude;
+            inputList.forEach(elemnt => {
+                maxLat = Math.max(elemnt.Latitude, maxLat);
+                minLat = Math.min(elemnt.Latitude, minLat);
+                maxLng = Math.max(elemnt.Longitude, maxLng);
+                minLng = Math.min(elemnt.Longitude, minLng);
+            });
+            return {
+                maxLat: maxLat,
+                minLat: minLat,
+                maxLng: maxLng,
+                minLng: minLng,
+            }
+        }
+        if (this.state.data['Observations'].length) {
+            return this.findBounds(this.state.data['Observations'])
+        }
+        return {
+            maxLat: null,
+            minLat: null,
+            maxLng: null,
+            minLng: null,
+        }
+    }
+
     render () {
+        let bounds = {
+            maxLat: 0,
+            minLat: 0,
+            maxLng: 0,
+            minLng: 0,
+        };
         let observations = this.state.data['Observations']
         .filter(element => {
             let search = this.state.search.toLowerCase()
@@ -83,44 +120,28 @@ class KartContainer extends Component {
                     if (element[key].toLowerCase().indexOf(search) !== -1) {
                         found = true
                     }
-                })
+                });
 
                 return found
             }
 
             return true
-        })
-        .map((element,i) =>{
-            return (<Marker position={[parseFloat(element.Latitude), parseFloat(element.Longitude)]} key={i}  />)
         });
-        let maxLat = 0;
-        let minLat = 0;
-        let maxLng = 0;
-        let minLng = 0;
+        bounds = this.findBounds(observations);
+        let observationsTransformed = observations.map((element,i) =>{
+            return (<Marker position={[parseFloat(element.Latitude), parseFloat(element.Longitude)]} key={i} />)
+        });
 
-        if (this.state.data['Observations'][0]) {
-            let obs = this.state.data['Observations']
-            maxLat = obs[0].Latitude;
-            minLat = obs[0].Latitude;
-            maxLng = obs[0].Longitude;
-            minLng = obs[0].Longitude;
-            this.state.data['Observations'].forEach(elemnt => {
-                maxLat = Math.max(elemnt.Latitude, maxLat);
-                minLat = Math.min(elemnt.Latitude, minLat);
-                maxLng = Math.max(elemnt.Longitude, maxLng);
-                minLng = Math.min(elemnt.Longitude, minLng);
-            });
-        }
 
         return (
             <div className="kart-container">
                 <KartSearch changeHandler={this.searchHandler.bind(this)} />
-                <Map center={[this.state.lat, this.state.lng]} bounds={[[maxLat, maxLng], [minLat, minLng]]}>
+                <Map center={[this.state.lat, this.state.lng]} bounds={[[bounds.maxLat, bounds.maxLng], [bounds.minLat, bounds.minLng]]}>
                     <TileLayer
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
                     />
-                    {observations}
+                    {observationsTransformed}
                 </Map>
             </div>
         )
