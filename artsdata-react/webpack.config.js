@@ -3,7 +3,7 @@ var webpack = require('webpack')
 var combineLoaders = require('webpack-combine-loaders')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['whatwg-fetch' ,'./src/index.js'],
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/dist/',
