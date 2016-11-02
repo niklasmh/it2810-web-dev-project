@@ -27,6 +27,7 @@ class KartContainer extends Component {
           lat: 63.417993,
           lng: 10.405758,
           zoom: 15,
+          search: '',
       }
       this.fetchHandler()
     }
@@ -52,14 +53,23 @@ class KartContainer extends Component {
             })
     }
 
+    searchHandler (evt) {
+        let val = evt.target.value
+        this.setState(Object.assign({}, this.state, { search: val }))
+    }
+
     render () {
-        let observations = this.state.data['Observations'].map((element,i) =>{
+        let observations = this.state.data['Observations']
+        .filter(element => {
+            return this.state.search.length ? element.Name.indexOf(this.state.search) !== -1 : true
+        })
+        .map((element,i) =>{
             return (<Marker position={[parseFloat(element.Latitude), parseFloat(element.Longitude)]} key={i}  />)
         });
 
         return (
             <div className="kart-container">
-                <KartSearch />
+                <KartSearch changeHandler={this.searchHandler.bind(this)} />
                 <Map center={[this.state.lat, this.state.lng]} zoom={this.state.zoom}>
                     <TileLayer
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
