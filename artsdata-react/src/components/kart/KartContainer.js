@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import './KartContainer.css'
 
@@ -22,24 +22,49 @@ class KartContainer extends Component {
     constructor () {
       super()
       this.state = {
+          data: {'Observations': []},
           lat: 63.417993,
           lng: 10.405758,
           zoom: 15,
       }
+      this.fetchHandler()
+    }
+
+
+
+    fetchHandler () {
+        var speciesList = '31133,31140,31237,31267,31292'
+        var url = 'http://artskart2.artsdatabanken.no/api/observations/list?Taxons='
+        var pageSize = 50
+        //Fetch is a modern replacement for XMLHttpRequest.
+        fetch(`${url + speciesList}&pageSize=${pageSize}`, {
+            method: 'GET'
+        })
+            .then((response) => {
+                return response.json()
+            })
+            .then((data) => {
+                this.setState(Object.assign({}, this.state, { data: data }))
+            })
+            .catch((error) => {
+                this.setState(Object.assign({}, this.state, { error: error }))
+            })
     }
 
     render () {
-        const position = [this.state.lat, this.state.lng]
+        let observations = this.state.data['Observations'].map((element,i) =>{
+            return (<Marker position={[parseFloat(element.Latitude), parseFloat(element.Longitude)]} key={i}  />)
+        });
+
         return (
-            <Map center={position} zoom={this.state.zoom}>
+            <Map center={[this.state.lat, this.state.lng]} zoom={this.state.zoom}>
                 <TileLayer
                     attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
                 />
-                <Marker position={position}>
-
-                </Marker>
+                {observations}
             </Map>
+
         )
     }
 }
