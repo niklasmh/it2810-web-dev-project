@@ -113,6 +113,7 @@ class ListeContainer extends Component {
 
     for (var i = 0; i < observationsFiltered.length; i++) {
       rows.push(<ListeElement data={observationsFiltered[i]} id={'element-' + i} key={i} />)
+
     }
     let date2 = new Date()
     console.log('Loading time:');
