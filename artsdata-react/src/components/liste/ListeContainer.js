@@ -31,6 +31,7 @@ class ListeContainer extends Component {
       sort: '',
       counties: []
     }
+    this.fetchHandler()
   }
 
   /**
@@ -41,10 +42,10 @@ class ListeContainer extends Component {
    * @memberOf ListeContainer
    */
   changeEvent (event) {
+    var newSearchFilter = this.state.searchFilter
+    newSearchFilter.name = event.target.value
     this.setState({
-      searchFilter: {
-        name: event.target.value
-      }
+      searchFilter: newSearchFilter
     })
   }
 
@@ -55,7 +56,6 @@ class ListeContainer extends Component {
   }
 
   filterEvent (event) {
-    console.log(event.target.name);
     var newSearchFilter = this.state.searchFilter
 
     switch (event.target.name) {
@@ -74,7 +74,6 @@ class ListeContainer extends Component {
         break;
       default:
     }
-    console.log(this.state.searchFilter.county)
   }
 
   /**
