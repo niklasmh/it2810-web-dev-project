@@ -155,6 +155,7 @@ class ListeContainer extends Component {
 
     for (var i = 0; i < observationsFiltered.length; i++) {
       rows.push(<ListeElement data={observationsFiltered[i]} id={'element-' + i} key={i} />)
+
     }
     return (
       <div className="listview">
