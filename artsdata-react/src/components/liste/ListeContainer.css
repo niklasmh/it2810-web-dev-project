@@ -1,3 +1,5 @@
-.listview{
-  margin: 0 20%;
+.listview {
+  margin: auto;
+  width: calc(50% + 200px);
+  max-width: 100%;
 }
