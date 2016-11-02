@@ -58,12 +58,41 @@ class KartContainer extends Component {
         this.setState(Object.assign({}, this.state, { search: val }))
     }
 
+    findCounties () {
+      //Find the different locations
+      var counties = []
+      this.state.data['Observations'].forEach(
+        (item) => {
+          if (counties.indexOf(item.County) == -1) {
+            counties.push(item.County)
+          }
+        }
+      )
+    }
+
     render () {
         let observations = this.state.data['Observations']
         .filter(element => {
-            return this.state.search.length ? element.Name.indexOf(this.state.search) !== -1 : true
+            let search = this.state.search.toLowerCase()
+
+            if (search.length) {
+                let keys = ['Name', 'ScientificName']
+                let found = false
+
+                keys.forEach(key => {
+                  console.log(element[key])
+                    if (element[key].toLowerCase().indexOf(search) !== -1) {
+                        found = true
+                    }
+                })
+
+                return found
+            }
+
+            return true
         })
         .map((element,i) =>{
+            console.log(element)
             return (<Marker position={[parseFloat(element.Latitude), parseFloat(element.Longitude)]} key={i}  />)
         });
 
