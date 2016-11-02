@@ -28,6 +28,7 @@ class KartContainer extends Component {
           lng: 10.405758,
           zoom: 15,
           search: '',
+          bounds: [[],[]]
       }
       this.fetchHandler()
     }
@@ -83,31 +84,16 @@ class KartContainer extends Component {
                 maxLng = Math.max(elemnt.Longitude, maxLng);
                 minLng = Math.min(elemnt.Longitude, minLng);
             });
-            return {
-                maxLat: maxLat,
-                minLat: minLat,
-                maxLng: maxLng,
-                minLng: minLng,
-            }
+            return [[maxLat, maxLng],[minLat, minLng]]
         }
         if (this.state.data['Observations'].length) {
             return this.findBounds(this.state.data['Observations'])
         }
-        return {
-            maxLat: null,
-            minLat: null,
-            maxLng: null,
-            minLng: null,
-        }
+        return [[null, null],[null, null]]
+
     }
 
     render () {
-        let bounds = {
-            maxLat: 0,
-            minLat: 0,
-            maxLng: 0,
-            minLng: 0,
-        };
         let observations = this.state.data['Observations']
         .filter(element => {
             let search = this.state.search.toLowerCase()
@@ -127,16 +113,37 @@ class KartContainer extends Component {
 
             return true
         });
-        bounds = this.findBounds(observations);
+        this.state.bounds = this.findBounds(observations);
         let observationsTransformed = observations.map((element,i) =>{
-            return (<Marker position={[parseFloat(element.Latitude), parseFloat(element.Longitude)]} key={i} />)
+            let NewMarker = (
+                <Marker position={[parseFloat(element.Latitude), parseFloat(element.Longitude)]} key={i}>
+                    <Popup maxWidth={350}>
+                        <dl>
+                            <dt>Navn</dt>
+                            <dd>{element.Name}</dd>
+                            <dt>Vitenskapelig navn</dt>
+                            <dd>{element.ScientificName}</dd>
+                            <br />
+                            <dt>Dato</dt>
+                            <dd>{element.CollectedDate}</dd>
+                            <dt>Sted</dt>
+                            <dd>{element.Municipality}, {element.County}, ({element.Latitude}, {element.Longitude})</dd>
+                            <dt>Registrert av</dt>
+                            <dd>{element.Collector}&nbsp;</dd>
+
+                        </dl>
+                    </Popup>
+                </Marker>
+            )
+            return (NewMarker)
         });
 
+        //return (<Marker posQtion={[parseFloat(element.Latitude), parseFloat(element.Longitude)]} key={i}/>)
 
         return (
             <div className="kart-container">
                 <KartSearch changeHandler={this.searchHandler.bind(this)} />
-                <Map center={[this.state.lat, this.state.lng]} bounds={[[bounds.maxLat, bounds.maxLng], [bounds.minLat, bounds.minLng]]}>
+                <Map center={[this.state.lat, this.state.lng]} bounds={this.state.bounds}>
                     <TileLayer
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
