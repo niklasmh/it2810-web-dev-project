@@ -48,7 +48,7 @@ class AddObservation extends Component {
 
     handleSubmit(event){
       if(!this.isValidDate(this.state.date)){
-        alert('yo biatch');
+        alert('Nå har du ikke skrevet datoen på riktig format. Prøv på nytt!');
       }
     }
   /**
@@ -64,25 +64,29 @@ class AddObservation extends Component {
       <div className="add-observation">
         <h3>Ny Observasjon </h3>
 
+        <br/>Artsnavn:<br/>
           <input
             type="text"
             className ="inputfelt"
             placeholder="skriv inn artsnavn"
             required
           />
+          <br/>Funndato:<br/>
           <input
             type="date"
             className ="inputfelt"
-            placeholder="skriv inn dato"
+            placeholder="dd/mm/yyyy"
             onChange={this.handleDateChange}
             required
           />
+          <br/>Funnsted:<br/>
           <input
             type="text"
             className ="inputfelt"
-            placeholder="skriv inn funnsted"
+            placeholder="Funnsted"
             required
           />
+          <br/>Kommentar: <br/>
           <input
             type="text"
             className ="inputfelt"
