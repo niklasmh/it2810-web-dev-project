@@ -11,9 +11,45 @@ class AddObservation extends Component {
 
   constructor(props){
     super(props);
-    this.state = {date:''};
+    this.state = {
+      date:'',
+      data: {'Observations': []},
+      counties: []
+    };
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.fetchHandler();
+  }
+
+  fetchHandler () {
+    var speciesList = '31133,31140,31237,31267,31292'
+    var url = 'http://artskart2.artsdatabanken.no/api/observations/list?Taxons='
+    var pageSize = 50
+    //Fetch is a modern replacement for XMLHttpRequest.
+    fetch(`${url + speciesList}&pageSize=${pageSize}`, {
+      method: 'GET'
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((data) => {
+      this.setState(Object.assign({}, this.state, { data: data }))
+    })
+    .catch((error) => {
+      this.setState(Object.assign({}, this.state, { error: error }))
+    }).then(() => {this.filterProps()})
+  }
+
+  //Find the different locations
+  filterProps () {
+    this.state.data['Observations'].forEach(
+      (item) => {
+        if (this.state.counties.indexOf(item.County) == -1) {
+          this.state.counties.push(item.County)
+        }
+      }
+    )
+    this.forceUpdate()
   }
 
     // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
@@ -51,6 +87,8 @@ class AddObservation extends Component {
         alert('Nå har du ikke skrevet datoen på riktig format. Prøv på nytt!');
       }
     }
+
+
   /**
    * Displays a search-input and exposes an onChange event where other
    * components can listen and respond to changed search-input.
@@ -60,6 +98,7 @@ class AddObservation extends Component {
    * @memberOf MyPage
    */
   render () {
+    console.log(this.state.counties.length)
     return (
       <div className="add-observation">
         <h3>Ny Observasjon </h3>
@@ -80,12 +119,15 @@ class AddObservation extends Component {
             required
           />
           <br/>Funnsted:<br/>
-          <input
-            type="text"
-            className ="inputfelt"
-            placeholder="Funnsted"
-            required
-          />
+          <select required>
+            {
+              this.state.counties.map((county) =>
+
+              <option value="{county}">{county}</option>
+            )}
+          </select>
+
+
           <br/>Kommentar: <br/>
           <input
             type="text"
