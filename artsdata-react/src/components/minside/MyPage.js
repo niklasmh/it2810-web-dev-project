@@ -18,12 +18,8 @@ class MyPage extends Component {
       <div>
         <UserInfo />
         <MyObservations />
-        
       </div>
     )
   }
-
-
 }
-
 export default MyPage
