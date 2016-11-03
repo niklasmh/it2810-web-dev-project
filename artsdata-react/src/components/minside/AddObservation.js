@@ -14,7 +14,8 @@ class AddObservation extends Component {
     this.state = {
       date:'',
       data: {'Observations': []},
-      counties: []
+      counties: [],
+      species:[]
     };
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,6 +47,9 @@ class AddObservation extends Component {
       (item) => {
         if (this.state.counties.indexOf(item.County) == -1) {
           this.state.counties.push(item.County)
+        }
+        if (this.state.species.indexOf(item.Name) == -1) {
+          this.state.species.push(item.Name)
         }
       }
     )
@@ -103,13 +107,13 @@ class AddObservation extends Component {
       <div className="add-observation">
         <h3>Ny Observasjon </h3>
 
-        <br/>Artsnavn:<br/>
-          <input
-            type="text"
-            className ="inputfelt"
-            placeholder="skriv inn artsnavn"
-            required
-          />
+        <br/>Art:<br/> 
+        <select required>
+          {
+            this.state.species.map((species) =>
+            <option value="{species}">{species}</option>
+          )}
+        </select>
           <br/>Funndato:<br/>
           <input
             type="date"
@@ -122,11 +126,16 @@ class AddObservation extends Component {
           <select required>
             {
               this.state.counties.map((county) =>
-
               <option value="{county}">{county}</option>
             )}
           </select>
-
+          <br/>Stedsnavn:<br/>
+            <input
+              type="text"
+              className ="inputfelt"
+              placeholder="skriv inn funnsted"
+              required
+            />
 
           <br/>Kommentar: <br/>
           <input
