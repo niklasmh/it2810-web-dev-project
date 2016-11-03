@@ -4,7 +4,7 @@ var router = require('express').Router()
 var ObjectID = mongo.ObjectID
 // var encoding = require('encoding')
 // var http = require('http')
-var fetch = require('node-fetch')
+// var fetch = require('node-fetch')
 
 var db, observations, species, users
 
