@@ -8,9 +8,12 @@ var ObjectID = mongo.ObjectID
 
 var db, observations, species, users
 
-/**
- * MongoDB Connection
- */
+//MongoDB
+
+//Page size and page index strategy:
+//https://scalegrid.io/blog/fast-paging-with-mongodb/
+//TODO: To make this efficient it is important to index _id and attributes that will be used for sorting.
+
 //TODO: Lag dokumentasjon for API-et.
 var url = 'mongodb://localhost:27017/artsdata'
 mongo.MongoClient.connect(url, function(err, database) {
@@ -20,24 +23,24 @@ mongo.MongoClient.connect(url, function(err, database) {
     process.exit(1)
   }
 
-  console.log('Connected successfully to the server')
+  console.log('Connected successfully to the MongoDB server\r\n')
   db = database
   users = db.collection('users')
   taxons = db.collection('taxons')
   observations = db.collection('observations')
-
   //TODO: Only call this method once to initiate the DB.
   populateDB(users, taxons, observations)
 })
 
 function populateDB(users, taxons, observations) {
-
   users.drop()
   taxons.drop()
   observations.drop()
   users = db.collection('users')
   taxons = db.collection('taxons')
   observations = db.collection('observations')
+
+  console.log("Initiating database collections...")
 
   var torjuss = {
     username: 'torjuss',
@@ -53,93 +56,72 @@ function populateDB(users, taxons, observations) {
     }
   })
 
-  var taxons2 = require('../resources/data/taxons.json')['Taxons']
-  taxons.insertMany(taxons2, function(err, docs) {
+  var newTaxons = require('../resources/data/taxons.json')['Taxons']
+  taxons.insert(newTaxons, function(err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to add user')
     } else {
-      console.log('Added taxons (' + taxons2.length + ')')
+      console.log('Added ' + newTaxons.length + ' taxons')
     }
   })
 
   //TODO: Encodinga for observations er feil. Må få til UTF-8 på eit vis.
-  var observations2 = require('../resources/data/observations.json')['Observations']
-  // var observations2Text = require('./observations.json')['Observations']
-  // var observations2 = encoding.convert(observations2Text, 'ASCII', 'UTF-8')
-  // observations2 = JSON.parse(JSON.stringify(observations2))
-
-  // var observations2 = fetchRawData()['Observations']
-  // var observations2 = fetchRawData()
-
-  for (var i = 0; i < observations2.length; i++) {
-    var doc = observations2[i]
-    var obj = {}
-    obj['TaxonId'] = doc['TaxonId']
-    obj['Collector'] = doc['Collector']
-    obj['CollectedDate'] = doc['CollectedDate']
-    obj['Name'] = doc['Name']
-    obj['ScientificName'] = doc['ScientificName']
-    obj['Count'] = doc['Count']
-    obj['Notes'] = doc['Notes']
-    obj['County'] = doc['County']
-    obj['Municipality'] = doc['Municipality']
-    obj['Locality'] = doc['Locality']
-    obj['Longitude'] = doc['Longitude']
-    obj['Latitude'] = doc['Latitude']
+  var newObservations = require('../resources/data/observations.json')['Observations']
+  for (var i = 0; i < newObservations.length; i++) {
+    var doc = newObservations[i]
+    var obj = {
+      'TaxonId': doc['TaxonId'],
+      'Collector': doc['Collector'],
+      'CollectedDate': doc['CollectedDate'],
+      'Name': doc['Name'],
+      'ScientificName': doc['ScientificName'],
+      'Count': doc['Count'],
+      'Notes': doc['Notes'],
+      'County': doc['County'],
+      'Municipality': doc['Municipality'],
+      'Locality': doc['Locality'],
+      'Longitude': doc['Longitude'],
+      'Latitude': doc['Latitude']
+    }
 
     observations.insert(obj, function(err, docs) {
       if (err) {
         handleError(res, err.message, 'Failed to add user')
       }
     })
-
-    console.log('Added observation (' + i + ': ' + obj['Name'] + ')')
+    // console.log('Added observation (' + (i + 1) + ': ' + obj['Name'] + ')')
   }
+
+  console.log('Added ' + newObservations.length + ' observations')
 }
 
-// function fetchRawData(observations) {
-//   var speciesList = ['31133', '31140', '31237', '31267', '31292']
-//   var url = 'http://artskart2.artsdatabanken.no/api/observations/list?Taxons='
-//   var pageSize = 1000
-//
-//   var observations3 = []
-//
-//   for (var i = 0; i < speciesList.length; i++) {
-//     var specie = speciesList[i]
-//     fetch(`${url + specie}&pageSize=${pageSize}`, {
-//         method: 'GET',
-//         headers: {
-//           'Content-Type': 'application/json; charset=utf-8'
-//         }
-//       })
-//       .then((response) => {
-//         var obj = response.json()
-//         // observations.append(obj['Observations'])
-//         observations3.append(obj)
-//         console.log(obj)
-//       })
-//   }
-//
-//   return observations3
-// }
+/**
+ * length - Returns the number of elements in a dictionary (numbr of attributes of a JSON object)
+ *
+ * @param  {type} obj The object
+ * @return {int}      Number of attributes of the object
+ */
+function length(obj) {
+  return Object.keys(obj).length;
+}
 
 /**
- * Generic error handler used by all endpoints.
+ * Generic error handler used by all API endpoints.
  */
 function handleError(res, reason, message, code) {
-  console.log('ERROR: ' + reason)
+  console.log('\r\nERROR: ' + reason)
   res.status(code || 500).json({
     'error': message
   })
 }
 
-/**
- * USER DATA
- */
+ // USER DATA
+
 /*  ''/user/:id'
- *    GET: find user by id
+ *    GET: finds user by id
  */
-router.get('/users/id', function(req, res) {
+router.get('/users/:id', function(req, res) {
+  console.log('\r\nGET users with _id: ' + req.params.id)
   users.findOne({
     _id: new ObjectID(req.params.id)
   }, function(err, doc) {
@@ -151,28 +133,63 @@ router.get('/users/id', function(req, res) {
   })
 })
 
-/**
- * OBSERVATIONS DATA
- */
+ // OBSERVATIONS DATA
 
 /*  ''/observations'
- *    GET: finds all observations, with specified query criteria.
+ *    GET: finds all observations (optionally: with specified query criteria)
  */
+//TODO: Sorting
 router.get('/observations', (req, res) => {
-  filter = {}
-  observations.find(filter).toArray(function(err, docs) {
+  var logText = '\r\nGET observations'
+  var filter = {}
+  var pageIndex = 1
+  var pageSize = 25
+  var maxPageSize = 100
+
+  //TODO: Validate query string
+  if (req.query.search != null) {
+    var search = req.query.search
+    filter = {
+      $or: [
+        {Name: {$regex: '(?i)' + search}},
+        {ScientificName: {$regex: '(?i)' + search}},
+        {Notes: {$regex: '(?i)' + search}},
+        {County: {$regex: '(?i)' + search}},
+        {Municipality: {$regex: '(?i)' + search}},
+        {Locality: {$regex: '(?i)' + search}}
+      ]
+    }
+    logText += '\r\nFilter: ' + JSON.stringify(filter, null, 2)
+  }
+
+  if (req.query.pageSize != null) {
+    tmpPageSize = parseInt(req.query.pageSize)
+    pageSize = isNaN(tmpPageSize) ? pageSize : Math.min(tmpPageSize, maxPageSize)
+    logText += '\r\nPage size: ' + pageSize
+  }
+
+  if (req.query.pageIndex != null) {
+    tmpPageIndex = parseInt(req.query.pageIndex)
+    pageIndex = isNaN(tmpPageIndex) ? pageIndex : Math.max(tmpPageIndex, pageIndex)
+    logText += '\r\nPage index: ' + pageIndex
+  }
+  console.log(logText)
+
+  observations.find(filter).skip(pageSize*(pageIndex-1)).limit(pageSize).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to get observations')
     } else {
+      console.log('Result count: ' + length(docs) + '\r\n')
       res.status(200).json(docs)
     }
   })
 })
 
 /*  ''/observations/:id'
- *    GET: find observation by id
+ *    GET: finds observation by id
  */
-router.get('/observations/id', function(req, res) {
+router.get('/observations/:id', function(req, res) {
+  console.log('\r\nGET observation with _id: ' + req.params.id)
   observations.findOne({
     _id: new ObjectID(req.params.id)
   }, function(err, doc) {
@@ -184,15 +201,46 @@ router.get('/observations/id', function(req, res) {
   })
 })
 
-/**
- * SPECIES DATA
- */
+// SPECIES DATA
+
 /*  ''/taxons'
- *    GET: finds all species, with specified query criteria.
+ *    GET: finds all species (optionally: with specified name or taxon group)
  */
+//TODO: Sorting
 router.get('/taxons', (req, res) => {
-  filter = {}
-  taxons.find(filter).toArray(function(err, docs) {
+  var logText = '\r\nGET taxons'
+  var filter = {}
+  var pageIndex = 1
+  var pageSize = 25
+  var maxPageSize = 100
+
+  //TODO: Validate query string
+  if (req.query.search != null) {
+    var search = req.query.search
+    filter = {
+      $or: [
+        {TaxonGroup: {$regex: '(?i)' + search}},
+        {ValidScientificName: {$regex: '(?i)' + search}},
+        {PrefferedPopularname: {$regex: '(?i)' + search}}
+      ]
+    }
+    logText += '\r\nFilter: ' + JSON.stringify(filter, null, 2)
+  }
+
+  if (req.query.pageSize != null) {
+    tmpPageSize = parseInt(req.query.pageSize)
+    pageSize = isNaN(tmpPageSize) ? pageSize : Math.min(tmpPageSize, maxPageSize)
+    logText += '\r\nPage size: ' + pageSize
+  }
+
+  if (req.query.pageIndex != null) {
+    tmpPageIndex = parseInt(req.query.pageIndex)
+    pageIndex = isNaN(tmpPageIndex) ? pageIndex : Math.max(tmpPageIndex, pageIndex)
+    logText += '\r\nPage index: ' + pageIndex
+  }
+  console.log(logText)
+
+  taxons.find(filter).skip(pageSize*(pageIndex-1)).limit(pageSize).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to get species')
     } else {
@@ -202,9 +250,10 @@ router.get('/taxons', (req, res) => {
 })
 
 /*  ''/taxons/:id'
- *    GET: find specie by id
+ *    GET: finds specie by id
  */
-router.get('/taxons/id', function(req, res) {
+router.get('/taxons/:id', function(req, res) {
+  console.log('\r\nGET taxon with _id: ' + req.params.id)
   taxons.findOne({
     _id: new ObjectID(req.params.id)
   }, function(err, doc) {
@@ -216,19 +265,17 @@ router.get('/taxons/id', function(req, res) {
   })
 })
 
-/**
- * DEFAULT
- */
+//DEFAULT ENDPOINT
 router.get('/*', (req, res) => {
+  console.log('\r\nGET welcome message')
   res.status(200).json({
     message: 'Welcome to the artsdata API'
   })
 })
 
-/**
- * TEST
- */
+//TEST ENDPOINT
 router.get('/test', (req, res) => {
+  console.log('\r\nGET test message')
   res.status(200).json({
     message: 'This is a test'
   })
