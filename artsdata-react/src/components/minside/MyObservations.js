@@ -28,7 +28,7 @@ class MyObservations extends Component {
           </label>
 
 
-        <p>Her kommer etterhvert alle observasjonenene som er lagt inn </p>
+        <p>Her kommer etterhvert alle observasjonenene som du har lagt inn </p>
 
       </div>
     )

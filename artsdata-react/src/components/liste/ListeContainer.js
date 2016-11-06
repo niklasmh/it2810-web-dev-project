@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ListeElement from './ListeElement'
 import ListeSearch from './ListeSearch'
+import ListeFilter from './ListeFilter'
 import './ListeContainer.css'
 
 /**
@@ -21,8 +22,14 @@ class ListeContainer extends Component {
     super(props)
     this.state = {
       data: {'Observations': []},
-      searchFilter: {name: ''},
-      sort: ''
+      searchFilter: {
+        name: '',
+        county: [],
+        municipality: '',
+        locality: ''
+      },
+      sort: '',
+      counties: []
     }
     this.fetchHandler()
   }
@@ -35,8 +42,10 @@ class ListeContainer extends Component {
    * @memberOf ListeContainer
    */
   changeEvent (event) {
+    var newSearchFilter = this.state.searchFilter
+    newSearchFilter.name = event.target.value
     this.setState({
-      searchFilter: {name: event.target.value}
+      searchFilter: newSearchFilter
     })
   }
 
@@ -44,6 +53,27 @@ class ListeContainer extends Component {
     this.setState({
       sort: 'name'
     })
+  }
+
+  filterEvent (event) {
+    var newSearchFilter = this.state.searchFilter
+
+    switch (event.target.name) {
+      case 'Fylke':
+        if (event.target.checked) {
+          newSearchFilter.county.push(event.target.value)
+          this.setState({
+            searchFilter: newSearchFilter
+          })
+        } else {
+          newSearchFilter.county.splice(newSearchFilter.county.indexOf(event.target.value), 1)
+          this.setState({
+            searchFilter: newSearchFilter
+          })
+        }
+        break;
+      default:
+    }
   }
 
   /**
@@ -67,7 +97,19 @@ class ListeContainer extends Component {
     })
     .catch((error) => {
       this.setState(Object.assign({}, this.state, { error: error }))
-    })
+    }).then(() => {this.filterProps()})
+  }
+
+  //Find the different locations
+  filterProps () {
+    this.state.data['Observations'].forEach(
+      (item) => {
+        if (this.state.counties.indexOf(item.County) == -1) {
+          this.state.counties.push(item.County)
+        }
+      }
+    )
+    this.forceUpdate()
   }
 
   /**
@@ -78,7 +120,7 @@ class ListeContainer extends Component {
    * @memberOf ListeContainer
    */
   render () {
-    let date = new Date()
+    console.log('render');
     var rows = []
     /**
      * Filters the data on our searchfilter.
@@ -86,19 +128,19 @@ class ListeContainer extends Component {
      * @param {any} item
      * @returns
      */
-    let observationsFiltered = this.state.data['Observations'].filter(
-      (item) => { return item.Name.indexOf(this.state.searchFilter.name) !== -1 }
-    )
-
-    //Find the different locations
-    var counties = []
-    this.state.data['Observations'].forEach(
-      (item) => {
-        if (counties.indexOf(item.County) == -1) {
-          counties.push(item.County)
-        }
-      }
-    )
+     let observationsFiltered = this.state.data['Observations']
+     if (this.state.searchFilter.name.length > 0) {
+       observationsFiltered = observationsFiltered.filter(
+         (item) => { return item.Name.indexOf(this.state.searchFilter.name) !== -1
+         || item.ScientificName.toLowerCase().indexOf(this.state.searchFilter.name) !== -1 }
+       )
+     }
+     if (this.state.searchFilter.county.length > 0) {
+       console.log('filter på county');
+       observationsFiltered = observationsFiltered.filter(
+         (item) => { return item.County.indexOf(this.state.searchFilter.county) !== -1}
+       )
+     }
 
     //Sort the list by a criteria
     switch (this.state.sort) {
@@ -113,14 +155,13 @@ class ListeContainer extends Component {
 
     for (var i = 0; i < observationsFiltered.length; i++) {
       rows.push(<ListeElement data={observationsFiltered[i]} id={'element-' + i} key={i} />)
+
     }
-    let date2 = new Date()
-    console.log('Loading time:');
-    console.log(date2 - date);
     return (
       <div className="listview">
         Sorter på: <button onClick={this.sortHandlerName.bind(this)}>Navn</button>
         <ListeSearch changeHandler={this.changeEvent.bind(this)} />
+        <ListeFilter title='Fylke' data={this.state.counties} filterHandler={this.filterEvent.bind(this)}/>
         <div>
           {rows}
         </div>

@@ -8,7 +8,6 @@ var routes = require('./api/routes.js')
 app.use(express.static(__dirname))
 app.use('/dist', express.static(__dirname + '/dist'))
 app.use('/node_modules', express.static(__dirname + '/node_modules'))
-// TODO: Flytt json-stuff til routes.js
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   'extended': true
