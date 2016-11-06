@@ -1,10 +1,7 @@
 var mongo = require('mongodb')
-var assert = require('assert')
 var router = require('express').Router()
 var ObjectID = mongo.ObjectID
-// var encoding = require('encoding')
-// var http = require('http')
-// var fetch = require('node-fetch')
+var fetch = require('node-fetch')
 
 var db, observations, species, users
 
@@ -33,66 +30,130 @@ mongo.MongoClient.connect(url, function(err, database) {
 })
 
 function populateDB(users, taxons, observations) {
-  users.drop()
-  taxons.drop()
-  observations.drop()
-  users = db.collection('users')
-  taxons = db.collection('taxons')
-  observations = db.collection('observations')
+  console.log('Initiating database collections...')
+  var speciesList = ['3846', '31113', '31133', '31140', '31163', '31222', '31237', '31267', '31292', '77987']
 
-  console.log("Initiating database collections...")
-
-  var torjuss = {
-    username: 'torjuss',
-    email: 'torjuss@stud.ntnu.no',
-    password: '1234'
-  }
-
-  users.insert(torjuss, function(err, docs) {
+  db.createCollection('users', function(err, res) {
     if (err) {
-      handleError(res, err.message, 'Failed to add user')
-    } else {
-      console.log('Added user ' + torjuss.username)
+      handleError(res, err.message, 'Failed to create users collection in MongoDB')
+    }
+  })
+  db.createCollection('taxons', function(err, res) {
+    if (err) {
+      handleError(res, err.message, 'Failed to create taxons collection in MongoDB')
+    }
+  })
+  db.createCollection('observations', function(err, res) {
+    if (err) {
+      handleError(res, err.message, 'Failed to create observations collection in MongoDB')
     }
   })
 
+  populateUsers(db.collection('users'))
+  populateTaxons(db.collection('taxons'), speciesList)
+  populateObservations(db.collection('observations'), speciesList)
+}
+
+function populateUsers(collection) {
+  var user = { username: 'torjuss', email: 'torjuss@stud.ntnu.no', password: '1234' }
+
+  collection.insert(user, function(err, docs) {
+    if (err) {
+      handleError(res, err.message, 'Failed to add user')
+    } else {
+      console.log('Added user ' + user.username)
+    }
+  })
+}
+
+function populateTaxons(collection, speciesList) {
   var newTaxons = require('../resources/data/taxons.json')['Taxons']
-  taxons.insert(newTaxons, function(err, docs) {
-    if (err) {
-      handleError(res, err.message, 'Failed to add user')
-    } else {
-      console.log('Added ' + newTaxons.length + ' taxons')
-    }
-  })
 
-  //TODO: Encodinga for observations er feil. Må få til UTF-8 på eit vis.
-  var newObservations = require('../resources/data/observations.json')['Observations']
-  for (var i = 0; i < newObservations.length; i++) {
-    var doc = newObservations[i]
-    var obj = {
-      'TaxonId': doc['TaxonId'],
-      'Collector': doc['Collector'],
-      'CollectedDate': doc['CollectedDate'],
-      'Name': doc['Name'],
-      'ScientificName': doc['ScientificName'],
-      'Count': doc['Count'],
-      'Notes': doc['Notes'],
-      'County': doc['County'],
-      'Municipality': doc['Municipality'],
-      'Locality': doc['Locality'],
-      'Longitude': doc['Longitude'],
-      'Latitude': doc['Latitude']
-    }
-
-    observations.insert(obj, function(err, docs) {
-      if (err) {
-        handleError(res, err.message, 'Failed to add user')
-      }
+  for (var i = 0; i < speciesList.length; i++) {
+    var id = speciesList[i]
+    var url = 'http://webtjenester.artsdatabanken.no/Artskart/api/taxon/' + id
+    //Fetch is a modern replacement for XMLHttpRequest.
+    fetch(`${url}`, {
+      method: 'GET',
     })
-    // console.log('Added observation (' + (i + 1) + ': ' + obj['Name'] + ')')
-  }
+    .then((response) => {
+      return response.json()
+    })
+    .then((body) => {
+      var doc = body
+      var obj = {
+        'Id': doc['Id'],
+        'TaxonGroup': doc['TaxonGroup'],
+        'ValidScientificName': doc['ValidScientificName'],
+        'PrefferedPopularname': doc['PrefferedPopularname'],
+      }
 
-  console.log('Added ' + newObservations.length + ' observations')
+      collection.insert(obj, function(err, docs) {
+        if (err) {
+          handleError(res, err.message, 'Failed to add taxon to MongoDB')
+        } else {
+          console.log('Added taxon: ' + obj['PrefferedPopularname'] + ' (' + obj['ValidScientificName'] + ')')
+        }
+      })
+    })
+    .catch((err) => {
+      handleError(null, err.message, 'Failed to fetch taxons API data')
+    })
+  }
+}
+
+function populateObservations(collection, speciesList) {
+  var newObservations = []
+  for (var i = 0; i < speciesList.length; i++) {
+    var id = speciesList[i]
+    var url = 'http://artskart2.artsdatabanken.no/api/observations/list?Taxons=' + id
+    //Limit the number of observations of a single species to 1000.
+    var pageSize = 1000
+
+    //Fetch is a modern replacement for XMLHttpRequest.
+    fetch(`${url}&pageSize=${pageSize}`, {
+      method: 'GET',
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((body) => {
+      var obs = body['Observations']
+      var speciesCount = obs.length
+      for (var j = 0; j < speciesCount; j++) {
+        var obj = obs[j]
+        newObservations.push(obj)
+      }
+
+      for (var j = 0; j < newObservations.length; j++) {
+        var doc = newObservations[j]
+        var obj = {
+          'TaxonId': doc['TaxonId'],
+          'Collector': doc['Collector'],
+          'CollectedDate': doc['CollectedDate'],
+          'Name': doc['Name'],
+          'ScientificName': doc['ScientificName'],
+          'Count': doc['Count'],
+          'Notes': doc['Notes'],
+          'County': doc['County'],
+          'Municipality': doc['Municipality'],
+          'Locality': doc['Locality'],
+          'Longitude': doc['Longitude'],
+          'Latitude': doc['Latitude']
+        }
+
+        collection.insert(obj, function(err, docs) {
+          if (err) {
+            handleError(res, err.message, 'Failed to add observation to MongoDB')
+          }
+        })
+      }
+      console.log('Added ' + speciesCount + ' observations for the species with taxon id: ' + obj['TaxonId'])
+    })
+    .catch((err) => {
+      handleError(null, err.message, 'Failed to fetch observations API data ')
+    })
+  }
 }
 
 /**
@@ -110,6 +171,8 @@ function length(obj) {
  */
 function handleError(res, reason, message, code) {
   console.log('\r\nERROR: ' + reason)
+  if (res == null) return;
+
   res.status(code || 500).json({
     'error': message
   })
