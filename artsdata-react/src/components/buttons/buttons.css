@@ -1,7 +1,5 @@
 .buttons {
-  padding: 5px;
   background-color: transparent;
-  margin: 10px;
   border: 0px;
 }
 
@@ -13,7 +11,8 @@ a:link .buttons, a:hover .buttons, a:visited .buttons{
 }
 
 a.active{
-  box-shadow: 0 2px 0 0 #FFF;
+  border-bottom: solid 2px #FFF;
+  margin:10px;
 }
 
 a:hover .buttons{
