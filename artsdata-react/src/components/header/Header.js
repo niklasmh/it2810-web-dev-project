@@ -32,8 +32,7 @@ class Header extends Component {
     return (
       <div className="header">
         <h1>Sjeldne arter!</h1>
-        <IndexLink to="/">Liste</IndexLink>
-        <Link to="/kart">Kart</Link>
+        <IndexLink to="/">MainContent</IndexLink>
         <Link to="/login">Login</Link>
         <Link to="/minside">MIn SIde</Link>
       </div>

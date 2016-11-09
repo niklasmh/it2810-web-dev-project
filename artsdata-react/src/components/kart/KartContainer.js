@@ -23,53 +23,14 @@ class KartContainer extends Component {
     constructor () {
       super()
       this.state = {
-          data: {'Observations': []},
           lat: 63.417993,
           lng: 10.405758,
           zoom: 15,
           search: '',
           bounds: [[],[]]
       }
-      this.fetchHandler()
     }
 
-
-
-    fetchHandler () {
-        var speciesList = '31133,31140,31237,31267,31292'
-        var url = 'http://artskart2.artsdatabanken.no/api/observations/list?Taxons='
-        var pageSize = 50
-        //Fetch is a modern replacement for XMLHttpRequest.
-        fetch(`${url + speciesList}&pageSize=${pageSize}`, {
-            method: 'GET'
-        })
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                this.setState(Object.assign({}, this.state, { data: data }))
-            })
-            .catch((error) => {
-                this.setState(Object.assign({}, this.state, { error: error }))
-            })
-    }
-
-    searchHandler (evt) {
-        let val = evt.target.value
-        this.setState(Object.assign({}, this.state, { search: val }))
-    }
-
-    findCounties () {
-      //Find the different locations
-      var counties = []
-      this.state.data['Observations'].forEach(
-        (item) => {
-          if (counties.indexOf(item.County) == -1) {
-            counties.push(item.County)
-          }
-        }
-      )
-    }
 
     findBounds(inputList){
         if (inputList.length) {
@@ -86,33 +47,17 @@ class KartContainer extends Component {
             });
             return [[maxLat, maxLng],[minLat, minLng]]
         }
-        if (this.state.data['Observations'].length) {
-            return this.findBounds(this.state.data['Observations'])
+        if (this.props.data.length) {
+            return this.findBounds(this.props.data)
         }
-        return [[null, null],[null, null]]
+        return [[71.695960, 32.149458],[57.452945, 2.837935]]
 
     }
 
     render () {
-        let observations = this.state.data['Observations']
-        .filter(element => {
-            let search = this.state.search.toLowerCase()
+      console.log('kartrender');
+        let observations = this.props.data
 
-            if (search.length) {
-                let keys = ['Name', 'ScientificName']
-                let found = false
-
-                keys.forEach(key => {
-                    if (element[key].toLowerCase().indexOf(search) !== -1) {
-                        found = true
-                    }
-                });
-
-                return found
-            }
-
-            return true
-        });
         this.state.bounds = this.findBounds(observations);
         let observationsTransformed = observations.map((element,i) =>{
             let NewMarker = (
@@ -142,7 +87,6 @@ class KartContainer extends Component {
 
         return (
             <div className="kart-container">
-                <KartSearch changeHandler={this.searchHandler.bind(this)} />
                 <Map center={[this.state.lat, this.state.lng]} bounds={this.state.bounds}>
                     <TileLayer
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
