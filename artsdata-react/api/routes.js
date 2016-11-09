@@ -5,7 +5,7 @@ var fetch = require('node-fetch')
 var user = require('./user.js')
 var observation = require('./observation.js')
 
-var db, observations, species, users, taxons, res
+var db, observations, users, taxons, res
 
 // MongoDB
 
@@ -67,9 +67,9 @@ function populateUsers (collection) {
     }
   })
 
-  //Fetch is a modern replacement for XMLHttpRequest.
+  // Fetch is a modern replacement for XMLHttpRequest.
   fetch(`${url}`, {
-    method: 'GET',
+    method: 'GET'
   })
   .then((response) => {
     return response.json()
@@ -80,10 +80,10 @@ function populateUsers (collection) {
       'Id': doc['Id'],
       'TaxonGroup': doc['TaxonGroup'],
       'ValidScientificName': doc['ValidScientificName'],
-      'PrefferedPopularname': doc['PrefferedPopularname'],
+      'PrefferedPopularname': doc['PrefferedPopularname']
     }
 
-    collection.insert(obj, function(err, docs) {
+    collection.insert(obj, function (err, docs) {
       if (err) {
         handleError(res, err.message, 'Failed to add taxon to MongoDB')
       } else {
@@ -155,9 +155,9 @@ function populateObservations (collection, speciesList) {
         newObservations.push(obj)
       }
 
-      for (var j = 0; j < newObservations.length; j++) {
-        var doc = newObservations[j]
-        var obj = {
+      for (var i = 0; j < newObservations.length; i++) {
+        var doc = newObservations[i]
+        var obsObj = {
           'TaxonId': doc['TaxonId'],
           'Collector': doc['Collector'],
           'CollectedDate': doc['CollectedDate'],
@@ -172,13 +172,13 @@ function populateObservations (collection, speciesList) {
           'Latitude': doc['Latitude']
         }
 
-        collection.insert(obj, function (err, docs) {
+        collection.insert(obsObj, function (err, docs) {
           if (err) {
             handleError(res, err.message, 'Failed to add observation to MongoDB')
           }
         })
       }
-      console.log('Added ' + speciesCount + ' observations for the species with taxon id: ' + obj['TaxonId'])
+      console.log('Added ' + speciesCount + ' observations for the species with taxon id: ' + obsObj['TaxonId'])
     })
     .catch((err) => {
       handleError(null, err.message, 'Failed to fetch observations API data ')
@@ -216,7 +216,7 @@ function handleError (res, reason, message, code) {
 router.get('/users/:id', function (req, res) {
   console.log('\r\nGET users with _id: ' + req.params.id)
 
-  users.findOne({_id: new ObjectID(req.params.id)}, function(err, doc) {
+  users.findOne({_id: new ObjectID(req.params.id)}, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to get user')
     } else {
@@ -229,14 +229,14 @@ router.get('/users/:id', function (req, res) {
  *    POST: inserts new user into the collection
  *    https://www.sitepoint.com/creating-restful-apis-express-4/
  */
-router.post('/users', function(req, res) {
+router.post('/users', function (req, res) {
   console.log('\r\nPOST new user')
-  //TODO: Torjus
+  // TODO: Torjus
   var user = new user.User({ username: 'torjuss2', email: 'torjuss2@stud.ntnu.no', password: '12345' })
   // var user = new User(req.body)
 
-  //TODO: What is "{w: 1}"?
-  users.insert(user, {w: 1}, function(err, docs) {
+  // TODO: What is "{w: 1}"?
+  users.insert(user, {w: 1}, function (err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to add new user')
     } else {
@@ -250,20 +250,20 @@ router.post('/users', function(req, res) {
  *    PUT: updates user with the specified id
  *    https://www.sitepoint.com/creating-restful-apis-express-4/
  */
-router.put('/users/:id', function(req, res) {
+router.put('/users/:id', function (req, res) {
   console.log('\r\nPUT user')
   var id = req.params.id
   users.findOne({
     _id: id
-  }, function(err, doc) {
+  }, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to find user with _id: ' + id)
     } else {
-      for (prop in req.body){
+      for (prop in req.body) {
         doc[prop] = req.body[prop]
       }
 
-      doc.save(function(err) {
+      doc.save(function (err) {
         if (err) {
           handleError(res, err.message, 'Failed to update user with _id: ' + id)
         } else {
@@ -280,11 +280,11 @@ router.put('/users/:id', function(req, res) {
  *    DELETE: deletes user with the specified id
  *    https://www.sitepoint.com/creating-restful-apis-express-4/
  */
-router.delete('/users/:id', function(req, res) {
+router.delete('/users/:id', function (req, res) {
   console.log('\r\nPUT user')
   var id = req.params.id
 
-  users.remove({_id: id}, function(err, doc){
+  users.remove({_id: id}, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to delete user with _id: ' + id)
     } else {
@@ -351,7 +351,7 @@ router.get('/observations', (req, res) => {
  */
 router.get('/observations/:id', function (req, res) {
   console.log('\r\nGET observation with _id: ' + req.params.id)
-  observations.findOne({_id: new ObjectID(req.params.id)}, function(err, doc) {
+  observations.findOne({_id: new ObjectID(req.params.id)}, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to get observation')
     } else {
@@ -364,12 +364,12 @@ router.get('/observations/:id', function (req, res) {
  *    POST: inserts new observation into the collection
  *    https://www.sitepoint.com/creating-restful-apis-express-4/
  */
-router.post('/observations', function(req, res) {
+router.post('/observations', function (req, res) {
   console.log('\r\nPOST new observation')
   var obs = new observation.Observation(req.body)
 
-  //TODO: What is "{w: 1}"?
-  observations.insert(obs, {w: 1}, function(err, docs) {
+  // TODO: What is "{w: 1}"?
+  observations.insert(obs, {w: 1}, function (err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to add new observation')
     } else {
@@ -383,20 +383,20 @@ router.post('/observations', function(req, res) {
  *    PUT: updates observation with the specified id
  *    https://www.sitepoint.com/creating-restful-apis-express-4/
  */
-router.put('/observations/:id', function(req, res) {
+router.put('/observations/:id', function (req, res) {
   console.log('\r\nPUT observation')
   var id = req.params.id
   observations.findOne({
     _id: id
-  }, function(err, doc) {
+  }, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to find observation with _id: ' + id)
     } else {
-      for (prop in req.body){
+      for (prop in req.body) {
         doc[prop] = req.body[prop]
       }
 
-      doc.save(function(err) {
+      doc.save(function (err) {
         if (err) {
           handleError(res, err.message, 'Failed to update observation with _id: ' + id)
         } else {
@@ -408,16 +408,15 @@ router.put('/observations/:id', function(req, res) {
   })
 })
 
-
 /*  ''/observations:id'
  *    DELETE: deletes observation with the specified id
  *    https://www.sitepoint.com/creating-restful-apis-express-4/
  */
-router.delete('/observations/:id', function(req, res) {
+router.delete('/observations/:id', function (req, res) {
   console.log('\r\nPUT observation')
   var id = req.params.id
 
-  observations.remove({_id: id}, function(err, doc){
+  observations.remove({_id: id}, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to delete observation with _id: ' + id)
     } else {
