@@ -5,17 +5,17 @@ var fetch = require('node-fetch')
 var user = require('./user.js')
 var observation = require('./observation.js')
 
-var db, observations, species, users
+var db, observations, users, taxons, res
 
-//MongoDB
+// MongoDB
 
-//Page size and page index strategy:
-//https://scalegrid.io/blog/fast-paging-with-mongodb/
-//TODO: To make this efficient it is important to index _id and attributes that will be used for sorting.
+// Page size and page index strategy:
+// https://scalegrid.io/blog/fast-paging-with-mongodb/
+// TODO: To make this efficient it is important to index _id and attributes that will be used for sorting.
 
-//TODO: Lag dokumentasjon for API-et.
+// TODO: Lag dokumentasjon for API-et.
 var url = 'mongodb://localhost:27017/artsdata'
-mongo.MongoClient.connect(url, function(err, database) {
+mongo.MongoClient.connect(url, function (err, database) {
   // Cancel app session if database fails
   if (err) {
     console.log(err)
@@ -27,25 +27,25 @@ mongo.MongoClient.connect(url, function(err, database) {
   users = db.collection('users')
   taxons = db.collection('taxons')
   observations = db.collection('observations')
-  //TODO: Only call this method once to initiate the DB.
+  // TODO: Only call this method once to initiate the DB.
   populateDB(users, taxons, observations)
 })
 
-function populateDB(users, taxons, observations) {
+function populateDB (users, taxons, observations) {
   console.log('Initiating database collections...')
   var speciesList = ['3846', '31113', '31133', '31140', '31163', '31222', '31237', '31267', '31292', '77987']
 
-  db.createCollection('users', function(err, res) {
+  db.createCollection('users', function (err, res) {
     if (err) {
       handleError(res, err.message, 'Failed to create users collection in MongoDB')
     }
   })
-  db.createCollection('taxons', function(err, res) {
+  db.createCollection('taxons', function (err, res) {
     if (err) {
       handleError(res, err.message, 'Failed to create taxons collection in MongoDB')
     }
   })
-  db.createCollection('observations', function(err, res) {
+  db.createCollection('observations', function (err, res) {
     if (err) {
       handleError(res, err.message, 'Failed to create observations collection in MongoDB')
     }
@@ -56,55 +56,27 @@ function populateDB(users, taxons, observations) {
   populateObservations(db.collection('observations'), speciesList)
 }
 
-function populateUsers(collection) {
+function populateUsers (collection) {
   var user = { username: 'torjuss', email: 'torjuss@stud.ntnu.no', password: '1234' }
 
-  collection.insert(user, function(err, docs) {
+  collection.insert(user, function (err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to add user')
     } else {
       console.log('Added user ' + user.username)
     }
   })
-
-  //Fetch is a modern replacement for XMLHttpRequest.
-  fetch(`${url}`, {
-    method: 'GET',
-  })
-  .then((response) => {
-    return response.json()
-  })
-  .then((body) => {
-    var doc = body
-    var obj = {
-      'Id': doc['Id'],
-      'TaxonGroup': doc['TaxonGroup'],
-      'ValidScientificName': doc['ValidScientificName'],
-      'PrefferedPopularname': doc['PrefferedPopularname'],
-    }
-
-    collection.insert(obj, function(err, docs) {
-      if (err) {
-        handleError(res, err.message, 'Failed to add taxon to MongoDB')
-      } else {
-        console.log('Added taxon: ' + obj['PrefferedPopularname'] + ' (' + obj['ValidScientificName'] + ')')
-      }
-    })
-  })
-  .catch((err) => {
-    handleError(null, err.message, 'Failed to fetch taxons API data')
-  })
 }
 
-function populateTaxons(collection, speciesList) {
+function populateTaxons (collection, speciesList) {
   var newTaxons = require('../resources/data/taxons.json')['Taxons']
 
   for (var i = 0; i < speciesList.length; i++) {
     var id = speciesList[i]
     var url = 'http://webtjenester.artsdatabanken.no/Artskart/api/taxon/' + id
-    //Fetch is a modern replacement for XMLHttpRequest.
+    // Fetch is a modern replacement for XMLHttpRequest.
     fetch(`${url}`, {
-      method: 'GET',
+      method: 'GET'
     })
     .then((response) => {
       return response.json()
@@ -115,10 +87,10 @@ function populateTaxons(collection, speciesList) {
         'Id': doc['Id'],
         'TaxonGroup': doc['TaxonGroup'],
         'ValidScientificName': doc['ValidScientificName'],
-        'PrefferedPopularname': doc['PrefferedPopularname'],
+        'PrefferedPopularname': doc['PrefferedPopularname']
       }
 
-      collection.insert(obj, function(err, docs) {
+      collection.insert(obj, function (err, docs) {
         if (err) {
           handleError(res, err.message, 'Failed to add taxon to MongoDB')
         } else {
@@ -132,17 +104,17 @@ function populateTaxons(collection, speciesList) {
   }
 }
 
-function populateObservations(collection, speciesList) {
+function populateObservations (collection, speciesList) {
   var newObservations = []
   for (var i = 0; i < speciesList.length; i++) {
     var id = speciesList[i]
     var url = 'http://artskart2.artsdatabanken.no/api/observations/list?Taxons=' + id
-    //Limit the number of observations of a single species to 1000.
+    // Limit the number of observations of a single species to 1000.
     var pageSize = 1000
 
-    //Fetch is a modern replacement for XMLHttpRequest.
+    // Fetch is a modern replacement for XMLHttpRequest.
     fetch(`${url}&pageSize=${pageSize}`, {
-      method: 'GET',
+      method: 'GET'
     })
     .then((response) => {
       return response.json()
@@ -155,9 +127,9 @@ function populateObservations(collection, speciesList) {
         newObservations.push(obj)
       }
 
-      for (var j = 0; j < newObservations.length; j++) {
-        var doc = newObservations[j]
-        var obj = {
+      for (var i = 0; j < newObservations.length; i++) {
+        var doc = newObservations[i]
+        var obsObj = {
           'TaxonId': doc['TaxonId'],
           'Collector': doc['Collector'],
           'CollectedDate': doc['CollectedDate'],
@@ -169,16 +141,17 @@ function populateObservations(collection, speciesList) {
           'Municipality': doc['Municipality'],
           'Locality': doc['Locality'],
           'Longitude': doc['Longitude'],
-          'Latitude': doc['Latitude']
+          'Latitude': doc['Latitude'],
+          'User': ''
         }
 
-        collection.insert(obj, function(err, docs) {
+        collection.insert(obsObj, function (err, docs) {
           if (err) {
             handleError(res, err.message, 'Failed to add observation to MongoDB')
           }
         })
       }
-      console.log('Added ' + speciesCount + ' observations for the species with taxon id: ' + obj['TaxonId'])
+      console.log('Added ' + speciesCount + ' observations for the species with taxon id: ' + obsObj['TaxonId'])
     })
     .catch((err) => {
       handleError(null, err.message, 'Failed to fetch observations API data ')
@@ -192,16 +165,16 @@ function populateObservations(collection, speciesList) {
  * @param  {type} obj The object
  * @return {int}      Number of attributes of the object
  */
-function length(obj) {
-  return Object.keys(obj).length;
+function length (obj) {
+  return Object.keys(obj).length
 }
 
 /**
  * Generic error handler used by all API endpoints.
  */
-function handleError(res, reason, message, code) {
+function handleError (res, reason, message, code) {
   console.log('\r\nERROR: ' + reason)
-  if (res == null) return;
+  if (res == null) return
 
   res.status(code || 500).json({
     'error': message
@@ -213,9 +186,10 @@ function handleError(res, reason, message, code) {
 /*  ''/users/:id'
  *    GET: finds user by id
  */
-router.get('/users/:id', function(req, res) {
+router.get('/users/:id', function (req, res) {
   console.log('\r\nGET users with _id: ' + req.params.id)
-  users.findOne({_id: new ObjectID(req.params.id)}, function(err, doc) {
+
+  users.findOne({_id: new ObjectID(req.params.id)}, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to get user')
     } else {
@@ -228,14 +202,14 @@ router.get('/users/:id', function(req, res) {
  *    POST: inserts new user into the collection
  *    https://www.sitepoint.com/creating-restful-apis-express-4/
  */
-router.post('/users', function(req, res) {
+router.post('/users', function (req, res) {
   console.log('\r\nPOST new user')
-  //TODO: Torjus
+  // TODO: Torjus
   var user = new user.User({ username: 'torjuss2', email: 'torjuss2@stud.ntnu.no', password: '12345' })
   // var user = new User(req.body)
 
-  //TODO: What is "{w: 1}"?
-  users.insert(user, {w: 1}, function(err, docs) {
+  // TODO: What is "{w: 1}"?
+  users.insert(user, {w: 1}, function (err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to add new user')
     } else {
@@ -249,20 +223,20 @@ router.post('/users', function(req, res) {
  *    PUT: updates user with the specified id
  *    https://www.sitepoint.com/creating-restful-apis-express-4/
  */
-router.put('/users/:id', function(req, res) {
+router.put('/users/:id', function (req, res) {
   console.log('\r\nPUT user')
   var id = req.params.id
   users.findOne({
     _id: id
-  }, function(err, doc) {
+  }, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to find user with _id: ' + id)
     } else {
-      for (prop in req.body){
+      for (prop in req.body) {
         doc[prop] = req.body[prop]
       }
 
-      doc.save(function(err) {
+      doc.save(function (err) {
         if (err) {
           handleError(res, err.message, 'Failed to update user with _id: ' + id)
         } else {
@@ -279,11 +253,11 @@ router.put('/users/:id', function(req, res) {
  *    DELETE: deletes user with the specified id
  *    https://www.sitepoint.com/creating-restful-apis-express-4/
  */
-router.delete('/users/:id', function(req, res) {
+router.delete('/users/:id', function (req, res) {
   console.log('\r\nPUT user')
   var id = req.params.id
 
-  users.remove({_id: id}, function(err, doc){
+  users.remove({_id: id}, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to delete user with _id: ' + id)
     } else {
@@ -298,7 +272,7 @@ router.delete('/users/:id', function(req, res) {
 /*  ''/observations'
  *    GET: finds all observations (optionally: with specified query criteria)
  */
-//TODO: Sorting
+// TODO: Sorting
 router.get('/observations', (req, res) => {
   var logText = '\r\nGET observations'
   var filter = {}
@@ -306,7 +280,7 @@ router.get('/observations', (req, res) => {
   var pageSize = 25
   var maxPageSize = 100
 
-  //TODO: Validate query string
+  // TODO: Validate query string
   if (req.query.search != null) {
     var search = req.query.search
     filter = {
@@ -335,7 +309,7 @@ router.get('/observations', (req, res) => {
   }
   console.log(logText)
 
-  observations.find(filter).skip(pageSize*(pageIndex-1)).limit(pageSize).toArray(function(err, docs) {
+  observations.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to get observations')
     } else {
@@ -348,9 +322,9 @@ router.get('/observations', (req, res) => {
 /*  ''/observations/:id'
  *    GET: finds observation by id
  */
-router.get('/observations/:id', function(req, res) {
+router.get('/observations/:id', function (req, res) {
   console.log('\r\nGET observation with _id: ' + req.params.id)
-  observations.findOne({_id: new ObjectID(req.params.id)}, function(err, doc) {
+  observations.findOne({_id: new ObjectID(req.params.id)}, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to get observation')
     } else {
@@ -363,12 +337,12 @@ router.get('/observations/:id', function(req, res) {
  *    POST: inserts new observation into the collection
  *    https://www.sitepoint.com/creating-restful-apis-express-4/
  */
-router.post('/observations', function(req, res) {
+router.post('/observations', function (req, res) {
   console.log('\r\nPOST new observation')
   var obs = new observation.Observation(req.body)
 
-  //TODO: What is "{w: 1}"?
-  observations.insert(obs, {w: 1}, function(err, docs) {
+  // TODO: What is "{w: 1}"?
+  observations.insert(obs, {w: 1}, function (err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to add new observation')
     } else {
@@ -382,20 +356,20 @@ router.post('/observations', function(req, res) {
  *    PUT: updates observation with the specified id
  *    https://www.sitepoint.com/creating-restful-apis-express-4/
  */
-router.put('/observations/:id', function(req, res) {
+router.put('/observations/:id', function (req, res) {
   console.log('\r\nPUT observation')
   var id = req.params.id
   observations.findOne({
     _id: id
-  }, function(err, doc) {
+  }, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to find observation with _id: ' + id)
     } else {
-      for (prop in req.body){
+      for (prop in req.body) {
         doc[prop] = req.body[prop]
       }
 
-      doc.save(function(err) {
+      doc.save(function (err) {
         if (err) {
           handleError(res, err.message, 'Failed to update observation with _id: ' + id)
         } else {
@@ -407,16 +381,15 @@ router.put('/observations/:id', function(req, res) {
   })
 })
 
-
 /*  ''/observations:id'
  *    DELETE: deletes observation with the specified id
  *    https://www.sitepoint.com/creating-restful-apis-express-4/
  */
-router.delete('/observations/:id', function(req, res) {
+router.delete('/observations/:id', function (req, res) {
   console.log('\r\nPUT observation')
   var id = req.params.id
 
-  observations.remove({_id: id}, function(err, doc){
+  observations.remove({_id: id}, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to delete observation with _id: ' + id)
     } else {
@@ -431,7 +404,7 @@ router.delete('/observations/:id', function(req, res) {
 /*  ''/taxons'
  *    GET: finds all species (optionally: with specified name or taxon group)
  */
-//TODO: Sorting
+// TODO: Sorting
 router.get('/taxons', (req, res) => {
   var logText = '\r\nGET taxons'
   var filter = {}
@@ -439,7 +412,7 @@ router.get('/taxons', (req, res) => {
   var pageSize = 25
   var maxPageSize = 100
 
-  //TODO: Validate query string
+  // TODO: Validate query string
   if (req.query.search != null) {
     var search = req.query.search
     filter = {
@@ -465,7 +438,7 @@ router.get('/taxons', (req, res) => {
   }
   console.log(logText)
 
-  taxons.find(filter).skip(pageSize*(pageIndex-1)).limit(pageSize).toArray(function(err, docs) {
+  taxons.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to get species')
     } else {
@@ -477,11 +450,11 @@ router.get('/taxons', (req, res) => {
 /*  ''/taxons/:id'
  *    GET: finds specie by id
  */
-router.get('/taxons/:id', function(req, res) {
+router.get('/taxons/:id', function (req, res) {
   console.log('\r\nGET taxon with _id: ' + req.params.id)
   taxons.findOne({
     _id: new ObjectID(req.params.id)
-  }, function(err, doc) {
+  }, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to get specie')
     } else {
@@ -490,7 +463,7 @@ router.get('/taxons/:id', function(req, res) {
   })
 })
 
-//DEFAULT ENDPOINT
+// DEFAULT ENDPOINT
 router.get('/*', (req, res) => {
   console.log('\r\nGET welcome message')
   res.status(200).json({
@@ -498,7 +471,7 @@ router.get('/*', (req, res) => {
   })
 })
 
-//TEST ENDPOINT
+// TEST ENDPOINT
 router.get('/test', (req, res) => {
   console.log('\r\nGET test message')
   res.status(200).json({
