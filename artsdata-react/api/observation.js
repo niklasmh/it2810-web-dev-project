@@ -1,16 +1,18 @@
-var Observation = function() {}
+var Observation = function () {}
 
-Observation = function(taxonid, name) {
+Observation = function (taxonid, name) {
   this.TaxonId = taxonid
   this.Name = name
-  this.ScientificName = ""
+  this.ScientificName = ''
   this.Count = 1
-  this.Notes = ""
-  this.County = "Akershus"
-  this.Municipality = ""
-  this.Locality = ""
-  this.Longitude = ""
-  this.Latitude = ""
+  this.CollectedDate = ''
+  this.Notes = ''
+  this.County = 'Akershus'
+  this.Municipality = ''
+  this.Locality = ''
+  this.Longitude = ''
+  this.Latitude = ''
+  this.User = ''
 }
 
 // Observation = function(obj) {
@@ -24,6 +26,7 @@ Observation = function(taxonid, name) {
 //   this.Locality = obj.Locality
 //   this.Longitude = obj.Longitude
 //   this.Latitude = obj.Latitude
+//   this.User = obj.User
 // }
 
 module.exports = new Observation()

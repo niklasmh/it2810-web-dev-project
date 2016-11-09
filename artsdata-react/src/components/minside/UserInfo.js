@@ -55,7 +55,7 @@ class UserInfo extends Component {
             placeholder="passord"
             required
           />
-
+          <br/>
             <button onClick={this.handleSubmit} > Submit It </button>
         </form>
       </div>
