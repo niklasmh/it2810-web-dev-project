@@ -17,7 +17,6 @@ a.active{
 }
 
 a:hover .buttons{
-
   color: grey;
   cursor: pointer;
 }

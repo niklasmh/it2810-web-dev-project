@@ -32,9 +32,9 @@ class Header extends Component {
     return (
       <div className="header">
         <h1>Sjeldne arter!</h1>
-        <IndexLink to="/">MainContent</IndexLink>
-        <Link to="/login">Login</Link>
-        <Link to="/minside">MIn SIde</Link>
+        <IndexLink to="/"  activeClassName="active"><LinkButton>MainContent</LinkButton></IndexLink>
+        <Link to="/login"  activeClassName="active"><LinkButton>Login</LinkButton></Link>
+        <Link to="/minside"  activeClassName="active"><LinkButton>Min SIde</LinkButton></Link>
       </div>
     )
   }
