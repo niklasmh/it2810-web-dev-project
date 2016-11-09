@@ -11,6 +11,7 @@ Observation = function(taxonid, name) {
   this.Locality = ""
   this.Longitude = ""
   this.Latitude = ""
+  this.CollectedDate = ""
 }
 
 // Observation = function(obj) {

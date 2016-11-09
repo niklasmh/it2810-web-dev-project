@@ -89,9 +89,24 @@ class AddObservation extends Component {
     handleSubmit(event){
       if(!this.isValidDate(this.state.date)){
         alert('Nå har du ikke skrevet datoen på riktig format. Prøv på nytt!');
+        return;
       }
-    }
+      var data = {
+        TaxonId : "taxonid",
+        Name : navn.value,
+        ScientificName : "",
+        Count : antall.value,
+        Notes : kommentar.value,
+        County : fylke.value,
+        Municipality : "",
+        Locality : lokalitet.value,
+        Longitude : "",
+        Latitude : "",
+        CollectedDate : dato.value,
+      }
 
+      fetch("/observasjons", {body:JSON.stringify(data), method:"POST"}).then(r => r.json()).then(console.log)
+    }
 
   /**
    * Displays a search-input and exposes an onChange event where other
@@ -107,8 +122,8 @@ class AddObservation extends Component {
       <div className="add-observation">
         <h3>Ny Observasjon </h3>
 
-        <br/>Art:<br/> 
-        <select required>
+        <br/>Art:<br/>
+        <select id="navn" required >
           {
             this.state.species.map((species) =>
             <option value="{species}">{species}</option>
@@ -119,11 +134,20 @@ class AddObservation extends Component {
             type="date"
             className ="inputfelt"
             placeholder="dd/mm/yyyy"
+            id="dato"
             onChange={this.handleDateChange}
             required
           />
+          <br/>Antall:<br/>
+          <input
+            type="number"
+            className ="inputfelt"
+            placeholder="antall"
+            id="antall"
+            required
+          />
           <br/>Funnsted:<br/>
-          <select required>
+          <select id="fylke" required>
             {
               this.state.counties.map((county) =>
               <option value="{county}">{county}</option>
@@ -134,6 +158,7 @@ class AddObservation extends Component {
               type="text"
               className ="inputfelt"
               placeholder="skriv inn funnsted"
+              id = "lokalitet"
               required
             />
 
@@ -142,10 +167,11 @@ class AddObservation extends Component {
             type="text"
             className ="inputfelt"
             placeholder="skriv inn kommentar"
+            id="kommentar"
             required
           />
           <br/>
-          <button onClick={this.handleSubmit} > Submit It </button>
+          <button onClick={this.handleSubmit} > Legg til observasjon </button>
 
       </div>
     )
