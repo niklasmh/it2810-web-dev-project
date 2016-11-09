@@ -66,34 +66,6 @@ function populateUsers (collection) {
       console.log('Added user ' + user.username)
     }
   })
-
-  // Fetch is a modern replacement for XMLHttpRequest.
-  fetch(`${url}`, {
-    method: 'GET'
-  })
-  .then((response) => {
-    return response.json()
-  })
-  .then((body) => {
-    var doc = body
-    var obj = {
-      'Id': doc['Id'],
-      'TaxonGroup': doc['TaxonGroup'],
-      'ValidScientificName': doc['ValidScientificName'],
-      'PrefferedPopularname': doc['PrefferedPopularname']
-    }
-
-    collection.insert(obj, function (err, docs) {
-      if (err) {
-        handleError(res, err.message, 'Failed to add taxon to MongoDB')
-      } else {
-        console.log('Added taxon: ' + obj['PrefferedPopularname'] + ' (' + obj['ValidScientificName'] + ')')
-      }
-    })
-  })
-  .catch((err) => {
-    handleError(null, err.message, 'Failed to fetch taxons API data')
-  })
 }
 
 function populateTaxons (collection, speciesList) {
@@ -169,7 +141,8 @@ function populateObservations (collection, speciesList) {
           'Municipality': doc['Municipality'],
           'Locality': doc['Locality'],
           'Longitude': doc['Longitude'],
-          'Latitude': doc['Latitude']
+          'Latitude': doc['Latitude'],
+          'User': ''
         }
 
         collection.insert(obsObj, function (err, docs) {
