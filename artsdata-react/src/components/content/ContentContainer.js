@@ -4,6 +4,7 @@ import MyPage from '../minside/MyPage'
 import KartContainer from '../kart/KartContainer'
 import ListeSearch from '../liste/ListeSearch'
 import ListeFilter from '../liste/ListeFilter'
+import './contentcontainer.css'
 
 /**
  * ContentContainer acts as a placeholder for the rest of the components in the application.
@@ -147,14 +148,23 @@ class ContentContainer extends Component {
     this.state.toggleContent ? cont = <ListeContainer data={observationsFiltered} /> : cont = <KartContainer data={observationsFiltered} />
 
     return (
-      <div>
-        <button onClick={this.toggleEvent.bind(this)}>Toggle</button>
-        <div>
-          Sorter på: <button onClick={this.sortHandlerName.bind(this)}>Navn</button>
+      <div id="flexy">
+        <div id="sidebar">
+
+          <h3>Velg Fremvisning</h3>
+          <button onClick={this.toggleEvent.bind(this)}>Kart/Liste</button>
+
+          <h3>Søk etter art</h3>
           <ListeSearch changeHandler={this.changeEvent.bind(this)} />
+
+          <h3>Sorter på Navn</h3>
+          <button onClick={this.sortHandlerName.bind(this)}>Navn</button>
+
           <ListeFilter title='Fylke' data={this.state.counties} filterHandler={this.filterEvent.bind(this)}/>
+          </div>
+        <div id="contentbox">
+          {cont}
         </div>
-        {cont}
       </div>
     )
   }

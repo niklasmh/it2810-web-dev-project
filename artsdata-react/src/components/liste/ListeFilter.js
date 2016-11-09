@@ -16,7 +16,7 @@ class ListeFilter extends Component {
 
     return(
       <div>
-        {this.props.title}:
+        <h3>Filtrer etter {this.props.title}</h3>
         <div>
           {choices}
         </div>
