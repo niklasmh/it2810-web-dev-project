@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link, IndexLink } from 'react-router'
-import MenuButton from '../buttons/MenuButton'
+import LinkButton from '../buttons/LinkButton'
 import './header.css'
 
 /**
@@ -31,11 +31,11 @@ class Header extends Component {
   render () {
     return (
       <div className="header">
-        <h1>Sjeldne arter!</h1>
-        <IndexLink to="/">Liste</IndexLink>
-        <Link to="/kart">Kart</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/minside">MIn SIde</Link>
+        <h1>Sjeldne arter i Norge</h1>
+        <IndexLink to="/" activeClassName="active"><LinkButton>Liste</LinkButton></IndexLink>
+        <Link to="/kart" activeClassName="active"><LinkButton>Kart</LinkButton></Link>
+        <Link to="/login" activeClassName="active"><LinkButton>Login</LinkButton></Link>
+        <Link to="/minside" activeClassName="active"><LinkButton>MIn SIde</LinkButton></Link>
       </div>
     )
   }
