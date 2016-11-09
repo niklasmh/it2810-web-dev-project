@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link, IndexLink } from 'react-router'
-import MenuButton from '../buttons/MenuButton'
+import LinkButton from '../buttons/LinkButton'
 import './header.css'
 
 /**

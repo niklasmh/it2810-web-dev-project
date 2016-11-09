@@ -5,6 +5,7 @@ Observation = function (taxonid, name) {
   this.Name = name
   this.ScientificName = ''
   this.Count = 1
+  this.CollectedDate = ''
   this.Notes = ''
   this.County = 'Akershus'
   this.Municipality = ''

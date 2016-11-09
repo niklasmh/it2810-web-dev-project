@@ -1,7 +1,23 @@
 .buttons {
-  background-color: #443789;
   padding: 5px;
-  color: #b9e1ea;
-  margin-bottom: 10px;
-  width:150px;
+  background-color: transparent;
+  margin: 10px;
+  border: 0px;
+}
+
+a:link .buttons, a:hover .buttons, a:visited .buttons{
+  color: #FFF;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+a.active{
+  box-shadow: 0 2px 0 0 #FFF;
+}
+
+a:hover .buttons{
+
+  color: grey;
+  cursor: pointer;
 }
