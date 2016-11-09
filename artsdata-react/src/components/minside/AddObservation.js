@@ -14,8 +14,8 @@ class AddObservation extends Component {
     this.state = {
       date:'',
       data: {'Observations': []},
-      counties: [],
-      species:[]
+      counties: {},
+      species:{}
     };
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,11 +45,17 @@ class AddObservation extends Component {
   filterProps () {
     this.state.data['Observations'].forEach(
       (item) => {
-        if (this.state.counties.indexOf(item.County) == -1) {
-          this.state.counties.push(item.County)
+        if (!this.state.counties.hasOwnProperty(item.County)) {
+          this.state.counties[item.County] = { count: 1 }
+        } else {
+          this.state.counties[item.County].count++
         }
-        if (this.state.species.indexOf(item.Name) == -1) {
-          this.state.species.push(item.Name)
+        console.log(this.state)
+
+        if (!this.state.species.hasOwnProperty(item.Name)) {
+          this.state.species[item.Name] = { count: 1, ScientificName: item.ScientificName }
+        } else {
+          this.state.species[item.Name].count++
         }
       }
     )
@@ -102,7 +108,6 @@ class AddObservation extends Component {
    * @memberOf MyPage
    */
   render () {
-    console.log(this.state.counties.length)
     return (
       <div className="add-observation">
         <h3>Ny Observasjon </h3>
@@ -110,8 +115,8 @@ class AddObservation extends Component {
         <br/>Art:<br/> 
         <select required>
           {
-            this.state.species.map((species) =>
-            <option value="{species}">{species}</option>
+            Object.keys(this.state.species).map((species, i) =>
+            <option key={i} value="{species}">{species} ({this.state.species[species].count})</option>
           )}
         </select>
           <br/>Funndato:<br/>
@@ -125,8 +130,8 @@ class AddObservation extends Component {
           <br/>Funnsted:<br/>
           <select required>
             {
-              this.state.counties.map((county) =>
-              <option value="{county}">{county}</option>
+              Object.keys(this.state.counties).map((county, i) =>
+              <option key={i} value="{county}">{county} ({this.state.counties[county].count})</option>
             )}
           </select>
           <br/>Stedsnavn:<br/>
