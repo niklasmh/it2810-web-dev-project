@@ -23,7 +23,7 @@ class ContentContainer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      data: {'Observations': []},
+      observations: [],
       searchFilter: {
         name: '',
         county: [],
@@ -79,18 +79,21 @@ class ContentContainer extends Component {
   }
 
   fetchHandler () {
-    var speciesList = '31133,31140,31237,31267,31292'
-    var url = 'http://artskart2.artsdatabanken.no/api/observations/list?Taxons='
-    var pageSize = 50
+    var url = 'http://localhost:3000/api/observations'
+    //TODO: Legg inn filtersøk/sortering dersom vi skal håndtere det i databasen.
+    var search = ''
+    var pageIndex = 1
+    var pageSize = 25
+    var request = `${url}?search=${search}&pageSize=${pageSize}&pageIndex=${pageIndex}`
     //Fetch is a modern replacement for XMLHttpRequest.
-    fetch(`${url + speciesList}&pageSize=${pageSize}`, {
+    fetch(request, {
       method: 'GET'
     })
     .then((response) => {
       return response.json()
     })
     .then((data) => {
-      this.setState(Object.assign({}, this.state, { data: data }))
+      this.setState(Object.assign({}, this.state, { observations: data }))
     })
     .catch((error) => {
       this.setState(Object.assign({}, this.state, { error: error }))
@@ -98,7 +101,7 @@ class ContentContainer extends Component {
   }
 
   filterProps () {
-    this.state.data['Observations'].forEach(
+    this.state.observations.forEach(
       (item) => {
         if (this.state.counties.indexOf(item.County) == -1) {
           this.state.counties.push(item.County)
@@ -120,7 +123,7 @@ class ContentContainer extends Component {
     var cont = ''
     this.state.toggleContent ? cont = <ListeContainer /> : <KartContainer />
 
-    let observationsFiltered = this.state.data['Observations']
+    let observationsFiltered = this.state.observations
     if (this.state.searchFilter.name.length > 0) {
       observationsFiltered = observationsFiltered.filter(
         (item) => { return item.Name.indexOf(this.state.searchFilter.name) !== -1

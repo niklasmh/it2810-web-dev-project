@@ -31,12 +31,20 @@ class ListeElement extends Component {
             <br />
             <dt>Dato</dt>
             <dd>{this.props.data.CollectedDate}</dd>
-            <dt>Sted</dt>
-            <dd>{this.props.data.Municipality}, {this.props.data.County} (<a target="_blank" href={'https://www.google.com/maps/preview/@' + this.props.data.Latitude + ',' + this.props.data.Longitude + ',14z'}>{this.props.data.Latitude}, {this.props.data.Longitude}</a>)</dd>
             <dt>Registrert av</dt>
             <dd>{this.props.data.Collector}&nbsp;</dd>
+            <dt>Sted</dt>
+            <dd>{this.props.data.Municipality}, {this.props.data.County} </dd>
+            <dt>Nøyaktig plassering</dt>
+            <dd> <a target="_blank" href={'https://www.google.com/maps/preview/@' + this.props.data.Latitude + ',' + this.props.data.Longitude + ',14z'}>{this.props.data.Locality}</a>&nbsp;</dd>
+            <br/>
             <dt>Beskrivelse</dt>
             <dd>{this.props.data.Notes}&nbsp;</dd>
+            <dt>Antall individer</dt>
+            <dd>{this.props.data.Count}&nbsp;</dd>
+            <br />
+            <dt>Lagt til av bruker</dt>
+            <dd>{this.props.data.User}&nbsp;</dd>
           </dl>
         </div>
       </div>

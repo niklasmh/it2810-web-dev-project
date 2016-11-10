@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AddObservation from './AddObservation'
+import ListeContainer from '../liste/ListeContainer'
 import './MyPage.css'
 
 /**
@@ -10,6 +11,43 @@ import './MyPage.css'
  */
 class MyObservations extends Component {
   /**
+   * Creates an instance of MyObservations.
+   *
+   * @param {any} props
+   *
+   * @memberOf MyObservations
+   */
+  constructor (props) {
+    super(props)
+    this.state = {
+      username: 'torjuss',
+      observations: [],
+      sort: ''
+    }
+    this.fetchHandler()
+  }
+
+  fetchHandler () {
+    var url = `http://localhost:3000/api/${this.state.username}/observations`
+    var pageIndex = 1
+    var pageSize = 25
+    var request = `${url}?pageSize=${pageSize}&pageIndex=${pageIndex}`
+    //Fetch is a modern replacement for XMLHttpRequest.
+    fetch(request, {
+      method: 'GET'
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((data) => {
+      this.setState(Object.assign({}, this.state, { observations: data }))
+    })
+    .catch((error) => {
+      this.setState(Object.assign({}, this.state, { error: error }))
+    })
+  }
+
+  /**
    * Displays a search-input and exposes an onChange event where other
    * components can listen and respond to changed search-input.
    *
@@ -18,6 +56,8 @@ class MyObservations extends Component {
    * @memberOf MyPage
    */
   render () {
+    var myObservations = this.state.observations.length > 0 ? <ListeContainer data={this.state.observations} /> : <p>Du har ingen registrerte observasjoner.</p>
+
     return (
       <div className="my-observations">
         <h3>Observasjoner </h3>
@@ -25,11 +65,10 @@ class MyObservations extends Component {
         <label htmlFor="skjul">
           <strong>Legg til Observasjon</strong>
           <AddObservation id="skjulmeg" />
-          </label>
+        </label>
 
-
-        <p>Her kommer etterhvert alle observasjonenene som du har lagt inn </p>
-
+        <h4>Mine observasjoner</h4>
+        {myObservations}
       </div>
     )
   }

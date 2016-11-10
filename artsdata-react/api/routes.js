@@ -28,7 +28,7 @@ mongo.MongoClient.connect(url, function (err, database) {
   taxons = db.collection('taxons')
   observations = db.collection('observations')
   // TODO: Only call this method once to initiate the DB.
-  populateDB(users, taxons, observations)
+  // populateDB(users, taxons, observations)
 })
 
 function populateDB (users, taxons, observations) {
@@ -281,7 +281,7 @@ router.get('/observations', (req, res) => {
   var maxPageSize = 100
 
   // TODO: Validate query string
-  if (req.query.search != null) {
+  if (req.query.search != null && req.query.search != '') {
     var search = req.query.search
     filter = {
       $or: [
@@ -296,13 +296,13 @@ router.get('/observations', (req, res) => {
     logText += '\r\nFilter: ' + JSON.stringify(filter, null, 2)
   }
 
-  if (req.query.pageSize != null) {
+  if (req.query.pageSize != null && req.query.pageSize != '') {
     tmpPageSize = parseInt(req.query.pageSize)
     pageSize = isNaN(tmpPageSize) ? pageSize : Math.min(tmpPageSize, maxPageSize)
     logText += '\r\nPage size: ' + pageSize
   }
 
-  if (req.query.pageIndex != null) {
+  if (req.query.pageIndex != null && req.query.pageIndex != '') {
     tmpPageIndex = parseInt(req.query.pageIndex)
     pageIndex = isNaN(tmpPageIndex) ? pageIndex : Math.max(tmpPageIndex, pageIndex)
     logText += '\r\nPage index: ' + pageIndex
@@ -312,6 +312,39 @@ router.get('/observations', (req, res) => {
   observations.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to get observations')
+    } else {
+      console.log('Result count: ' + length(docs) + '\r\n')
+      res.status(200).json(docs)
+    }
+  })
+})
+
+//TODO: Sikkerhet. Alle kan hente ut alle andre sine observations. Vi bør sjekke username (eller id) opp mot den aktive brukeren i state.
+/*  ''/:username/myObservations'
+ *    GET: finds observation by user name
+ */
+router.get('/:username/observations', function (req, res) {
+  var logText = '\r\nGET observations registered by a user'
+  var pageIndex = 1
+  var pageSize = 25
+  var maxPageSize = 100
+
+  if (req.query.pageSize != null && req.query.pageSize != '') {
+    tmpPageSize = parseInt(req.query.pageSize)
+    pageSize = isNaN(tmpPageSize) ? pageSize : Math.min(tmpPageSize, maxPageSize)
+    logText += '\r\nPage size: ' + pageSize
+  }
+
+  if (req.query.pageIndex != null && req.query.pageIndex != '') {
+    tmpPageIndex = parseInt(req.query.pageIndex)
+    pageIndex = isNaN(tmpPageIndex) ? pageIndex : Math.max(tmpPageIndex, pageIndex)
+    logText += '\r\nPage index: ' + pageIndex
+  }
+  console.log(logText)
+
+  observations.find({User: req.params.username}).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
+    if (err) {
+      handleError(res, err.message, 'Failed to get observations for user')
     } else {
       console.log('Result count: ' + length(docs) + '\r\n')
       res.status(200).json(docs)
@@ -413,7 +446,7 @@ router.get('/taxons', (req, res) => {
   var maxPageSize = 100
 
   // TODO: Validate query string
-  if (req.query.search != null) {
+  if (req.query.search != null && req.query.search != '') {
     var search = req.query.search
     filter = {
       $or: [
@@ -425,13 +458,13 @@ router.get('/taxons', (req, res) => {
     logText += '\r\nFilter: ' + JSON.stringify(filter, null, 2)
   }
 
-  if (req.query.pageSize != null) {
+  if (req.query.pageSize != null && req.query.pageSize != '') {
     tmpPageSize = parseInt(req.query.pageSize)
     pageSize = isNaN(tmpPageSize) ? pageSize : Math.min(tmpPageSize, maxPageSize)
     logText += '\r\nPage size: ' + pageSize
   }
 
-  if (req.query.pageIndex != null) {
+  if (req.query.pageIndex != null && req.query.pageIndex != '') {
     tmpPageIndex = parseInt(req.query.pageIndex)
     pageIndex = isNaN(tmpPageIndex) ? pageIndex : Math.max(tmpPageIndex, pageIndex)
     logText += '\r\nPage index: ' + pageIndex
@@ -464,7 +497,7 @@ router.get('/taxons/:id', function (req, res) {
 })
 
 // DEFAULT ENDPOINT
-router.get('/*', (req, res) => {
+router.get('/', (req, res) => {
   console.log('\r\nGET welcome message')
   res.status(200).json({
     message: 'Welcome to the artsdata API'

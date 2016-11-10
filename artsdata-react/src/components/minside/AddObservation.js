@@ -13,9 +13,8 @@ class AddObservation extends Component {
     super(props);
     this.state = {
       date:'',
-      data: {'Observations': []},
-      counties: [],
-      species:[]
+      species: [],
+      counties: ['Akershus', 'Aust-Agder', 'Buskerud', 'Finnmark', 'Hedmark', 'Hordaland', 'Møre og Romsdal', 'Nord-Trøndelag', 'Nordland', 'Oppland', 'Oslo', 'Rogaland', 'Sogn og Fjordane', 'Sør-Trøndelag', 'Telemark', 'Troms', 'Vest-Agder', 'Vestfold', 'Østfold']
     };
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,40 +22,23 @@ class AddObservation extends Component {
   }
 
   fetchHandler () {
-    var speciesList = '31133,31140,31237,31267,31292'
-    var url = 'http://artskart2.artsdatabanken.no/api/observations/list?Taxons='
-    var pageSize = 50
+    var url = 'http://localhost:3000/api/taxons'
     //Fetch is a modern replacement for XMLHttpRequest.
-    fetch(`${url + speciesList}&pageSize=${pageSize}`, {
+    fetch(`${url}`, {
       method: 'GET'
     })
     .then((response) => {
       return response.json()
     })
     .then((data) => {
-      this.setState(Object.assign({}, this.state, { data: data }))
+      this.setState(Object.assign({}, this.state, { species: data }))
     })
     .catch((error) => {
       this.setState(Object.assign({}, this.state, { error: error }))
-    }).then(() => {this.filterProps()})
+    })
   }
 
-  //Find the different locations
-  filterProps () {
-    this.state.data['Observations'].forEach(
-      (item) => {
-        if (this.state.counties.indexOf(item.County) == -1) {
-          this.state.counties.push(item.County)
-        }
-        if (this.state.species.indexOf(item.Name) == -1) {
-          this.state.species.push(item.Name)
-        }
-      }
-    )
-    this.forceUpdate()
-  }
-
-    // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
+  // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
   isValidDate(dateString){
       // First check for the pattern
       if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString))
@@ -103,9 +85,13 @@ class AddObservation extends Component {
         Longitude : "",
         Latitude : "",
         CollectedDate : dato.value,
+        User: this.state.username
       }
 
-      fetch("/observasjons", {body:JSON.stringify(data), method:"POST"}).then(r => r.json()).then(console.log)
+      fetch("http://localhost/api/observations", {
+        body:JSON.stringify(data),
+        method:"POST"
+      }).then(r => r.json()).then(console.log)
     }
 
   /**
@@ -117,62 +103,64 @@ class AddObservation extends Component {
    * @memberOf MyPage
    */
   render () {
-    console.log(this.state.counties.length)
     return (
       <div className="add-observation">
-        <h3>Ny Observasjon </h3>
-
-        <br/>Art:<br/>
+        <h4>Ny Observasjon </h4>
+        Art:<br/>
         <select id="navn" required >
           {
-            this.state.species.map((species) =>
-            <option value="{species}">{species}</option>
+            this.state.species.map((specie) =>
+            <option key={specie.PrefferedPopularname} value={specie}>{specie.PrefferedPopularname}</option>
           )}
         </select>
-          <br/>Funndato:<br/>
-          <input
-            type="date"
-            className ="inputfelt"
-            placeholder="dd/mm/yyyy"
-            id="dato"
-            onChange={this.handleDateChange}
-            required
-          />
-          <br/>Antall:<br/>
-          <input
-            type="number"
-            className ="inputfelt"
-            placeholder="antall"
-            id="antall"
-            required
-          />
-          <br/>Funnsted:<br/>
-          <select id="fylke" required>
-            {
-              this.state.counties.map((county) =>
-              <option value="{county}">{county}</option>
-            )}
-          </select>
-          <br/>Stedsnavn:<br/>
-            <input
-              type="text"
-              className ="inputfelt"
-              placeholder="skriv inn funnsted"
-              id = "lokalitet"
-              required
-            />
 
-          <br/>Kommentar: <br/>
+        <br/>Funndato:<br/>
+        <input
+          type="date"
+          className ="inputfelt"
+          placeholder="dd/mm/yyyy"
+          id="dato"
+          onChange={this.handleDateChange}
+          required
+        />
+
+        <br/>Antall:<br/>
+        <input
+          type="number"
+          className ="inputfelt"
+          placeholder="antall"
+          id="antall"
+          required
+        />
+
+        <br/>Funnsted:<br/>
+        <select id="fylke" required>
+          {
+            this.state.counties.map((county) =>
+            <option key={county} value={county}>{county}</option>
+          )}
+        </select>
+
+        <br/>Stedsnavn:<br/>
           <input
             type="text"
             className ="inputfelt"
-            placeholder="skriv inn kommentar"
-            id="kommentar"
+            placeholder="skriv inn funnsted"
+            id = "lokalitet"
             required
           />
-          <br/>
-          <button onClick={this.handleSubmit} > Legg til observasjon </button>
 
+        <br/>Kommentar: <br/>
+        <input
+          type="text"
+          className ="inputfelt"
+          placeholder="skriv inn kommentar"
+          id="kommentar"
+          required
+        />
+
+        <br/>
+        <button onClick={this.handleSubmit} > Legg til observasjon </button>
       </div>
     )
   }
