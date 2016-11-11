@@ -32,7 +32,7 @@ class MyObservations extends Component {
     var pageIndex = 1
     var pageSize = 25
     var request = `${url}?pageSize=${pageSize}&pageIndex=${pageIndex}`
-    //Fetch is a modern replacement for XMLHttpRequest.
+    // Fetch is a modern replacement for XMLHttpRequest.
     fetch(request, {
       method: 'GET'
     })
