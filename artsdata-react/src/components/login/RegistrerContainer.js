@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './RegistrerContainer.css'
+import { browserHistory } from 'react-router'
 
 class RegistrerContainer extends Component {
 
@@ -45,25 +46,32 @@ class RegistrerContainer extends Component {
     }
   }
 
-    handleSubmit(){
+    handleSubmit () {
         if(this.state.username < 3) {
             this.setState({status: 'Fields are not vaild'})
         }else{
-            fetch('/api/users', {method: 'POST', headers: {'Content-Type': 'application/json'},  body:JSON.stringify(this.state)})
+            fetch ('/api/users', {method: 'POST', headers: {'Content-Type': 'application/json'},body:JSON.stringify(this.state)})
                 .then((response) => {
                 return response.status
                 })
                 .then((data) => {
                     console.log(data)
-                    if(data == 200){
-                        this.setState(Object.assign({}, this.state, { status: 'Successfully registered' }))
+                    if (data == 200) {
+                        this.setState(Object.assign({}, this.state, { status: 'Successfully registered, you will now be redirected to the login' }))
                     }
                     if(data == 404){
                         this.setState(Object.assign({}, this.state, { status: 'User already exists' }))
                     }
                 })
                 .catch((error) => {
+                }).then(() => {
+                  if (this.state.status === 'Successfully registered, you will now be redirected to the login') {
+                    setTimeout(function () {
+                      browserHistory.push('/login')
+                    }, 1500)
+                  }
                 })
+
         }
     }
 
