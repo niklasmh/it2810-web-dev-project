@@ -1,0 +1,5 @@
+
+
+* Rydd opp i listefiltersøkingen (som nå er dropp ned):
+  * få den til å virke
+  * legg til funksjon på alternativet "hele landet"

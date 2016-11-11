@@ -59,23 +59,17 @@ class ContentContainer extends Component {
 
   filterEvent (event) {
     var newSearchFilter = this.state.searchFilter
-
-    switch (event.target.name) {
+    switch(event.target.name){
       case 'Fylke':
-        if (event.target.checked) {
+        newSearchFilter.county = []
           newSearchFilter.county.push(event.target.value)
           this.setState({
             searchFilter: newSearchFilter
           })
-        } else {
-          newSearchFilter.county.splice(newSearchFilter.county.indexOf(event.target.value), 1)
-          this.setState({
-            searchFilter: newSearchFilter
-          })
-        }
-        break;
-      default:
-    }
+          break;
+        default:
+      }
+
   }
 
   fetchHandler () {
