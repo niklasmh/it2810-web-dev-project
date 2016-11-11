@@ -2,14 +2,15 @@
 * Sidebar høyde blir lav når lista krymper... fix.
 * ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???)
 * Flere sorteringer
-* Skifte navn på maincontent linken
+* ordne så å velge en art i dropned på addobs genererer riktig ID og vitenskaplige navn (HELENE)
+* Hente ut koordinat fra leaflet, som kan puttes inn i addobs. (HELENE)
+* Sette sånn at addobs tar inn innlogget bruker-ID når man lager obs.
+
 
 * legge til observasjoner (POST)
 * endre egne observasjoner (OUT)
 * hente ut egne observasjoner (GET)
 * slette egne observasjoner (DELETE)
-
-* Endre brukerinformasjon
 
 * Uten søk skal get/observations gi siste N observasjoner
 * Med søk skal det gi alle som har match
@@ -17,8 +18,11 @@
 * eget system for knapper som blir brukt konsekvent
 
 LAV PRIORITET
+* Endre brukerinformasjon..?
 * linter
 
 FERDIG:
+* Skifte navn på maincontent linken
+* FLYTTE ADDOBS.inn i hovedsiden.
 * Rydd opp i listefiltersøkingen: (COMPLETE)
 * sorteringen er nå enveis. mao, vi kan ikke se den sortere.  (COMPLETE)
