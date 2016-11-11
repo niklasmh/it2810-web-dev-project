@@ -25,7 +25,7 @@ class AddObservation extends Component {
     var url = 'http://localhost:3000/api/taxons'
     // Fetch is a modern replacement for XMLHttpRequest.
     fetch(`${url}`, {
-      method: 'GET'
+      method: 'GET',
     })
     .then((response) => {
       return response.json()
@@ -76,9 +76,10 @@ class AddObservation extends Component {
       return
     }
     var data = {
-      TaxonId : "taxonid",
-      Name: navn.value,
-      ScientificName : '',
+      TaxonId : navn.value.TaxonId,
+      Name: navn.value.PrefferedPopularname,
+      ScientificName : navn.value.ValidScientificName,
+
       Count: antall.value,
       Notes: kommentar.value,
       County: fylke.value,
@@ -112,9 +113,14 @@ class AddObservation extends Component {
         <select id="navn" required >
           {
           this.state.species.map((specie) =>
-            <option key={specie.PrefferedPopularname} value={specie}>{specie.PrefferedPopularname}</option>
+            <option
+              key={specie.PrefferedPopularname}
+              value={specie}
+            >
+              {specie.PrefferedPopularname}</option>
           )}
         </select>
+        <input value="navn.value.ScientificName"/>
 
         <br />Funndato:<br />
         <input

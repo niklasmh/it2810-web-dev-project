@@ -4,6 +4,7 @@ import KartContainer from '../kart/KartContainer'
 import ListeSearch from '../liste/ListeSearch'
 import ListeFilter from '../liste/ListeFilter'
 import './contentcontainer.css'
+import AddObservation from '../minside/AddObservation'
 
 /**
  * ContentContainer acts as a placeholder for the rest of the components in the application.
@@ -204,6 +205,12 @@ class ContentContainer extends Component {
 
         </div>
         <div id="contentbox">
+          <input type="checkbox" className="toggle-checkbutton" id="skjul" />
+          <label htmlFor="skjul" id="addbox">
+            <strong>Legg til Observasjon</strong>
+            <AddObservation id="skjulmeg" />
+          </label>
+
           {cont}
           <button onClick={this.fetchMoreHandler.bind(this)}>LoadMore</button>
         </div>
