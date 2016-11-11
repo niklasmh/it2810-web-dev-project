@@ -1,11 +1,11 @@
 _______________________
 KRAV VI MANGLER:
-* Dynamisk lasting av data.
-  Eksempel: liste viser de 10 første treffene,flere lastes når brukeren scroller
-  eller ved blar i sider.
+* Dynamisk lasting av data. (HÅVARD FIKSER)
+  Eksempel: liste viser de 10 første treffene,flere lastes når brukeren scroller (HÅVARD FIKSER DETTE OGSÅ)
+  eller ved blar i sider. (JADA)
 * "min side" funksjonalitet: innlogging hvor det blir registrert noe fra
   søkeaktiviteten f.eks. hva brukeren har sett på eller søkene som er brukt.
-* Den listebaserte visningen skal kunne sorteres på minimum to forskjellge egenskaper.
+* Den listebaserte visningen skal kunne sorteres på minimum to forskjellge egenskaper. (HÅVARD FIKSER)
 * må implementere "session"-håndtering
   som vi f.eks. trenger for å implementere dynamisk lasting og min side
 
@@ -22,8 +22,8 @@ ________________________
 * hente ut egne observasjoner (GET)
 * slette egne observasjoner (DELETE)
 
-* Uten søk skal get/observations gi siste N observasjoner
-* Med søk skal det gi alle som har match
+* Uten søk skal get/observations gi siste N observasjoner (HÅVARD ER FERDIG)
+* Med søk skal det gi alle som har match (HÅVARD ER FERDIG)
 
 * eget system for knapper som blir brukt konsekvent
 
