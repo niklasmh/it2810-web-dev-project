@@ -214,16 +214,16 @@ router.get('/users/:username', function (req, res) {
 router.post('/users', function (req, res) {
   console.log('\r\nPOST new user')
   // TODO: Torjus
-  var user = new user.User({ username: 'torjuss2', email: 'torjuss2@stud.ntnu.no', password: '12345' })
-  // var user = new User(req.body)
+  //var user = new user.User({ username: 'torjuss2', email: 'torjuss2@stud.ntnu.no', password: '12345' })
+  var user = new user(req.body)
 
   // TODO: What is "{w: 1}"?
   users.insert(user, {w: 1}, function (err, docs) {
     if (err) {
       handleError(res, err.message, 'Failed to add new user')
     } else {
-      res.json({message: 'Added new user: ' + obs['username']})
-      console.log('Added new user: ' + obs['username'])
+      res.json({message: 'Added new user: ' + obj['username']})
+      console.log('Added new user: ' + obj['username'])
     }
   })
 })
