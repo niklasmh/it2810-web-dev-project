@@ -22,8 +22,6 @@ mongo.MongoClient.connect(url, function (err, database) {
     process.exit(1)
   }
 
-  //TODO: db.close()
-
   console.log('Connected successfully to the MongoDB server\r\n')
   db = database
   users = db.collection('users')
@@ -190,19 +188,13 @@ function handleError (res, reason, message, code) {
  */
 router.get('/users/:username', function (req, res) {
   var username = req.params.username
-  console.log('\r\nGET user with username: ' + username)
+  console.log('\r\nGET users with username: ' + username)
 
-  users.find({username: username}).toArray(function (err, docs) {
+  users.findOne({_id: new ObjectID(req.params.id)}, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to get user')
     } else {
-      if (docs.length == 0) {
-        handleError(res, 'User does not exist', 'User does not exist', 404)
-      } else {
-        var user = docs[0];
-        user = { _id: user['_id'], username: user['username'] }
-        res.status(200).json(user)
-      }
+      res.status(200).json(doc)
     }
   })
 })
