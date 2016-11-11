@@ -3,7 +3,7 @@
 //
 var mongo = require('mongodb')
 
-mongo.MongoClient.connect('mongodb://localhost:27017/artsdata', function(err, db) {
+mongo.MongoClient.connect('mongodb://localhost:27017/artsdata', function (err, db) {
   if (err) {
     console.log(err)
     process.exit(1)

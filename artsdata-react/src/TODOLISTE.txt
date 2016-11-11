@@ -1,0 +1,21 @@
+
+* Rydd opp i listefiltersøkingen: (COMPLETE)
+* Sidebar høyde blir lav når lista krymper... fix.
+* ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???)
+* sorteringen er nå enveis. mao, vi kan ikke se den sortere.  (COMPLETE, men vi trenger fleire sorteringer)
+* Skifte navn på maincontent linken
+
+* legge til observasjoner (POST)
+* endre egne observasjoner (OUT)
+* hente ut egne observasjoner (GET)
+* slette egne observasjoner (DELETE)
+
+* Endre brukerinformasjon
+
+* Uten søk skal get/observations gi siste N observasjoner
+* Med søk skal det gi alle som har match
+
+* eget system for knapper som blir brukt konsekvent
+
+LAV PRIORITET
+* linter

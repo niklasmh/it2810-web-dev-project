@@ -4,3 +4,11 @@
   color: #e6e3f2;
   margin-bottom: 10px;
 }
+
+.header h1{
+  display:inline-block;
+  text-transform: uppercase;
+  margin-right: 10px;
+  font-size: 25px;
+  font-weight: normal;
+}

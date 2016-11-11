@@ -22,8 +22,6 @@ mongo.MongoClient.connect(url, function (err, database) {
     process.exit(1)
   }
 
-  //TODO: db.close()
-
   console.log('Connected successfully to the MongoDB server\r\n')
   db = database
   users = db.collection('users')
@@ -190,19 +188,13 @@ function handleError (res, reason, message, code) {
  */
 router.get('/users/:username', function (req, res) {
   var username = req.params.username
-  console.log('\r\nGET user with username: ' + username)
+  console.log('\r\nGET users with username: ' + username)
 
-  users.find({username: username}).toArray(function (err, docs) {
+  users.findOne({_id: new ObjectID(req.params.id)}, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to get user')
     } else {
-      if (docs.length == 0) {
-        handleError(res, 'User does not exist', 'User does not exist', 404)
-      } else {
-        var user = docs[0];
-        //user = { _id: user['_id'], username: user['username'] }
-        res.status(200).json(user)
-      }
+      res.status(200).json(doc)
     }
   })
 })
@@ -214,31 +206,18 @@ router.get('/users/:username', function (req, res) {
 router.post('/users', function (req, res) {
   console.log('\r\nPOST new user')
   // TODO: Torjus
-  //var user = new user.User({ username: 'torjuss2', email: 'torjuss2@stud.ntnu.no', password: '12345' })
-  var user = req.body
-
-  var username = user.username
-  users.find({username: username}).toArray(function (err, docs) {
-    if (err) {
-
-    } else {
-
-      if (docs.length == 0) {
-        users.insert(user, {w: 1}, function (err, docs) {
-          if (err) {
-            handleError(res, err.message, 'Failed to add new user')
-          } else {
-            res.status(200).json({message: 'Added new user: ' + user['username']})
-            console.log('Added new user: ' + user['username'])
-          }
-        })
-      } else {
-        handleError(res, 'User already exists', 'User already exists', 404)
-      }
-    }
-  })
+  var user = new user.User({ username: 'torjuss2', email: 'torjuss2@stud.ntnu.no', password: '12345' })
+  // var user = new User(req.body)
 
   // TODO: What is "{w: 1}"?
+  users.insert(user, {w: 1}, function (err, docs) {
+    if (err) {
+      handleError(res, err.message, 'Failed to add new user')
+    } else {
+      res.json({message: 'Added new user: ' + obs['username']})
+      console.log('Added new user: ' + obs['username'])
+    }
+  })
 })
 
 /*  ''/users:id'
@@ -318,38 +297,27 @@ router.get('/observations', (req, res) => {
     logText += '\r\nFilter: ' + JSON.stringify(filter, null, 2)
   }
 
-  if (req.query.pageSize !== null && req.query.pageSize !== '') {
-    var tmpPageSize = parseInt(req.query.pageSize)
+  if (req.query.pageSize != null && req.query.pageSize != '') {
+    tmpPageSize = parseInt(req.query.pageSize)
     pageSize = isNaN(tmpPageSize) ? pageSize : Math.min(tmpPageSize, maxPageSize)
     logText += '\r\nPage size: ' + pageSize
   }
 
-  if (req.query.pageIndex !== null && req.query.pageIndex !== '') {
-    var tmpPageIndex = parseInt(req.query.pageIndex)
+  if (req.query.pageIndex != null && req.query.pageIndex != '') {
+    tmpPageIndex = parseInt(req.query.pageIndex)
     pageIndex = isNaN(tmpPageIndex) ? pageIndex : Math.max(tmpPageIndex, pageIndex)
     logText += '\r\nPage index: ' + pageIndex
   }
   console.log(logText)
 
-  if (filter === {}) {
-    observations.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).sort({$natural: -1}).toArray(function (err, docs) {
-      if (err) {
-        handleError(res, err.message, 'Failed to get observations')
-      } else {
-        console.log('Result count: ' + length(docs) + '\r\n')
-        res.status(200).json(docs)
-      }
-    })
-  } else {
-    observations.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
-      if (err) {
-        handleError(res, err.message, 'Failed to get observations')
-      } else {
-        console.log('Result count: ' + length(docs) + '\r\n')
-        res.status(200).json(docs)
-      }
-    })
-  }
+  observations.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
+    if (err) {
+      handleError(res, err.message, 'Failed to get observations')
+    } else {
+      console.log('Result count: ' + length(docs) + '\r\n')
+      res.status(200).json(docs)
+    }
+  })
 })
 
 //TODO: Sikkerhet. Alle kan hente ut alle andre sine observations. Vi bør sjekke username (eller id) opp mot den aktive brukeren i state.

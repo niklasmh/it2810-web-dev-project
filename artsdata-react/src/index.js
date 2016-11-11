@@ -11,12 +11,12 @@ import KartContainer from './components/kart/KartContainer'
 import LoginContainer from './components/login/LoginContainer'
 import RegistrerContainer from './components/login/RegistrerContainer'
 import MyPage from './components/minside/MyPage'
+import ContentContainer from './components/content/ContentContainer'
 
 ReactDOM.render (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={ListeContainer} />
-      <Route path="/kart" component={KartContainer} />
+      <IndexRoute component={ContentContainer} />
       <Route path="/login" component={LoginContainer} />
       <Route path="/registrer" component={RegistrerContainer} />
       <Route path="/minside" component={MyPage} />

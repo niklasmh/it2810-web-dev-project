@@ -6,19 +6,27 @@ class ListeFilter extends Component {
     let choices = []
     for (var i = 0; i < this.props.data.length; i++) {
       choices.push(
-        <div key={i}>
-          <input id={'filter-' + this.props.data[i]} type="checkbox" name={this.props.title} onClick={this.props.filterHandler} value={this.props.data[i]} key={i} />
-          <label htmlFor={'filter-' + this.props.data[i]}>{this.props.data[i]}</label>
-        </div>
+        <option
+          value={this.props.data[i]}
+          name={this.props.title}
+          key={i}
+          >
+          {this.props.data[i]}
+        </option>
       )
     }
 
-
-    return(
+    return (
       <div>
-        {this.props.title}:
+        <h3>Filtrer etter {this.props.title}</h3>
         <div>
-          {choices}
+          <select
+            onChange={this.props.filterHandler}
+            name={this.props.title}
+          >
+            <option value="" name={this.props.title}>Vis alle</option>
+            {choices}
+          </select>
         </div>
       </div>
     )
