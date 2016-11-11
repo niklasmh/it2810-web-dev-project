@@ -1,21 +1,38 @@
+_______________________
+KRAV VI MANGLER:
+* Dynamisk lasting av data. (HÅVARD FIKSER)
+  Eksempel: liste viser de 10 første treffene,flere lastes når brukeren scroller (HÅVARD FIKSER DETTE OGSÅ)
+  eller ved blar i sider. (JADA)
+* "min side" funksjonalitet: innlogging hvor det blir registrert noe fra
+  søkeaktiviteten f.eks. hva brukeren har sett på eller søkene som er brukt.
+* Den listebaserte visningen skal kunne sorteres på minimum to forskjellge egenskaper. (HÅVARD FIKSER)
+* må implementere "session"-håndtering
+  som vi f.eks. trenger for å implementere dynamisk lasting og min side
 
-* Rydd opp i listefiltersøkingen: (COMPLETE)
+________________________
 * Sidebar høyde blir lav når lista krymper... fix.
 * ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???)
-* sorteringen er nå enveis. mao, vi kan ikke se den sortere.  (COMPLETE, men vi trenger fleire sorteringer)
-* Skifte navn på maincontent linken
+* Flere sorteringer
+* ordne så å velge en art i dropned på addobs genererer riktig ID og vitenskaplige navn (HELENE)
+* Hente ut koordinat fra leaflet, som kan puttes inn i addobs. (HELENE)
+* Sette sånn at addobs tar inn innlogget bruker-ID når man lager obs.
 
 * legge til observasjoner (POST)
 * endre egne observasjoner (OUT)
 * hente ut egne observasjoner (GET)
 * slette egne observasjoner (DELETE)
 
-* Endre brukerinformasjon
-
-* Uten søk skal get/observations gi siste N observasjoner
-* Med søk skal det gi alle som har match
+* Uten søk skal get/observations gi siste N observasjoner (HÅVARD ER FERDIG)
+* Med søk skal det gi alle som har match (HÅVARD ER FERDIG)
 
 * eget system for knapper som blir brukt konsekvent
 
 LAV PRIORITET
+* Endre brukerinformasjon..?
 * linter
+
+FERDIG:
+* Skifte navn på maincontent linken
+* FLYTTE ADDOBS.inn i hovedsiden.
+* Rydd opp i listefiltersøkingen: (COMPLETE)
+* sorteringen er nå enveis. mao, vi kan ikke se den sortere.  (COMPLETE)

@@ -4,6 +4,7 @@ import KartContainer from '../kart/KartContainer'
 import ListeSearch from '../liste/ListeSearch'
 import ListeFilter from '../liste/ListeFilter'
 import './contentcontainer.css'
+import AddObservation from '../minside/AddObservation'
 
 /**
  * ContentContainer acts as a placeholder for the rest of the components in the application.
@@ -48,7 +49,7 @@ class ContentContainer extends Component {
     newSearchFilter.name = event.target.value
     this.setState({
       searchFilter: newSearchFilter
-    })
+    }, this.fetchHandler())
   }
 
   sortHandlerName (event) {
@@ -89,9 +90,9 @@ class ContentContainer extends Component {
   fetchHandler () {
     var url = 'http://localhost:3000/api/observations'
     // TODO: Legg inn filtersøk/sortering dersom vi skal håndtere det i databasen.
-    var search = ''
+    var search = this.state.searchFilter.name
     var pageIndex = 1
-    var pageSize = 25
+    var pageSize = 50
     var request = `${url}?search=${search}&pageSize=${pageSize}&pageIndex=${pageIndex}`
     // Fetch is a modern replacement for XMLHttpRequest.
     fetch(request, {
@@ -102,6 +103,29 @@ class ContentContainer extends Component {
     })
     .then((data) => {
       this.setState(Object.assign({}, this.state, { observations: data }))
+    })
+    .catch((error) => {
+      this.setState(Object.assign({}, this.state, { error: error }))
+    }).then(() => { this.filterProps() })
+  }
+
+  fetchMoreHandler () {
+    var url = 'http://localhost:3000/api/observations'
+    // TODO: Legg inn filtersøk/sortering dersom vi skal håndtere det i databasen.
+    var search = this.state.searchFilter.name
+    var pageIndex = Math.floor(this.state.observations.length / 50) + 1
+    var pageSize = 50
+    var request = `${url}?search=${search}&pageSize=${pageSize}&pageIndex=${pageIndex}`
+    // Fetch is a modern replacement for XMLHttpRequest.
+    fetch(request, {
+      method: 'GET'
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((data) => {
+      var newObservations = this.state.observations.concat(data)
+      this.setState(Object.assign({}, this.state, { observations: newObservations }))
     })
     .catch((error) => {
       this.setState(Object.assign({}, this.state, { error: error }))
@@ -134,14 +158,7 @@ class ContentContainer extends Component {
     this.state.toggleContent ? cont = <ListeContainer /> : <KartContainer />
 
     let observationsFiltered = this.state.observations
-    if (this.state.searchFilter.name.length > 0) {
-      observationsFiltered = observationsFiltered.filter(
-        (item) => {
-          return item.Name.indexOf(this.state.searchFilter.name) !== -1 ||
-          item.ScientificName.toLowerCase().indexOf(this.state.searchFilter.name) !== -1
-        }
-      )
-    }
+
     if (this.state.searchFilter.county.length > 0) {
       console.log('filter på county')
       observationsFiltered = observationsFiltered.filter(
@@ -188,7 +205,14 @@ class ContentContainer extends Component {
 
         </div>
         <div id="contentbox">
+          <input type="checkbox" className="toggle-checkbutton" id="skjul" />
+          <label htmlFor="skjul" id="addbox">
+            <strong>Legg til Observasjon</strong>
+            <AddObservation id="skjulmeg" />
+          </label>
+
           {cont}
+          <button onClick={this.fetchMoreHandler.bind(this)}>LoadMore</button>
         </div>
       </div>
     )

@@ -200,7 +200,8 @@ router.get('/users/:username', function (req, res) {
         handleError(res, 'User does not exist', 'User does not exist', 404)
       } else {
         var user = docs[0];
-        //user = { _id: user['_id'], username: user['username'] }
+
+        //user = { _id: user['6'], username: user['username'] }
         res.status(200).json(user)
       }
     }
@@ -240,6 +241,37 @@ router.post('/users', function (req, res) {
 
   // TODO: What is "{w: 1}"?
 })
+
+router.post('/users/login', function (req, res) {
+  console.log('\r\nPOST new user')
+  // TODO: Torjus
+  //var user = new user.User({ username: 'torjuss2', email: 'torjuss2@stud.ntnu.no', password: '12345' })
+  var user = req.body
+  console.log(user)
+  var filter = {
+    $and: [
+      {username: user['username']},
+      {password: user['password']}
+    ]
+  }
+  var username = user.username
+  users.find(filter).toArray(function (err, docs) {
+    if (err) {
+      handleError(res, err.message, 'Failed to get user')
+    } else {
+      if (docs.length == 0) {
+        handleError(res, 'User does not exist', 'User does not exist', 404)
+      } else {
+        var user = docs[0];
+        //user = { _id: user['6'], username: user['username'] }
+        res.status(200).json(user)
+      }
+    }
+  })
+
+  // TODO: What is "{w: 1}"?
+})
+
 
 /*  ''/users:id'
  *    PUT: updates user with the specified id
@@ -331,17 +363,17 @@ router.get('/observations', (req, res) => {
   }
   console.log(logText)
 
-  if (filter === {}) {
-    observations.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).sort({$natural: -1}).toArray(function (err, docs) {
+  if (Object.keys(filter).length === 0 && filter.constructor === Object) {
+    observations.find().sort({$natural: -1}).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
       if (err) {
         handleError(res, err.message, 'Failed to get observations')
       } else {
-        console.log('Result count: ' + length(docs) + '\r\n')
+        console.log('Result count without filter: ' + length(docs) + '\r\n')
         res.status(200).json(docs)
       }
     })
   } else {
-    observations.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
+    observations.find(filter).sort({$natural: -1}).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
       if (err) {
         handleError(res, err.message, 'Failed to get observations')
       } else {
