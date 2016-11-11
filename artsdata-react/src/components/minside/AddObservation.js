@@ -13,6 +13,8 @@ class AddObservation extends Component {
     super(props)
     this.state = {
       date: '',
+      latitude: '',
+      longitude: '',
       species: [],
       counties: ['Akershus', 'Aust-Agder', 'Buskerud', 'Finnmark', 'Hedmark', 'Hordaland', 'Møre og Romsdal', 'Nord-Trøndelag', 'Nordland', 'Oppland', 'Oslo', 'Rogaland', 'Sogn og Fjordane', 'Sør-Trøndelag', 'Telemark', 'Troms', 'Vest-Agder', 'Vestfold', 'Østfold']
     }
@@ -67,10 +69,10 @@ class AddObservation extends Component {
       Count: antall.value,
       Notes: kommentar.value,
       County: fylke.value,
-      Municipality: '',
+      Municipality: munc.value,
       Locality: lokalitet.value,
-      Longitude: '',
-      Latitude: '',
+      Longitude: long.value,
+      Latitude: lat.value,
       CollectedDate: this.dateFormatter(dato.value),
       User: this.state.username
     }
@@ -79,6 +81,11 @@ class AddObservation extends Component {
       body: JSON.stringify(data),
       method: 'POST'
     }).then(r => r.json()).then(console.log)
+  }
+
+  setPosition(position){
+    alert("Valgte koordinater: " + "\n" + "Latitude: " + position.lat + "\n" + "Longitude: " + position.lng + "\n" + "Lagt inn i skjema")
+    this.setState({latitude: position.lat, longitude: position.lng})
   }
 
   /**
@@ -104,7 +111,7 @@ class AddObservation extends Component {
               {specie.PrefferedPopularname}</option>
           )}
         </select>
-        <input value="navn.value.ScientificName"/>
+
 
         <br />Funndato:<br />
         <input
@@ -142,14 +149,42 @@ class AddObservation extends Component {
           required
         />
 
+        <br />Municipality:<br />
+        <input
+          type="text"
+          className="inputfelt"
+          placeholder="skriv inn funnsted"
+          id="munc"
+          required
+        />
+
         <br />Kommentar: <br />
         <input
           type="text"
           className="inputfelt"
           placeholder="skriv inn kommentar"
           id="kommentar"
+        />
+
+        <br />Latitude and Longitude:<br/>
+        <input
+          type="number"
+          className="inputfelt"
+          placeholder="Latitude"
+          id="lat"
+          value={this.state.latitude}
           required
         />
+        <input
+          type="number"
+          className="inputfelt"
+          placeholder="Longitude"
+          id="long"
+          value={this.state.longitude}
+          required
+        />
+        <br/>
+        <button onClick={this.props.toggleEventFunc} > Vis kart </button><br/>
 
         <br />
         <button onClick={this.handleSubmit} > Legg til observasjon </button>

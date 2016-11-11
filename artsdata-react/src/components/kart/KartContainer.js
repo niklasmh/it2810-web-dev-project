@@ -51,7 +51,10 @@ class KartContainer extends Component {
     }
     return [[71.695960, 32.149458], [57.452945, 2.837935]]
   }
-
+  handleMapClick(event){
+    this.props.registerPositionFunc(event.latlng)
+    //alert("Koordinater: " + event.latlng )
+  }
   render () {
     console.log('kartrender')
     let observations = this.props.data
@@ -85,11 +88,15 @@ class KartContainer extends Component {
 
     return (
       <div className="kart-container">
-        <Map center={[this.state.lat, this.state.lng]} bounds={this.state.bounds}>
+        <Map
+          center={[this.state.lat, this.state.lng]}
+          bounds={this.state.bounds}
+          onClick={this.handleMapClick.bind(this)}
+        >
           <TileLayer
             attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
-                />
+          />
                 {observationsTransformed}
         </Map>
       </div>

@@ -146,6 +146,10 @@ class ContentContainer extends Component {
     this.forceUpdate()
   }
 
+  sendPosition(position){
+    this.refs.addobs.setPosition(position)
+  }
+
   /**
    * Displays the div where the list-container (or map-container) will appear in the code.
    *
@@ -185,7 +189,7 @@ class ContentContainer extends Component {
     }
 
     var cont = ''
-    this.state.toggleContent ? cont = <ListeContainer data={observationsFiltered} /> : cont = <KartContainer data={observationsFiltered} />
+    this.state.toggleContent ? cont = <ListeContainer data={observationsFiltered} /> : cont = <KartContainer data={observationsFiltered} registerPositionFunc={this.sendPosition.bind(this)} />
 
     return (
       <div id="flexy">
@@ -208,7 +212,7 @@ class ContentContainer extends Component {
           <input type="checkbox" className="toggle-checkbutton" id="skjul" />
           <label htmlFor="skjul" id="addbox">
             <strong>Legg til Observasjon</strong>
-            <AddObservation id="skjulmeg" />
+            <AddObservation id="skjulmeg" ref='addobs'/>
           </label>
 
           {cont}
