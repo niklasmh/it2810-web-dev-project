@@ -33,9 +33,9 @@ class Header extends Component {
       <div className="header">
 
         <h1>Sjeldne arter i Norge</h1>
-        <IndexLink to="/"  activeClassName="active"><LinkButton>MainContent</LinkButton></IndexLink>
-        <Link to="/login"  activeClassName="active"><LinkButton>Login</LinkButton></Link>
-        <Link to="/minside"  activeClassName="active"><LinkButton>Min SIde</LinkButton></Link>
+        <IndexLink to="/" activeClassName="active"><LinkButton>MainContent</LinkButton></IndexLink>
+        <Link to="/login" activeClassName="active"><LinkButton>Login</LinkButton></Link>
+        <Link to="/minside" activeClassName="active"><LinkButton>Min SIde</LinkButton></Link>
       </div>
     )
   }
