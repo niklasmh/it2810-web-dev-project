@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ListeContainer from '../liste/ListeContainer'
-import MyPage from '../minside/MyPage'
 import KartContainer from '../kart/KartContainer'
 import ListeSearch from '../liste/ListeSearch'
 import ListeFilter from '../liste/ListeFilter'
@@ -53,9 +52,17 @@ class ContentContainer extends Component {
   }
 
   sortHandlerName (event) {
-    this.setState({
-      sort: 'name'
-    })
+    switch (this.state.sort) {
+      case 'name':
+        this.setState({sort: 'invName'})
+        break
+      case 'invName':
+        this.setState({sort: 'name'})
+        break
+      default:
+        this.setState({sort: 'name'})
+        break
+    }
   }
 
   filterEvent (event) {
@@ -130,7 +137,8 @@ class ContentContainer extends Component {
     if (this.state.searchFilter.name.length > 0) {
       observationsFiltered = observationsFiltered.filter(
         (item) => {
-          return item.Name.indexOf(this.state.searchFilter.name) !== -1 || item.ScientificName.toLowerCase().indexOf(this.state.searchFilter.name) !== -1
+          return item.Name.indexOf(this.state.searchFilter.name) !== -1 ||
+          item.ScientificName.toLowerCase().indexOf(this.state.searchFilter.name) !== -1
         }
       )
     }
@@ -146,8 +154,13 @@ class ContentContainer extends Component {
     switch (this.state.sort) {
       case 'name':
         observationsFiltered.sort(function (a, b) {
-          var x = a.Name.toLowerCase()
-          var y = b.Name.toLowerCase()
+          var x = a.Name.toLowerCase(), y = b.Name.toLowerCase()
+          return x < y ? -1 : x > y ? 1 : 0
+        })
+        break;
+      case 'invName':
+        observationsFiltered.sort(function (a, b) {
+          var y = a.Name.toLowerCase(), x = b.Name.toLowerCase()
           return x < y ? -1 : x > y ? 1 : 0
         })
         break

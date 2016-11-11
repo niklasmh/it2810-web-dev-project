@@ -318,27 +318,38 @@ router.get('/observations', (req, res) => {
     logText += '\r\nFilter: ' + JSON.stringify(filter, null, 2)
   }
 
-  if (req.query.pageSize != null && req.query.pageSize != '') {
-    tmpPageSize = parseInt(req.query.pageSize)
+  if (req.query.pageSize !== null && req.query.pageSize !== '') {
+    var tmpPageSize = parseInt(req.query.pageSize)
     pageSize = isNaN(tmpPageSize) ? pageSize : Math.min(tmpPageSize, maxPageSize)
     logText += '\r\nPage size: ' + pageSize
   }
 
-  if (req.query.pageIndex != null && req.query.pageIndex != '') {
-    tmpPageIndex = parseInt(req.query.pageIndex)
+  if (req.query.pageIndex !== null && req.query.pageIndex !== '') {
+    var tmpPageIndex = parseInt(req.query.pageIndex)
     pageIndex = isNaN(tmpPageIndex) ? pageIndex : Math.max(tmpPageIndex, pageIndex)
     logText += '\r\nPage index: ' + pageIndex
   }
   console.log(logText)
 
-  observations.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
-    if (err) {
-      handleError(res, err.message, 'Failed to get observations')
-    } else {
-      console.log('Result count: ' + length(docs) + '\r\n')
-      res.status(200).json(docs)
-    }
-  })
+  if (filter === {}) {
+    observations.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).sort({$natural: -1}).toArray(function (err, docs) {
+      if (err) {
+        handleError(res, err.message, 'Failed to get observations')
+      } else {
+        console.log('Result count: ' + length(docs) + '\r\n')
+        res.status(200).json(docs)
+      }
+    })
+  } else {
+    observations.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
+      if (err) {
+        handleError(res, err.message, 'Failed to get observations')
+      } else {
+        console.log('Result count: ' + length(docs) + '\r\n')
+        res.status(200).json(docs)
+      }
+    })
+  }
 })
 
 //TODO: Sikkerhet. Alle kan hente ut alle andre sine observations. Vi bør sjekke username (eller id) opp mot den aktive brukeren i state.
