@@ -200,7 +200,7 @@ router.get('/users/:username', function (req, res) {
         handleError(res, 'User does not exist', 'User does not exist', 404)
       } else {
         var user = docs[0];
-        user = { _id: user['_id'], username: user['username'] }
+        //user = { _id: user['_id'], username: user['username'] }
         res.status(200).json(user)
       }
     }
@@ -215,17 +215,30 @@ router.post('/users', function (req, res) {
   console.log('\r\nPOST new user')
   // TODO: Torjus
   //var user = new user.User({ username: 'torjuss2', email: 'torjuss2@stud.ntnu.no', password: '12345' })
-  var user = new user(req.body)
+  var user = req.body
 
-  // TODO: What is "{w: 1}"?
-  users.insert(user, {w: 1}, function (err, docs) {
+  var username = user.username
+  users.find({username: username}).toArray(function (err, docs) {
     if (err) {
-      handleError(res, err.message, 'Failed to add new user')
+
     } else {
-      res.json({message: 'Added new user: ' + obj['username']})
-      console.log('Added new user: ' + obj['username'])
+
+      if (docs.length == 0) {
+        users.insert(user, {w: 1}, function (err, docs) {
+          if (err) {
+            handleError(res, err.message, 'Failed to add new user')
+          } else {
+            res.status(200).json({message: 'Added new user: ' + user['username']})
+            console.log('Added new user: ' + user['username'])
+          }
+        })
+      } else {
+        handleError(res, 'User already exists', 'User already exists', 404)
+      }
     }
   })
+
+  // TODO: What is "{w: 1}"?
 })
 
 /*  ''/users:id'
