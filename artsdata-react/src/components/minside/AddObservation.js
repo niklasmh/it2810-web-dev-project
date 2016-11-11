@@ -16,7 +16,31 @@ class AddObservation extends Component {
       latitude: '',
       longitude: '',
       species: [],
-      counties: ['Akershus', 'Aust-Agder', 'Buskerud', 'Finnmark', 'Hedmark', 'Hordaland', 'Møre og Romsdal', 'Nord-Trøndelag', 'Nordland', 'Oppland', 'Oslo', 'Rogaland', 'Sogn og Fjordane', 'Sør-Trøndelag', 'Telemark', 'Troms', 'Vest-Agder', 'Vestfold', 'Østfold']
+      specie: {
+        Name: '',
+        ScientificName: ''
+      },
+      counties: [
+        'Akershus',
+        'Aust-Agder',
+        'Buskerud',
+        'Finnmark',
+        'Hedmark',
+        'Hordaland',
+        'Møre og Romsdal',
+        'Nord-Trøndelag',
+        'Nordland',
+        'Oppland',
+        'Oslo',
+        'Rogaland',
+        'Sogn og Fjordane',
+        'Sør-Trøndelag',
+        'Telemark',
+        'Troms',
+        'Vest-Agder',
+        'Vestfold',
+        'Østfold'
+      ]
     }
     this.handleDateChange = this.handleDateChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -88,6 +112,24 @@ class AddObservation extends Component {
     this.setState({latitude: position.lat, longitude: position.lng})
   }
 
+  setSpecieHandler (evt) {
+    this.setSpecie(evt.target.value)
+  }
+
+  setSpecie (name) {
+    let specieName = name
+    let speciesFiltered = this.state.species.filter(s=>specieName===s.PrefferedPopularname)
+    let specieScientificName = ''
+
+    if (speciesFiltered.length && speciesFiltered[0].ValidScientificName)
+      specieScientificName = speciesFiltered[0].ValidScientificName
+    this.setState({
+      specie: {
+        Name: specieName,
+        ScientificName: specieScientificName
+      }
+    })
+  }
   /**
    * Displays a search-input and exposes an onChange event where other
    * components can listen and respond to changed search-input.
@@ -99,20 +141,19 @@ class AddObservation extends Component {
   render () {
     return (
       <div className="add-observation">
-        <h4>Ny Observasjon </h4>
+        <h4>Ny Observasjon</h4>
         Art:<br />
-        <select id="navn" required >
+        <select id="navn" required onChange={this.setSpecieHandler.bind(this)}>
           {
-          this.state.species.map((specie, i) =>
+          this.state.species.filter(s=>s.PrefferedPopularname).map((specie, i) =>
             <option
               key={i}
-              value={specie}
+              value={specie.PrefferedPopularname}
             >
               {specie.PrefferedPopularname}</option>
           )}
         </select>
-
-
+        <input value={this.state.specie.ScientificName} readOnly disabled />
         <br />Funndato:<br />
         <input
           type="date"
