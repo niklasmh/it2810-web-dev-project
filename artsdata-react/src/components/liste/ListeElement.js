@@ -37,7 +37,7 @@ class ListeElement extends Component {
             <dd>{this.props.data.Municipality}, {this.props.data.County} </dd>
             <dt>Nøyaktig plassering</dt>
             <dd> <a target="_blank" href={'https://www.google.com/maps/preview/@' + this.props.data.Latitude + ',' + this.props.data.Longitude + ',14z'}>{this.props.data.Locality}</a>&nbsp;</dd>
-            <br/>
+            <br />
             <dt>Beskrivelse</dt>
             <dd>{this.props.data.Notes}&nbsp;</dd>
             <dt>Antall individer</dt>

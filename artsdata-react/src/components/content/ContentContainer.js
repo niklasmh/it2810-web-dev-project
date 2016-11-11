@@ -32,6 +32,7 @@ class ContentContainer extends Component {
       },
       sort: '',
       counties: [],
+      names: [],
       toggleContent: true
     }
     this.fetchHandler()
@@ -59,33 +60,33 @@ class ContentContainer extends Component {
 
   filterEvent (event) {
     var newSearchFilter = this.state.searchFilter
-
     switch (event.target.name) {
       case 'Fylke':
-        if (event.target.checked) {
-          newSearchFilter.county.push(event.target.value)
-          this.setState({
-            searchFilter: newSearchFilter
-          })
-        } else {
-          newSearchFilter.county.splice(newSearchFilter.county.indexOf(event.target.value), 1)
-          this.setState({
-            searchFilter: newSearchFilter
-          })
-        }
-        break;
+        newSearchFilter.county = []
+        newSearchFilter.county.push(event.target.value)
+        this.setState({
+          searchFilter: newSearchFilter
+        })
+        break
+      case 'Art':
+        newSearchFilter.name = []
+        newSearchFilter.name.push(event.target.value)
+        this.setState({
+          searchFilter: newSearchFilter
+        })
+        break
       default:
     }
   }
 
   fetchHandler () {
     var url = 'http://localhost:3000/api/observations'
-    //TODO: Legg inn filtersøk/sortering dersom vi skal håndtere det i databasen.
+    // TODO: Legg inn filtersøk/sortering dersom vi skal håndtere det i databasen.
     var search = ''
     var pageIndex = 1
     var pageSize = 25
     var request = `${url}?search=${search}&pageSize=${pageSize}&pageIndex=${pageIndex}`
-    //Fetch is a modern replacement for XMLHttpRequest.
+    // Fetch is a modern replacement for XMLHttpRequest.
     fetch(request, {
       method: 'GET'
     })
@@ -97,20 +98,22 @@ class ContentContainer extends Component {
     })
     .catch((error) => {
       this.setState(Object.assign({}, this.state, { error: error }))
-    }).then(() => {this.filterProps()})
+    }).then(() => { this.filterProps() })
   }
 
   filterProps () {
     this.state.observations.forEach(
       (item) => {
-        if (this.state.counties.indexOf(item.County) == -1) {
+        if (this.state.counties.indexOf(item.County) === -1) {
           this.state.counties.push(item.County)
+        }
+        if (this.state.names.indexOf(item.Name) === -1) {
+          this.state.names.push(item.Name)
         }
       }
     )
     this.forceUpdate()
   }
-
 
   /**
    * Displays the div where the list-container (or map-container) will appear in the code.
@@ -126,24 +129,28 @@ class ContentContainer extends Component {
     let observationsFiltered = this.state.observations
     if (this.state.searchFilter.name.length > 0) {
       observationsFiltered = observationsFiltered.filter(
-        (item) => { return item.Name.indexOf(this.state.searchFilter.name) !== -1
-        || item.ScientificName.toLowerCase().indexOf(this.state.searchFilter.name) !== -1 }
+        (item) => {
+          return item.Name.indexOf(this.state.searchFilter.name) !== -1 || item.ScientificName.toLowerCase().indexOf(this.state.searchFilter.name) !== -1
+        }
       )
     }
     if (this.state.searchFilter.county.length > 0) {
-      console.log('filter på county');
+      console.log('filter på county')
       observationsFiltered = observationsFiltered.filter(
-        (item) => { return item.County.indexOf(this.state.searchFilter.county) !== -1}
+        (item) => {
+          return item.County.indexOf(this.state.searchFilter.county) !== -1
+        }
       )
     }
 
     switch (this.state.sort) {
       case 'name':
-        observationsFiltered.sort(function(a, b) {
-          var x = a.Name.toLowerCase(), y = b.Name.toLowerCase()
-          return x < y ? -1 : x > y ? 1 : 0;
+        observationsFiltered.sort(function (a, b) {
+          var x = a.Name.toLowerCase()
+          var y = b.Name.toLowerCase()
+          return x < y ? -1 : x > y ? 1 : 0
         })
-        break;
+        break
       default:
     }
 
@@ -163,8 +170,10 @@ class ContentContainer extends Component {
           <h3>Sorter på Navn</h3>
           <button onClick={this.sortHandlerName.bind(this)}>Navn</button>
 
-          <ListeFilter title='Fylke' data={this.state.counties} filterHandler={this.filterEvent.bind(this)}/>
-          </div>
+          <ListeFilter title='Fylke' data={this.state.counties} filterHandler={this.filterEvent.bind(this)} />
+          <ListeFilter title='Art' data={this.state.names} filterHandler={this.filterEvent.bind(this)} />
+
+        </div>
         <div id="contentbox">
           {cont}
         </div>

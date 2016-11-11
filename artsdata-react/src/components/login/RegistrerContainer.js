@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './RegistrerContainer.css'
 
 class RegistrerContainer extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -13,61 +14,63 @@ class RegistrerContainer extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this)
-        this.handleNameChange = this.handleNameChange.bind(this)
         this.handleUsernameChange = this.handleUsernameChange.bind(this)
         this.handlePasswordChange = this.handlePasswordChange.bind(this)
-    }
 
-    handleEmailChange(event){
-        if(event.target.validity.valid){
-            this.state.email = event.target.value;
-        }
     }
+  handleEmailChange (event) {
+    if (event.target.validity.valid) {
+        this.state.email = event.target.value,
+        this.setState({ status: '' })
+    }else{
+        this.setState({ status: 'Email is not vaild' })
+    }
+  }
 
-    handleNameChange(event){
-        if(event.target.value.length > 3){
-        }
+  handleUsernameChange (event) {
+    if (event.target.value.length > 3) {
+        this.state.username = event.target.value
+        this.setState({ status: '' })
+    }else{
+        this.setState({ status: 'Password must be more than 3 characters' })
     }
+  }
 
-    handleUsernameChange(event){
-        if(event.target.value.length > 3){
-            this.state.username = event.target.value;
-        }
+  handlePasswordChange (event) {
+    if (event.target.value.length > 3) {
+        this.state.password = event.target.value
+        this.setState({ status: '' })
+    }else{
+        this.setState({ status: 'Username must be more than 3 characters' })
     }
-
-    handlePasswordChange(event){
-        if(event.target.value.length > 3){
-            this.state.password = event.target.value;
-        }
-    }
+  }
 
     handleSubmit(){
-
-        fetch('/api/users', {method: 'POST', headers: {'Content-Type': 'application/json'},  body:JSON.stringify(this.state)})
-            .then((response) => {
-            return response.status
-            })
-            .then((data) => {
-                console.log(data)
-                if(data == 200){
-                    this.setState(Object.assign({}, this.state, { status: 'Successfully registered' }))
-                }
-                if(data == 404){
-                    this.setState(Object.assign({}, this.state, { status: 'User already exists' }))
-                }
-            })
-            .catch((error) => {
-            })
+        if(this.state.username < 3) {
+            this.setState({status: 'Fields are not vaild'})
+        }else{
+            fetch('/api/users', {method: 'POST', headers: {'Content-Type': 'application/json'},  body:JSON.stringify(this.state)})
+                .then((response) => {
+                return response.status
+                })
+                .then((data) => {
+                    console.log(data)
+                    if(data == 200){
+                        this.setState(Object.assign({}, this.state, { status: 'Successfully registered' }))
+                    }
+                    if(data == 404){
+                        this.setState(Object.assign({}, this.state, { status: 'User already exists' }))
+                    }
+                })
+                .catch((error) => {
+                })
+        }
     }
 
     render () {
         return (
             <div id="registrationDiv">
                 <h1>Registrer</h1>
-                <div className="registrationForm">
-                    <label htmlFor="name" className="registrationLabel">Full name:</label>
-                    <input type="text" id="name" className="registrationInput" placeholder="Name" onChange={this.handleNameChange}/>
-                </div>
                 <div className="registrationForm">
                     <label htmlFor="username" className="registrationLabel">Username:</label>
                     <input type="text" id="username" className="registrationInput" placeholder="Username" onChange={this.handleUsernameChange}/>
@@ -84,8 +87,8 @@ class RegistrerContainer extends Component {
                 <p id="status">{this.state.status}</p>
             </div>
 
-        )
-    }
+      )
+  }
 }
 
 export default RegistrerContainer

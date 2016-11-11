@@ -1,0 +1,9 @@
+
+* Rydd opp i listefiltersøkingen: (COMPLETE)
+* Sidebar høyde blir lav når lista krymper... fix.
+* ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn.
+* sorteringen er nå enveis. mao, vi kan ikke se den sortere. 
+
+* legge til observasjoner (POST)
+* endre egne observasjoner (OUT)
+* slette egne observasjoner (DELETE)
