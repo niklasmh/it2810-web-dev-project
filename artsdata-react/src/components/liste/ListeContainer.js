@@ -22,8 +22,6 @@ class ListeContainer extends Component {
     super(props)
   }
 
-
-
   /**
    * Displays the filtererd data in an array.
    *
@@ -32,12 +30,11 @@ class ListeContainer extends Component {
    * @memberOf ListeContainer
    */
   render () {
-    console.log('render');
+    console.log('render')
     var rows = []
 
     for (var i = 0; i < this.props.data.length; i++) {
       rows.push(<ListeElement data={this.props.data[i]} id={'element-' + i} key={i} />)
-
     }
     return (
       <div className="listview">
