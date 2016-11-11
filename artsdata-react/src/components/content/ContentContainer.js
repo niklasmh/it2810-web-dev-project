@@ -32,6 +32,7 @@ class ContentContainer extends Component {
       },
       sort: '',
       counties: [],
+      names: [],
       toggleContent: true
     }
     this.fetchHandler()
@@ -63,6 +64,13 @@ class ContentContainer extends Component {
       case 'Fylke':
         newSearchFilter.county = []
           newSearchFilter.county.push(event.target.value)
+          this.setState({
+            searchFilter: newSearchFilter
+          })
+          break;
+        case 'Art':
+        newSearchFilter.name = []
+          newSearchFilter.name.push(event.target.value)
           this.setState({
             searchFilter: newSearchFilter
           })
@@ -100,6 +108,10 @@ class ContentContainer extends Component {
         if (this.state.counties.indexOf(item.County) == -1) {
           this.state.counties.push(item.County)
         }
+        if (this.state.names.indexOf(item.Name) == -1) {
+          this.state.names.push(item.Name)
+        }
+
       }
     )
     this.forceUpdate()
@@ -158,6 +170,10 @@ class ContentContainer extends Component {
           <button onClick={this.sortHandlerName.bind(this)}>Navn</button>
 
           <ListeFilter title='Fylke' data={this.state.counties} filterHandler={this.filterEvent.bind(this)}/>
+
+
+          <ListeFilter title='Art' data={this.state.names} filterHandler={this.filterEvent.bind(this)}/>
+
           </div>
         <div id="contentbox">
           {cont}
