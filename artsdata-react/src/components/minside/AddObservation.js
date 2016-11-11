@@ -40,46 +40,30 @@ class AddObservation extends Component {
 
   // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
   isValidDate (dateString) {
-    // First check for the pattern
-    if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) {
-      return false
-    }
-
-    // Parse the date parts tso integers
-    var parts = dateString.split('/')
-    var day = parseInt(parts[1], 10)
-    var month = parseInt(parts[0], 10)
-    var year = parseInt(parts[2], 10)
-
-    // Check the ranges of month and year
-    if (year < 1000 || year > 3000 || month === 0 || month > 12) {
-      return false
-    }
-    var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
-
-    // Adjust for leap years
-    if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
-      monthLength[1] = 29
-    }
-
-    // Check the range of the day
-    return day > 0 && day <= monthLength[month - 1]
+    let date = new Date(dateString)
+    return Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date.getTime())
   }
 
   handleDateChange (event) {
     this.setState({date: event.target.value})
   }
 
+  dateFormatter (date) {
+    let obj = new Date(date)
+    return obj.getDate() + '/' + obj.getMonth() + '/' + obj.getFullYear()
+  }
+
   handleSubmit (event) {
-    if (!this.isValidDate(this.state.date)) {
+    console.log(this.dateFormatter(dato.value), dato.value, this.isValidDate(dato.value))
+    if (!this.isValidDate(dato.value)) {
       alert('Nå har du ikke skrevet datoen på riktig format. Prøv på nytt!')
       return
     }
+
     var data = {
       TaxonId : navn.value.TaxonId,
       Name: navn.value.PrefferedPopularname,
       ScientificName : navn.value.ValidScientificName,
-
       Count: antall.value,
       Notes: kommentar.value,
       County: fylke.value,
@@ -87,7 +71,7 @@ class AddObservation extends Component {
       Locality: lokalitet.value,
       Longitude: '',
       Latitude: '',
-      CollectedDate: dato.value,
+      CollectedDate: this.dateFormatter(dato.value),
       User: this.state.username
     }
 
@@ -112,9 +96,9 @@ class AddObservation extends Component {
         Art:<br />
         <select id="navn" required >
           {
-          this.state.species.map((specie) =>
+          this.state.species.map((specie, i) =>
             <option
-              key={specie.PrefferedPopularname}
+              key={i}
               value={specie}
             >
               {specie.PrefferedPopularname}</option>
@@ -126,7 +110,7 @@ class AddObservation extends Component {
         <input
           type="date"
           className="inputfelt"
-          placeholder="dd/mm/yyyy"
+          placeholder="yyyy/mm/dd"
           id="dato"
           onChange={this.handleDateChange}
           required
@@ -144,8 +128,8 @@ class AddObservation extends Component {
         <br />Funnsted:<br />
         <select id="fylke" required>
           {
-          this.state.counties.map((county) =>
-            <option key={county} value={county}>{county}</option>
+          this.state.counties.map((county, i) =>
+            <option key={i} value={county}>{county}</option>
           )}
         </select>
 
