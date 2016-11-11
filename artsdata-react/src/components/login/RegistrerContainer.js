@@ -69,7 +69,7 @@ class RegistrerContainer extends Component {
 
     render () {
         return (
-            <div id="registrationDiv">
+            <div className="registration-container module">
                 <h1>Registrer</h1>
                 <div className="registrationForm">
                     <label htmlFor="username" className="registrationLabel">Username:</label>

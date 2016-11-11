@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+
+import Button from './Button'
 import './buttons.css'
 
 /**
@@ -18,8 +20,8 @@ class MenuButton extends Component {
    */
   render () {
     return (
-      <div>
-        <button onClick={this.props.clickHandler} className="buttons">{this.props.btnText}</button>
+      <div className="menu-btn">
+        <Button type={this.props.type} clickHandler={this.props.clickHandler}>{this.props.children}</Button>
       </div>
     )
   }

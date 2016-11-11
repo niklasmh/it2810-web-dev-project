@@ -3,7 +3,7 @@ import ListeContainer from '../liste/ListeContainer'
 import KartContainer from '../kart/KartContainer'
 import ListeSearch from '../liste/ListeSearch'
 import ListeFilter from '../liste/ListeFilter'
-import './contentcontainer.css'
+import './ContentContainer.css'
 import AddObservation from '../minside/AddObservation'
 
 /**

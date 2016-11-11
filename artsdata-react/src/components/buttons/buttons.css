@@ -1,21 +1,37 @@
 .buttons {
-  background-color: transparent;
-  border: 0px;
+  background-color: rgba(0, 0, 0, .2);
+  box-shadow: 0 .5px 1px rgba(0, 0, 0, .8);
+  padding: 6px 10px;
+  margin: 4px;
+  font-size: .8em;
+  cursor: pointer;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  display: inline-block;
 }
 
-a:link .buttons, a:hover .buttons, a:visited .buttons{
-  color: #FFF;
-  text-transform: uppercase;
+.menu-btn .buttons {
+  background-color: transparent;
+  box-shadow: none;
+  margin: 0;
+  padding: 12px 10px;
+  border-radius: 0;
+}
+
+a:link .menu-btn .buttons,
+a:hover .menu-btn .buttons,
+a:visited .menu-btn .buttons {
+  color: #000;
   text-decoration: none;
   font-size: 20px;
+  transition: box-shadow .2s ease-in-out;
 }
 
-a.active{
-  border-bottom: solid 2px #FFF;
-  margin:10px;
+a.active {
+  box-shadow: inset 0 3px 0 #f00;
 }
 
-a:hover .buttons{
+a:hover .buttons {
   color: grey;
-  cursor: pointer;
 }

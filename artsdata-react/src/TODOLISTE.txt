@@ -25,7 +25,7 @@ ________________________
 * Uten søk skal get/observations gi siste N observasjoner (HÅVARD ER FERDIG)
 * Med søk skal det gi alle som har match (HÅVARD ER FERDIG)
 
-* eget system for knapper som blir brukt konsekvent
+* eget system for knapper som blir brukt konsekvent (NIKLAS ER FERDIG)
 
 LAV PRIORITET
 * Endre brukerinformasjon..?

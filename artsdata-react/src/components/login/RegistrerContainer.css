@@ -1,41 +1,25 @@
-#registrationDiv{
+.registration-container {
     margin: auto;
     display: flex;
+    width: 360px;
+    max-width: 100%;
     flex-flow: column;
     justify-content: center;
-    align-content: center;
-    width: 15%;
+    height: 100%;
 }
 
-.registrationForm{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-flow: column;
-    margin: auto;
-    padding-bottom: 15px;
+.registrationForm {
 }
 
-
-.registrationLabel{
-    text-align: left;
+.registrationLabel {
 }
 
-.registrationInput{
-    display: flex;
-    text-align: left;
-    border-radius:5px;
-    border:3px solid #eeeeee;
-    padding: 10px;
-
+.registrationInput {
 }
 
-#registrationBtn{
-    border-radius:5px;
-    padding: 15px;
-    width: 25%;
+#registrationBtn {
 }
 
-input[type="number"]::-webkit-inner-spin-button{
+input[type="number"]::-webkit-inner-spin-button {
     display: none;
 }

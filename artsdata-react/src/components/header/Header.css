@@ -1,0 +1,16 @@
+.header {
+  background: #fff;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.dark .header {
+  background: #333;
+}
+
+.header .title {
+  flex: 1;
+  font-size: 1em;
+  margin: 0 10px;
+}
