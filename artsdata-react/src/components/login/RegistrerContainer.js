@@ -7,7 +7,8 @@ class RegistrerContainer extends Component {
         this.state = {
             username: '',
             email: '',
-            password: ''
+            password: '',
+            status: ''
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,9 +42,22 @@ class RegistrerContainer extends Component {
     }
 
     handleSubmit(){
-        //fetch('/api/users', {method: 'post', body:JSON.stringify(this.state)}).then(console.log)
 
-        fetch('/api/users', {method: 'POST', headers: {'Content-Type': 'application/json'},  body:JSON.stringify(this.state)}).then(console.log)
+        fetch('/api/users', {method: 'POST', headers: {'Content-Type': 'application/json'},  body:JSON.stringify(this.state)})
+            .then((response) => {
+            return response.status
+            })
+            .then((data) => {
+                console.log(data)
+                if(data == 200){
+                    this.setState(Object.assign({}, this.state, { status: 'Successfully registered' }))
+                }
+                if(data == 404){
+                    this.setState(Object.assign({}, this.state, { status: 'User already exists' }))
+                }
+            })
+            .catch((error) => {
+            })
     }
 
     render () {
@@ -67,6 +81,7 @@ class RegistrerContainer extends Component {
                     <input type="email" id="email" className="registrationInput" placeholder="Email" onChange={this.handleEmailChange}/>
                 </div>
                 <button type="submit" id="loginBtn" onClick={this.handleSubmit}>Registrer</button>
+                <p id="status">{this.state.status}</p>
             </div>
 
         )
