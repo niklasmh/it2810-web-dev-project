@@ -363,17 +363,17 @@ router.get('/observations', (req, res) => {
   }
   console.log(logText)
 
-  if (filter === {}) {
-    observations.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).sort({$natural: -1}).toArray(function (err, docs) {
+  if (Object.keys(filter).length === 0 && filter.constructor === Object) {
+    observations.find().sort({$natural: -1}).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
       if (err) {
         handleError(res, err.message, 'Failed to get observations')
       } else {
-        console.log('Result count: ' + length(docs) + '\r\n')
+        console.log('Result count without filter: ' + length(docs) + '\r\n')
         res.status(200).json(docs)
       }
     })
   } else {
-    observations.find(filter).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
+    observations.find(filter).sort({$natural: -1}).skip(pageSize * (pageIndex - 1)).limit(pageSize).toArray(function (err, docs) {
       if (err) {
         handleError(res, err.message, 'Failed to get observations')
       } else {

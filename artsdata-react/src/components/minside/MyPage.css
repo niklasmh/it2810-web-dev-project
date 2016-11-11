@@ -25,7 +25,8 @@ h3{
   margin-top: 0%;
 }
 
-.toggle-checkbutton {
+#addbox {
+  background-color: transparent;
 }
 
 .toggle-checkbutton:not(:checked) + label > .add-observation {
