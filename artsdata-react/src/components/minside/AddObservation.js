@@ -12,11 +12,9 @@ class AddObservation extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      date:'',
-      data: {'Observations': []},
-      countieNames: ['Akershus', 'Aust-Agder', 'Buskerud', 'Finnmark', 'Hedmark', 'Hordaland', 'Møre og Romsdal', 'Nord-Trøndelag', 'Nordland', 'Oppland', 'Oslo', 'Rogaland', 'Sogn og Fjordane', 'Sør-Trøndelag', 'Telemark', 'Troms', 'Vest-Agder', 'Vestfold', 'Østfold']
-      counties: {},
-      species:{}
+      date: '',
+      species: [],
+      counties: ['Akershus', 'Aust-Agder', 'Buskerud', 'Finnmark', 'Hedmark', 'Hordaland', 'Møre og Romsdal', 'Nord-Trøndelag', 'Nordland', 'Oppland', 'Oslo', 'Rogaland', 'Sogn og Fjordane', 'Sør-Trøndelag', 'Telemark', 'Troms', 'Vest-Agder', 'Vestfold', 'Østfold']
     }
     this.handleDateChange = this.handleDateChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -37,28 +35,7 @@ class AddObservation extends Component {
     })
     .catch((error) => {
       this.setState(Object.assign({}, this.state, { error: error }))
-    }).then(() => {this.filterProps()})
-  }
-
-  //Find the different locations
-  filterProps () {
-    this.state.data['Observations'].forEach(
-      (item) => {
-        if (!this.state.counties.hasOwnProperty(item.County)) {
-          this.state.counties[item.County] = { count: 1 }
-        } else {
-          this.state.counties[item.County].count++
-        }
-        console.log(this.state)
-
-        if (!this.state.species.hasOwnProperty(item.Name)) {
-          this.state.species[item.Name] = { count: 1, ScientificName: item.ScientificName }
-        } else {
-          this.state.species[item.Name].count++
-        }
-      }
-    )
-    this.forceUpdate()
+    })
   }
 
   // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
@@ -134,34 +111,38 @@ class AddObservation extends Component {
         Art:<br />
         <select id="navn" required >
           {
-            Object.keys(this.state.species).map((species, i) =>
-            <option key={i} value="{species}">{species} ({this.state.species[species].count})</option>
+          this.state.species.map((specie) =>
+            <option key={specie.PrefferedPopularname} value={specie}>{specie.PrefferedPopularname}</option>
           )}
         </select>
-        <br/>Funndato:<br/>
+
+        <br />Funndato:<br />
         <input
           type="date"
-          className ="inputfelt"
+          className="inputfelt"
           placeholder="dd/mm/yyyy"
           id="dato"
           onChange={this.handleDateChange}
           required
         />
-        <br/>Antall:<br/>
+
+        <br />Antall:<br />
         <input
           type="number"
-          className ="inputfelt"
+          className="inputfelt"
           placeholder="antall"
           id="antall"
           required
         />
-        <br/>Funnsted:<br/>
+
+        <br />Funnsted:<br />
         <select id="fylke" required>
           {
-            Object.keys(this.state.counties).map((county, i) =>
-            <option key={i} value="{county}">{county} ({this.state.counties[county].count})</option>
+          this.state.counties.map((county) =>
+            <option key={county} value={county}>{county}</option>
           )}
         </select>
+
         <br />Stedsnavn:<br />
         <input
           type="text"
@@ -181,7 +162,7 @@ class AddObservation extends Component {
         />
 
         <br />
-        <button onClick={this.handleSubmit}>Legg til observasjon</button>
+        <button onClick={this.handleSubmit} > Legg til observasjon </button>
       </div>
     )
   }
