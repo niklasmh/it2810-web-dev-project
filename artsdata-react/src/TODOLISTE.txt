@@ -1,8 +1,7 @@
 
-* Rydd opp i listefiltersøkingen: (COMPLETE)
 * Sidebar høyde blir lav når lista krymper... fix.
 * ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???)
-* sorteringen er nå enveis. mao, vi kan ikke se den sortere.  (COMPLETE, men vi trenger fleire sorteringer)
+* Flere sorteringer
 * Skifte navn på maincontent linken
 
 * legge til observasjoner (POST)
@@ -19,3 +18,7 @@
 
 LAV PRIORITET
 * linter
+
+FERDIG:
+* Rydd opp i listefiltersøkingen: (COMPLETE)
+* sorteringen er nå enveis. mao, vi kan ikke se den sortere.  (COMPLETE)
