@@ -52,8 +52,20 @@ class ContentContainer extends Component {
         'Vestfold',
         'Østfold'
       ],
-      names: [],
-      toggleContent: true
+      names: [
+        'villsvin',
+        'storflaggermus',
+        'slåttehumle',
+        'moskusfe',
+        'snømus',
+        'fiskeørn',
+        'gaupe',
+        'gulflankedelfin',
+        'bredøre',
+        'piggsvin'
+      ],
+      toggleContent: true,
+      toggleAddObs: false
     }
     this.fetchHandler()
   }
@@ -61,6 +73,12 @@ class ContentContainer extends Component {
   toggleEvent (event) {
     this.setState({
       toggleContent: !this.state.toggleContent
+    })
+  }
+
+  toggleAddObsEvent (event) {
+    this.setState({
+      toggleAddObs: !this.state.toggleAddObs
     })
   }
 
@@ -127,7 +145,7 @@ class ContentContainer extends Component {
     .catch((error) => {
       this.setState(Object.assign({}, this.state, { error: error }))
     }).then(() => { this.filterProps() })
-    
+
   }
 
   fetchMoreHandler () {
@@ -212,6 +230,10 @@ class ContentContainer extends Component {
     var cont = ''
     this.state.toggleContent ? cont = <ListeContainer data={observationsFiltered} /> : cont = <KartContainer data={observationsFiltered} registerPositionFunc={this.sendPosition.bind(this)} />
 
+    var addobs = ''
+    this.state.toggleAddObs ? addobs = <AddObservation ref='addobs' toggleEventFunc={this.toggleEvent.bind(this)}/> : addobs = ''
+
+
     return (
       <div id="flexy">
         <div id="sidebar">
@@ -230,13 +252,8 @@ class ContentContainer extends Component {
 
         </div>
         <div id="contentbox">
-          <input type="checkbox" className="toggle-checkbutton" id="skjul" />
-          <label htmlFor="skjul" id="addbox">
-            <strong>Legg til Observasjon</strong>
-            <AddObservation id="skjulmeg" ref='addobs' toggleEventFunc={this.toggleEvent.bind(this)}/>
-
-          </label>
-
+          <button onClick={this.toggleAddObsEvent.bind(this)} id="sexybutton"><strong>Legg til Observasjon</strong></button>
+          {addobs}
           {cont}
           <button onClick={this.fetchMoreHandler.bind(this)}>LoadMore</button>
         </div>

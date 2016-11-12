@@ -12,7 +12,6 @@ KRAV VI MANGLER:
 ________________________
 * Sidebar høyde blir lav når lista krymper... fix.
 * addobs forsvinner når man trykker på bakgrunnen, ikke bare knappen. Litt overkill...
-* ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???)
 * Flere sorteringer
 * REPARERE artfilteret!
 * ordne så å velge en art i dropned på addobs genererer riktig ID og vitenskaplige navn (HELENE)
@@ -31,6 +30,7 @@ LAV PRIORITET
 * linter
 
 FERDIG:
+* ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???) (HELENE)
 * Hente ut koordinat fra leaflet, som kan puttes inn i addobs. (HELENE)
 * Uten søk skal get/observations gi siste N observasjoner (HÅVARD ER FERDIG)
 * Med søk skal det gi alle som har match (HÅVARD ER FERDIG)

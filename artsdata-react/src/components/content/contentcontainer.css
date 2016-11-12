@@ -16,3 +16,9 @@
   vertical-align: top;
   margin-top:-10px;
 }
+
+#sexybutton{
+  padding:5px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
