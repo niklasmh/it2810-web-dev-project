@@ -212,7 +212,8 @@ class ContentContainer extends Component {
           <input type="checkbox" className="toggle-checkbutton" id="skjul" />
           <label htmlFor="skjul" id="addbox">
             <strong>Legg til Observasjon</strong>
-            <AddObservation id="skjulmeg" ref='addobs'/>
+            <AddObservation id="skjulmeg" ref='addobs' toggleEventFunc={this.toggleEvent.bind(this)}/>
+
           </label>
 
           {cont}
