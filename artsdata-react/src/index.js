@@ -13,13 +13,22 @@ import RegistrerContainer from './components/login/RegistrerContainer'
 import MyPage from './components/minside/MyPage'
 import ContentContainer from './components/content/ContentContainer'
 
+function requireAuth(nextState, replace) {
+  //if (!auth.loggedIn()) {
+  //  replace({
+  //    pathname: '/login',
+  //    state: { nextPathname: nextState.location.pathname }
+  //  })
+  //}
+}
+
 ReactDOM.render (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={ContentContainer} />
       <Route path="/login" component={LoginContainer} />
       <Route path="/registrer" component={RegistrerContainer} />
-      <Route path="/minside" component={MyPage} />
+      <Route path="/minside" component={MyPage} onEnter={requireAuth} />
     </Route>
   </Router>,
   document.querySelector('#root')

@@ -6,7 +6,7 @@ KRAV VI MANGLER:
 * "min side" funksjonalitet: innlogging hvor det blir registrert noe fra
   søkeaktiviteten f.eks. hva brukeren har sett på eller søkene som er brukt.
 * Den listebaserte visningen skal kunne sorteres på minimum to forskjellge egenskaper. (HÅVARD FIKSER)
-* må implementere "session"-håndtering
+* må implementere "session"-håndtering (NIKLAS)
   som vi f.eks. trenger for å implementere dynamisk lasting og min side
 
 ________________________

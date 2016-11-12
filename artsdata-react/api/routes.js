@@ -1,9 +1,22 @@
 var mongo = require('mongodb')
 var router = require('express').Router()
 var ObjectID = mongo.ObjectID
+var session = require('express-session')
 var fetch = require('node-fetch')
 var user = require('./user.js')
 var observation = require('./observation.js')
+
+router.use(session({
+  cookieName: 'uuid',
+  secret: '3te1ler4nn3tR4nd0M',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+  httpOnly: true,
+  secure: true,
+  resave: true,
+  saveUninitialized: true,
+  ephemeral: true
+}))
 
 var db, observations, users, taxons, res
 
@@ -242,6 +255,9 @@ router.post('/users', function (req, res) {
   // TODO: What is "{w: 1}"?
 })
 
+router.get('/id', function (req, res) {
+  res.end(req.session.uuid)
+})
 router.post('/users/login', function (req, res) {
   console.log('\r\nPOST new user')
   // TODO: Torjus
@@ -264,12 +280,16 @@ router.post('/users/login', function (req, res) {
       } else {
         var user = docs[0];
         //user = { _id: user['6'], username: user['username'] }
+        //if (req.session)
+        req.session.uuid = user._id
+        console.log(req.session)
+
         res.status(200).json(user)
       }
     }
   })
 
-  // TODO: What is "{w: 1}"?
+  // TODO: What is "{w: 1}"? The w option to request acknowledgment that the write operation has propagated to a specified number of mongod instances or to mongod instances with specified tags.
 })
 
 
