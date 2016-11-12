@@ -31,7 +31,27 @@ class ContentContainer extends Component {
         locality: ''
       },
       sort: '',
-      counties: [],
+      counties: [
+        'Akershus',
+        'Aust-Agder',
+        'Buskerud',
+        'Finnmark',
+        'Hedmark',
+        'Hordaland',
+        'Møre og Romsdal',
+        'Nord-Trøndelag',
+        'Nordland',
+        'Oppland',
+        'Oslo',
+        'Rogaland',
+        'Sogn og Fjordane',
+        'Sør-Trøndelag',
+        'Telemark',
+        'Troms',
+        'Vest-Agder',
+        'Vestfold',
+        'Østfold'
+      ],
       names: [],
       toggleContent: true
     }
@@ -107,6 +127,7 @@ class ContentContainer extends Component {
     .catch((error) => {
       this.setState(Object.assign({}, this.state, { error: error }))
     }).then(() => { this.filterProps() })
+    
   }
 
   fetchMoreHandler () {
