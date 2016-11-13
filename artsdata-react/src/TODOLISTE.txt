@@ -2,7 +2,7 @@ _______________________
 KRAV VI MANGLER:
 * Dynamisk lasting av data. (HÅVARD FIKSER)
 * "min side" funksjonalitet:
-  * innlogging hvor
+  * innlogging
   * det blir registrert noe fra søkeaktiviteten
   * f.eks. hva brukeren har sett på eller søkene som er brukt.
 * sorter liste på minimum to forskjellge egenskaper. (HÅVARD FIKSER)
@@ -10,15 +10,18 @@ KRAV VI MANGLER:
   * f.eks: implementere dynamisk lasting og min side
 
 ________________________
-* Sidebar høyde blir lav når lista krymper... fix.
-* Sortere etter "mine observasjoner"
-  * legg til / rediger?
-* REPARERE artfilteret!
-  * søk funker ikkke på alt.
-* Sette sånn at addobs tar inn innlogget bruker-ID når man lager obs.
 
-* legge til observasjoner (POST)
-  * Gi feedback til bruker når den har lagt til.
+* Sortere etter "mine observasjoner" (Torjus)
+  * legg til / rediger?
+
+* REPARERE artfilteret! (Håvard)
+  * søk funker ikke på alt. (Håvard)
+
+
+* legge til observasjoner (POST) (Thomas)
+  * Sette sånn at addobs tar inn innlogget bruker-ID når man lager obs.(Thomas)
+  * Gi feedback til bruker når den har lagt til.(Thomas)
+  
 * endre egne observasjoner (OUT)
 * hente ut egne observasjoner (GET)
 * slette egne observasjoner (DELETE)
@@ -26,6 +29,7 @@ ________________________
 * eget system for knapper som blir brukt konsekvent (niklas)
 
 LAV PRIORITET
+* Sidebar høyde blir lav når lista krymper... fix.
 * Endre brukerinformasjon..?
 * linter
 
