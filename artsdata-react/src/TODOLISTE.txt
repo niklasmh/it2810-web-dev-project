@@ -14,6 +14,8 @@ ________________________
 * Sortere etter "mine observasjoner" (Torjus)
   * legg til / rediger?
 
+* Dokumentere kode (Andreas)
+
 * REPARERE artfilteret! (Håvard)
   * søk funker ikke på alt. (Håvard)
 
@@ -21,7 +23,7 @@ ________________________
 * legge til observasjoner (POST) (Thomas)
   * Sette sånn at addobs tar inn innlogget bruker-ID når man lager obs.(Thomas)
   * Gi feedback til bruker når den har lagt til.(Thomas)
-  
+
 * endre egne observasjoner (OUT)
 * hente ut egne observasjoner (GET)
 * slette egne observasjoner (DELETE)
