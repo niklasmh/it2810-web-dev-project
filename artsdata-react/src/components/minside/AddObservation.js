@@ -130,6 +130,7 @@ class AddObservation extends Component {
       alert('Nå har du ikke skrevet datoen på riktig format. Prøv på nytt!')
       return
     }
+
     var data = {
       TaxonId : this.state.specie.Id,
       Name: this.state.specie.Name,
@@ -143,7 +144,26 @@ class AddObservation extends Component {
       CollectedDate: this.dateFormatter(dato.value),
       User: this.state.username
     }
-    fetch('/api/observations', {method: 'POST',  headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)}).then(console.log)
+    fetch('/api/observations', {method: 'POST', headers: {'Content-Type': 'application/json'},  bbody: JSON.stringify(data)})
+        .then((response) => {
+            return response
+        })
+        .then((data) => {
+            if(data.status == 200){
+                this.setState(Object.assign({}, this.state, { status: 'Lagt inn i databasen' }))
+            }
+            if(data.status == 404){
+                this.setState(Object.assign({}, this.state, { status: 'Error' }))
+            }
+        })
+        .catch((error) => {
+        }).then(() => {
+          if (this.state.status === 'Lagt inn i databasen') {
+            setTimeout(function () {
+              browserHistory.push('/')
+            }, 1500)
+          }
+        })
   }
   /**
   * When a user clicks on the map, the corresponing longitude and latitude coordinates will appear
@@ -203,7 +223,6 @@ class AddObservation extends Component {
         <h4>Ny Observasjon</h4>
         Art:<br />
         <select id="navn" required onChange={this.setSpecieHandler.bind(this)}>
-          <option key={-1}>Velg en art</option>
           {
           this.state.species.filter(s=>s.PrefferedPopularname).map((specie, i) =>
             <option key={i} value={specie.PrefferedPopularname}>{specie.PrefferedPopularname}</option>
@@ -238,6 +257,7 @@ class AddObservation extends Component {
 
         <br />
         <button onClick={this.handleSubmit} > Legg til observasjon </button>
+        <p>{this.state.status}</p>
       </div>
     )
   }
