@@ -31,7 +31,8 @@ class ContentContainer extends Component {
         name: [],
         county: [],
         municipality: '',
-        locality: ''
+        locality: '',
+        own: false
       },
       sort: '',
       counties: [
@@ -83,6 +84,12 @@ class ContentContainer extends Component {
     this.setState({
       toggleAddObs: !this.state.toggleAddObs
     })
+  }
+
+  toggleOwnObsEvent (event) {
+    var newSearchFilter = this.state.searchFilter
+    newSearchFilter.own = !this.state.searchFilter.own
+    this.setState({searchFilter: newSearchFilter}, this.fetchHandler())
   }
 
   changeEvent (event) {
@@ -149,7 +156,9 @@ class ContentContainer extends Component {
     console.log('searching for ' + search)
     var pageIndex = 1
     var pageSize = 50
-    var request = `${url}?search=${search}&pageSize=${pageSize}&pageIndex=${pageIndex}`
+    var user = this.state.searchFilter.own ? localStorage['user'] : ''
+    console.log('Bruker: ' + user)
+    var request = `${url}?search=${search}&pageSize=${pageSize}&pageIndex=${pageIndex}&user=${user}`
     // Fetch is a modern replacement for XMLHttpRequest.
     fetch(request, {
       method: 'GET'
@@ -183,7 +192,8 @@ class ContentContainer extends Component {
     }
     var pageIndex = Math.floor(this.state.observations.length / 50) + 1
     var pageSize = 50
-    var request = `${url}?search=${search}&pageSize=${pageSize}&pageIndex=${pageIndex}`
+    var user = this.state.searchFilter.own ? localStorage['user'] : ''
+    var request = `${url}?search=${search}&pageSize=${pageSize}&pageIndex=${pageIndex}&user=${user}`
     // Fetch is a modern replacement for XMLHttpRequest.
     fetch(request, {
       method: 'GET'
@@ -276,6 +286,7 @@ class ContentContainer extends Component {
     var addobs = ''
     this.state.toggleAddObs ? addobs = <AddObservation ref='addobs' toggleEventFunc={this.toggleEvent.bind(this)}/> : addobs = ''
 
+    var buttonTxt = (this.state.searchFilter.own) ? 'Vis alle observasjoner' : 'Vis mine observasjoner'
 
     return (
       <div id="flexy">
@@ -298,7 +309,7 @@ class ContentContainer extends Component {
         <div id="contentbox">
           <Auth>
             <Button onClick={this.toggleAddObsEvent.bind(this)} id="sexyButton"><strong>Legg til Observasjon</strong></Button>
-            <Button id="sexyButton"><strong>Vis mine observasjoner</strong></Button>
+            <Button id="sexyButton" onClick={this.toggleOwnObsEvent.bind(this)}><strong>{buttonTxt}</strong></Button>
           </Auth>
           {addobs}
           {cont}

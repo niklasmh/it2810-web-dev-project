@@ -1,5 +1,4 @@
 var express = require('express')
-var session = require('express-session')
 var app = express()
 var bodyParser = require('body-parser')
 var os = require('os')
@@ -14,21 +13,7 @@ app.use(bodyParser.urlencoded({
   'extended': true
 }))
 app.use('/api', routes)
-app.use(session({
-  cookieName: 'uuid',
-  secret: '3te1ler4nn3tR4nd0M',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
-  httpOnly: true,
-  secure: true,
-  resave: true,
-  saveUninitialized: true,
-  ephemeral: true
-}))
 
-app.get('/id', function (req, res) {
-  res.end(req.session.uuid)
-})
 app.get('/*', function (req, res) {
   res.sendFile(__dirname + '/public/index.html')
 })

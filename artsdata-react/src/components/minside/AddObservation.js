@@ -74,19 +74,7 @@ class AddObservation extends Component {
       this.setState(Object.assign({}, this.state, { error: error }))
     })
 
-    var url2 = 'http://localhost:3000/api/id'
-    fetch(`${url2}`, {
-      method: 'GET',
-    })
-    .then((response) => {
-      return response.json()
-    })
-    .then((data) => {
-      this.setState(Object.assign({}, this.state, { species: data }))
-    })
-    .catch((error) => {
-      this.setState(Object.assign({}, this.state, { error: error }))
-    })
+
   }
 
   /**
@@ -130,6 +118,7 @@ class AddObservation extends Component {
       alert('Nå har du ikke skrevet datoen på riktig format. Prøv på nytt!')
       return
     }
+
     var data = {
       TaxonId : this.state.specie.Id,
       Name: this.state.specie.Name,
@@ -143,10 +132,26 @@ class AddObservation extends Component {
       CollectedDate: this.dateFormatter(dato.value),
       User: localStorage['user']
     }
-    fetch('/api/observations', {method: 'POST',  headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
-    .then(() => {
-      location.reload()
-    })
+    fetch('/api/observations', {method: 'POST', headers: {'Content-Type': 'application/json'},  body: JSON.stringify(data)})
+        .then((response) => {
+            return response
+        })
+        .then((data) => {
+            if(data.status == 200){
+                this.setState(Object.assign({}, this.state, { status: 'Lagt inn i databasen' }))
+            }
+            if(data.status == 404){
+                this.setState(Object.assign({}, this.state, { status: 'Error' }))
+            }
+        })
+        .catch((error) => {
+        }).then(() => {
+          if (this.state.status === 'Lagt inn i databasen') {
+            setTimeout(function () {
+              location.reload()
+            }, 1500)
+          }
+        })
   }
   /**
   * When a user clicks on the map, the corresponing longitude and latitude coordinates will appear
@@ -206,7 +211,6 @@ class AddObservation extends Component {
         <h4>Ny Observasjon</h4>
         Art:<br />
         <select id="navn" required onChange={this.setSpecieHandler.bind(this)}>
-          <option key={-1}>Velg en art</option>
           {
           this.state.species.filter(s=>s.PrefferedPopularname).map((specie, i) =>
             <option key={i} value={specie.PrefferedPopularname}>{specie.PrefferedPopularname}</option>
@@ -234,6 +238,7 @@ class AddObservation extends Component {
         <input type="text" className="inputfelt" placeholder="skriv inn kommentar" id="kommentar" />
 
         <br />Latitude and Longitude:<br/>
+        (Trykk på kart for å velge koordinater)<br/>
         <input type="number" className="inputfelt" placeholder="Latitude" id="lat" value={this.state.latitude} required/>
         <input type="number" className="inputfelt" placeholder="Longitude" id="long" value={this.state.longitude} required />
         <br/>
@@ -241,6 +246,7 @@ class AddObservation extends Component {
 
         <br />
         <button onClick={this.handleSubmit} > Legg til observasjon </button>
+        <p>{this.state.status}</p>
       </div>
     )
   }
