@@ -33,7 +33,7 @@ class RegistrerContainer extends Component {
         this.state.username = event.target.value
         this.setState({ status: '' })
     }else{
-        this.setState({ status: 'Password must be more than 3 characters' })
+        this.setState({ status: 'Username must be more than 3 characters' })
     }
   }
 
@@ -42,7 +42,7 @@ class RegistrerContainer extends Component {
         this.state.password = event.target.value
         this.setState({ status: '' })
     }else{
-        this.setState({ status: 'Username must be more than 3 characters' })
+        this.setState({ status: 'Password must be more than 3 characters' })
     }
   }
 
