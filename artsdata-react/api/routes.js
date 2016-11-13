@@ -355,7 +355,7 @@ router.get('/observations', (req, res) => {
   var maxPageSize = 100
 
   // TODO: Validate query string
-  if (req.query.search != null && req.query.search != '') {
+  if (req.query.search !== null && req.query.search !== '') {
     var search = req.query.search
     filter = {
       $or: [
@@ -367,6 +367,7 @@ router.get('/observations', (req, res) => {
         {Locality: {$regex: '(?i)' + search}}
       ]
     }
+
     logText += '\r\nFilter: ' + JSON.stringify(filter, null, 2)
   }
 
