@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './RegistrerContainer.css'
 import { browserHistory } from 'react-router'
+import Button from '../buttons/Button'
 /**
 * RegisterContainer renders and controls the logic behind registering a new user to the database.
 * The Component checks that the user is not allready in the database, and that the user must have

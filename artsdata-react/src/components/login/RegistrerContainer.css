@@ -2,22 +2,10 @@
     margin: auto;
     display: flex;
     width: 360px;
-    max-width: 100%;
+    max-width: calc(100% - 32px);
     flex-flow: column;
     justify-content: center;
     height: 100%;
-}
-
-.registrationForm {
-}
-
-.registrationLabel {
-}
-
-.registrationInput {
-}
-
-#registrationBtn {
 }
 
 input[type="number"]::-webkit-inner-spin-button {

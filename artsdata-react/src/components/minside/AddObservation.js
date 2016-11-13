@@ -71,12 +71,12 @@ class AddObservation extends Component {
     })
     .then((data) => {
       this.setState(Object.assign({}, this.state, { species: data }))
+      if (data && data.length)
+        this.setSpecie(data[0].PrefferedPopularname)
     })
     .catch((error) => {
       this.setState(Object.assign({}, this.state, { error: error }))
     })
-
-
   }
 
   /**
@@ -218,7 +218,9 @@ class AddObservation extends Component {
             <option key={i} value={specie.PrefferedPopularname}>{specie.PrefferedPopularname}</option>
           )}
         </select>
-        <input id='scientificName' value={this.state.specie.ScientificName} readOnly disabled />
+        <br />
+        {this.state.specie.ScientificName ? 'Vitenskapelig navn: ' + this.state.specie.ScientificName : ''}
+        <br />
         <br />Funndato:<br />
         <input type="date" className="inputfelt" placeholder="yyyy/mm/dd" id="dato" onChange={this.handleDateChange} required/>
 

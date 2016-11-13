@@ -289,8 +289,8 @@ class ContentContainer extends Component {
     var buttonTxt = (this.state.searchFilter.own) ? 'Vis alle observasjoner' : 'Vis mine observasjoner'
 
     return (
-      <div id="flexy">
-        <div id="sidebar">
+      <div className="content-container">
+        <div className="sidebar module">
 
           <h3>Velg Fremvisning</h3>
           <Button onClick={this.toggleEvent.bind(this)}>Kart/Liste</Button>
@@ -306,7 +306,7 @@ class ContentContainer extends Component {
           <ListeFilter title='Art' data={this.state.names} filterHandler={this.filterEvent.bind(this)} />
 
         </div>
-        <div id="contentbox">
+        <div className="contentbox module">
           <Auth>
             <Button onClick={this.toggleAddObsEvent.bind(this)} id="sexyButton"><strong>Legg til Observasjon</strong></Button>
             <Button id="sexyButton" onClick={this.toggleOwnObsEvent.bind(this)}><strong>{buttonTxt}</strong></Button>

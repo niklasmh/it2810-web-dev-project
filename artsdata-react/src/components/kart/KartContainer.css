@@ -1,5 +1,9 @@
 .leaflet-container {
+  width: 100%;
+  height: 100%;
 }
 
 .kart-container {
+  width: 100%;
+  height: calc(100vh - 160px);
 }
