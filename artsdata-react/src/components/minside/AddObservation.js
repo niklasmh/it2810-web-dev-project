@@ -13,8 +13,34 @@ class AddObservation extends Component {
     super(props)
     this.state = {
       date: '',
+      latitude: '',
+      longitude: '',
       species: [],
-      counties: ['Akershus', 'Aust-Agder', 'Buskerud', 'Finnmark', 'Hedmark', 'Hordaland', 'Møre og Romsdal', 'Nord-Trøndelag', 'Nordland', 'Oppland', 'Oslo', 'Rogaland', 'Sogn og Fjordane', 'Sør-Trøndelag', 'Telemark', 'Troms', 'Vest-Agder', 'Vestfold', 'Østfold']
+      specie: {
+        Name: '',
+        ScientificName: ''
+      },
+      counties: [
+        'Akershus',
+        'Aust-Agder',
+        'Buskerud',
+        'Finnmark',
+        'Hedmark',
+        'Hordaland',
+        'Møre og Romsdal',
+        'Nord-Trøndelag',
+        'Nordland',
+        'Oppland',
+        'Oslo',
+        'Rogaland',
+        'Sogn og Fjordane',
+        'Sør-Trøndelag',
+        'Telemark',
+        'Troms',
+        'Vest-Agder',
+        'Vestfold',
+        'Østfold'
+      ]
     }
     this.handleDateChange = this.handleDateChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -40,54 +66,38 @@ class AddObservation extends Component {
 
   // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
   isValidDate (dateString) {
-    // First check for the pattern
-    if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) {
-      return false
-    }
-
-    // Parse the date parts tso integers
-    var parts = dateString.split('/')
-    var day = parseInt(parts[1], 10)
-    var month = parseInt(parts[0], 10)
-    var year = parseInt(parts[2], 10)
-
-    // Check the ranges of month and year
-    if (year < 1000 || year > 3000 || month === 0 || month > 12) {
-      return false
-    }
-    var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
-
-    // Adjust for leap years
-    if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
-      monthLength[1] = 29
-    }
-
-    // Check the range of the day
-    return day > 0 && day <= monthLength[month - 1]
+    let date = new Date(dateString)
+    return Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date.getTime())
   }
 
   handleDateChange (event) {
     this.setState({date: event.target.value})
   }
 
+  dateFormatter (date) {
+    let obj = new Date(date)
+    return obj.getDate() + '/' + obj.getMonth() + '/' + obj.getFullYear()
+  }
+
   handleSubmit (event) {
-    if (!this.isValidDate(this.state.date)) {
+    console.log(this.dateFormatter(dato.value), dato.value, this.isValidDate(dato.value))
+    if (!this.isValidDate(dato.value)) {
       alert('Nå har du ikke skrevet datoen på riktig format. Prøv på nytt!')
       return
     }
+
     var data = {
       TaxonId : navn.value.TaxonId,
       Name: navn.value.PrefferedPopularname,
       ScientificName : navn.value.ValidScientificName,
-
       Count: antall.value,
       Notes: kommentar.value,
       County: fylke.value,
-      Municipality: '',
+      Municipality: munc.value,
       Locality: lokalitet.value,
-      Longitude: '',
-      Latitude: '',
-      CollectedDate: dato.value,
+      Longitude: long.value,
+      Latitude: lat.value,
+      CollectedDate: this.dateFormatter(dato.value),
       User: this.state.username
     }
 
@@ -97,6 +107,29 @@ class AddObservation extends Component {
     }).then(r => r.json()).then(console.log)
   }
 
+  setPosition(position){
+    alert("Valgte koordinater: " + "\n" + "Latitude: " + position.lat + "\n" + "Longitude: " + position.lng + "\n" + "Lagt inn i skjema")
+    this.setState({latitude: position.lat, longitude: position.lng})
+  }
+
+  setSpecieHandler (evt) {
+    this.setSpecie(evt.target.value)
+  }
+
+  setSpecie (name) {
+    let specieName = name
+    let speciesFiltered = this.state.species.filter(s=>specieName===s.PrefferedPopularname)
+    let specieScientificName = ''
+
+    if (speciesFiltered.length && speciesFiltered[0].ValidScientificName)
+      specieScientificName = speciesFiltered[0].ValidScientificName
+    this.setState({
+      specie: {
+        Name: specieName,
+        ScientificName: specieScientificName
+      }
+    })
+  }
   /**
    * Displays a search-input and exposes an onChange event where other
    * components can listen and respond to changed search-input.
@@ -108,25 +141,24 @@ class AddObservation extends Component {
   render () {
     return (
       <div className="add-observation">
-        <h4>Ny Observasjon </h4>
+        <h4>Ny Observasjon</h4>
         Art:<br />
-        <select id="navn" required >
+        <select id="navn" required onChange={this.setSpecieHandler.bind(this)}>
           {
-          this.state.species.map((specie) =>
+          this.state.species.filter(s=>s.PrefferedPopularname).map((specie, i) =>
             <option
-              key={specie.PrefferedPopularname}
-              value={specie}
+              key={i}
+              value={specie.PrefferedPopularname}
             >
               {specie.PrefferedPopularname}</option>
           )}
         </select>
-        <input value="navn.value.ScientificName"/>
-
+        <input value={this.state.specie.ScientificName} readOnly disabled />
         <br />Funndato:<br />
         <input
           type="date"
           className="inputfelt"
-          placeholder="dd/mm/yyyy"
+          placeholder="yyyy/mm/dd"
           id="dato"
           onChange={this.handleDateChange}
           required
@@ -144,8 +176,8 @@ class AddObservation extends Component {
         <br />Funnsted:<br />
         <select id="fylke" required>
           {
-          this.state.counties.map((county) =>
-            <option key={county} value={county}>{county}</option>
+          this.state.counties.map((county, i) =>
+            <option key={i} value={county}>{county}</option>
           )}
         </select>
 
@@ -158,14 +190,42 @@ class AddObservation extends Component {
           required
         />
 
+        <br />Municipality:<br />
+        <input
+          type="text"
+          className="inputfelt"
+          placeholder="skriv inn funnsted"
+          id="munc"
+          required
+        />
+
         <br />Kommentar: <br />
         <input
           type="text"
           className="inputfelt"
           placeholder="skriv inn kommentar"
           id="kommentar"
+        />
+
+        <br />Latitude and Longitude:<br/>
+        <input
+          type="number"
+          className="inputfelt"
+          placeholder="Latitude"
+          id="lat"
+          value={this.state.latitude}
           required
         />
+        <input
+          type="number"
+          className="inputfelt"
+          placeholder="Longitude"
+          id="long"
+          value={this.state.longitude}
+          required
+        />
+        <br/>
+        <button onClick={this.props.toggleEventFunc} > Vis kart </button><br/>
 
         <br />
         <button onClick={this.handleSubmit} > Legg til observasjon </button>

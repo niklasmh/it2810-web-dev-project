@@ -1,29 +1,27 @@
 _______________________
 KRAV VI MANGLER:
-* Dynamisk lasting av data.
-  Eksempel: liste viser de 10 første treffene,flere lastes når brukeren scroller
-  eller ved blar i sider.
+* Dynamisk lasting av data. (HÅVARD FIKSER)
+  Eksempel: liste viser de 10 første treffene,flere lastes når brukeren scroller (HÅVARD FIKSER DETTE OGSÅ)
+  eller ved blar i sider. (JADA)
 * "min side" funksjonalitet: innlogging hvor det blir registrert noe fra
   søkeaktiviteten f.eks. hva brukeren har sett på eller søkene som er brukt.
-* Den listebaserte visningen skal kunne sorteres på minimum to forskjellge egenskaper.
-* må implementere "session"-håndtering
+* Den listebaserte visningen skal kunne sorteres på minimum to forskjellge egenskaper. (HÅVARD FIKSER)
+* må implementere "session"-håndtering (NIKLAS)
   som vi f.eks. trenger for å implementere dynamisk lasting og min side
 
 ________________________
 * Sidebar høyde blir lav når lista krymper... fix.
-* ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???)
+* addobs forsvinner når man trykker på bakgrunnen, ikke bare knappen. Litt overkill...
 * Flere sorteringer
+* REPARERE artfilteret!
 * ordne så å velge en art i dropned på addobs genererer riktig ID og vitenskaplige navn (HELENE)
-* Hente ut koordinat fra leaflet, som kan puttes inn i addobs. (HELENE)
 * Sette sånn at addobs tar inn innlogget bruker-ID når man lager obs.
 
 * legge til observasjoner (POST)
+  * Gi feedback til bruker når den har lagt til.
 * endre egne observasjoner (OUT)
 * hente ut egne observasjoner (GET)
 * slette egne observasjoner (DELETE)
-
-* Uten søk skal get/observations gi siste N observasjoner
-* Med søk skal det gi alle som har match
 
 * eget system for knapper som blir brukt konsekvent
 
@@ -32,6 +30,10 @@ LAV PRIORITET
 * linter
 
 FERDIG:
+* ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???) (HELENE)
+* Hente ut koordinat fra leaflet, som kan puttes inn i addobs. (HELENE)
+* Uten søk skal get/observations gi siste N observasjoner (HÅVARD ER FERDIG)
+* Med søk skal det gi alle som har match (HÅVARD ER FERDIG)
 * Skifte navn på maincontent linken
 * FLYTTE ADDOBS.inn i hovedsiden.
 * Rydd opp i listefiltersøkingen: (COMPLETE)
