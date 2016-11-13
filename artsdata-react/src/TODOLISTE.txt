@@ -1,6 +1,5 @@
 _______________________
 KRAV VI MANGLER:
-* Dynamisk lasting av data. (HÅVARD FIKSER) (DONE tRUR EG?)
 * "min side" funksjonalitet:
   * innlogging
   * det blir registrert noe fra søkeaktiviteten
@@ -35,6 +34,7 @@ LAV PRIORITET
 * linter
 
 FERDIG:
+* Dynamisk lasting av data. (HÅVARD HAR FIKSA) 
 * ordne så å velge en art i dropned på addobs genererer riktig ID og vitenskaplige navn (NIKLAS)
 * addobs forsvinner når man trykker på bakgrunnen, ikke bare knappen. Litt overkill... (Helene)
 * ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???) (HELENE)

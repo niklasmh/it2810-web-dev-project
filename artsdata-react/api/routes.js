@@ -355,6 +355,22 @@ router.get('/observations', (req, res) => {
     logText += '\r\nFilter: ' + JSON.stringify(filter, null, 2)
   }
 
+  if (req.query.user !== null && req.query.user !== '') {
+    var search = req.query.search
+    var user = req.query.user
+    filter = {
+      User: user,
+      $or: [
+        {Name: {$regex: '(?i)' + search}},
+        {ScientificName: {$regex: '(?i)' + search}},
+        {Notes: {$regex: '(?i)' + search}},
+        {County: {$regex: '(?i)' + search}},
+        {Municipality: {$regex: '(?i)' + search}},
+        {Locality: {$regex: '(?i)' + search}}
+      ]
+    }
+  }
+
   if (req.query.pageSize !== null && req.query.pageSize !== '') {
     var tmpPageSize = parseInt(req.query.pageSize)
     pageSize = isNaN(tmpPageSize) ? pageSize : Math.min(tmpPageSize, maxPageSize)
