@@ -1,6 +1,6 @@
 _______________________
 KRAV VI MANGLER:
-* Dynamisk lasting av data. (HÅVARD FIKSER)
+* Dynamisk lasting av data. (HÅVARD FIKSER) (DONE tRUR EG?)
 * "min side" funksjonalitet:
   * innlogging
   * det blir registrert noe fra søkeaktiviteten
@@ -21,7 +21,7 @@ ________________________
 * legge til observasjoner (POST) (Thomas)
   * Sette sånn at addobs tar inn innlogget bruker-ID når man lager obs.(Thomas)
   * Gi feedback til bruker når den har lagt til.(Thomas)
-  
+
 * endre egne observasjoner (OUT)
 * hente ut egne observasjoner (GET)
 * slette egne observasjoner (DELETE)
@@ -44,3 +44,4 @@ FERDIG:
 * FLYTTE ADDOBS.inn i hovedsiden.
 * Rydd opp i listefiltersøkingen: (COMPLETE)
 * sorteringen er nå enveis. mao, vi kan ikke se den sortere.  (COMPLETE)
+* sorter liste på minimum to forskjellge egenskaper. (HÅVARD FIKSER/ER FERDIG)
