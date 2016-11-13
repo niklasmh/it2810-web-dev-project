@@ -13,6 +13,8 @@ ________________________
 * Sortere etter "mine observasjoner" (Torjus)
   * legg til / rediger?
 
+* Dokumentere kode (Andreas)
+
 * REPARERE artfilteret! (Håvard)
   * søk funker ikke på alt. (Håvard)
 
