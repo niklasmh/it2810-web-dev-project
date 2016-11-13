@@ -1,20 +1,20 @@
 _______________________
 KRAV VI MANGLER:
 * Dynamisk lasting av data. (HÅVARD FIKSER)
-  Eksempel: liste viser de 10 første treffene,flere lastes når brukeren scroller (HÅVARD FIKSER DETTE OGSÅ)
-  eller ved blar i sider. (JADA)
-* "min side" funksjonalitet: innlogging hvor det blir registrert noe fra
-  søkeaktiviteten f.eks. hva brukeren har sett på eller søkene som er brukt.
-* Den listebaserte visningen skal kunne sorteres på minimum to forskjellge egenskaper. (HÅVARD FIKSER)
-* må implementere "session"-håndtering (NIKLAS)
-  som vi f.eks. trenger for å implementere dynamisk lasting og min side
+* "min side" funksjonalitet:
+  * innlogging hvor
+  * det blir registrert noe fra søkeaktiviteten
+  * f.eks. hva brukeren har sett på eller søkene som er brukt.
+* sorter liste på minimum to forskjellge egenskaper. (HÅVARD FIKSER)
+* implementere "session"-håndtering (NIKLAS)
+  * f.eks: implementere dynamisk lasting og min side
 
 ________________________
 * Sidebar høyde blir lav når lista krymper... fix.
-* addobs forsvinner når man trykker på bakgrunnen, ikke bare knappen. Litt overkill...
-* Flere sorteringer
+* Sortere etter "mine observasjoner"
+  * legg til / rediger?
 * REPARERE artfilteret!
-* ordne så å velge en art i dropned på addobs genererer riktig ID og vitenskaplige navn (HELENE)
+  * søk funker ikkke på alt.
 * Sette sånn at addobs tar inn innlogget bruker-ID når man lager obs.
 
 * legge til observasjoner (POST)
@@ -23,13 +23,15 @@ ________________________
 * hente ut egne observasjoner (GET)
 * slette egne observasjoner (DELETE)
 
-* eget system for knapper som blir brukt konsekvent
+* eget system for knapper som blir brukt konsekvent (niklas)
 
 LAV PRIORITET
 * Endre brukerinformasjon..?
 * linter
 
 FERDIG:
+* ordne så å velge en art i dropned på addobs genererer riktig ID og vitenskaplige navn (NIKLAS)
+* addobs forsvinner når man trykker på bakgrunnen, ikke bare knappen. Litt overkill... (Helene)
 * ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???) (HELENE)
 * Hente ut koordinat fra leaflet, som kan puttes inn i addobs. (HELENE)
 * Uten søk skal get/observations gi siste N observasjoner (HÅVARD ER FERDIG)
