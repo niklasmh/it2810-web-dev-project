@@ -60,4 +60,5 @@ input[type="text"]::-ms-input-placeholder {
 
 option {
   font-size: .8em;
+  text-transform: capitalize;
 }

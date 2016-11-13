@@ -50,6 +50,7 @@ label > p{
   transition: width .2s ease-in-out;
   background-color: #eee;
   display: none;
+  text-transform: none;
 }
 
 .toggle-checkbutton:checked + label + .notes {
