@@ -31,7 +31,7 @@ mongo.MongoClient.connect(url, function (err, database) {
   taxons = db.collection('taxons')
   observations = db.collection('observations')
   // TODO: Only call this method once to initiate the DB.
-  populateDB(users, taxons, observations)
+  //populateDB(users, taxons, observations)
 })
 
 function populateDB (users, taxons, observations) {

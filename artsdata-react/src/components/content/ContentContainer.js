@@ -285,6 +285,7 @@ class ContentContainer extends Component {
     var addobs = ''
     this.state.toggleAddObs ? addobs = <AddObservation ref='addobs' toggleEventFunc={this.toggleEvent.bind(this)}/> : addobs = ''
 
+    var buttonTxt = (this.state.searchFilter.own) ? 'Vis alle observasjoner' : 'Vis mine observasjoner'
 
     return (
       <div id="flexy">
@@ -307,7 +308,7 @@ class ContentContainer extends Component {
         <div id="contentbox">
           <Auth>
             <button onClick={this.toggleAddObsEvent.bind(this)} id="sexybutton"><strong>Legg til Observasjon</strong></button>
-            <button id="sexybutton" onClick={this.toggleOwnObsEvent.bind(this)}><strong>Vis mine observasjoner</strong></button>
+            <button id="sexybutton" onClick={this.toggleOwnObsEvent.bind(this)}><strong>{buttonTxt}</strong></button>
           </Auth>
           {addobs}
           {cont}
