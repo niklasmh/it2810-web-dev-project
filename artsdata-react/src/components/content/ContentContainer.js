@@ -25,6 +25,7 @@ class ContentContainer extends Component {
     this.state = {
       observations: [],
       searchFilter: {
+        searchtext: '',
         name: [],
         county: [],
         municipality: '',
@@ -84,7 +85,7 @@ class ContentContainer extends Component {
 
   changeEvent (event) {
     var newSearchFilter = this.state.searchFilter
-    newSearchFilter.name = event.target.value
+    newSearchFilter.searchtext = event.target.value
     this.setState({
       searchFilter: newSearchFilter
     }, this.fetchHandler())
@@ -118,14 +119,14 @@ class ContentContainer extends Component {
         newSearchFilter.name.push(event.target.value)
         this.setState({
           searchFilter: newSearchFilter
-        })
+        }, this.fetchHandler())
         break
       case 'Fylke':
         newSearchFilter.county = []
         newSearchFilter.county.push(event.target.value)
         this.setState({
           searchFilter: newSearchFilter
-        })
+        }, this.fetchHandler())
         break
       default:
     }
@@ -138,7 +139,14 @@ class ContentContainer extends Component {
   fetchHandler () {
     var url = 'http://localhost:3000/api/observations'
     // TODO: Legg inn filtersøk/sortering dersom vi skal håndtere det i databasen.
-    var search = this.state.searchFilter.name
+    var search = this.state.searchFilter.searchtext
+    if (this.state.searchFilter.county[0]) {
+      (search !== '') ? search += '|' + this.state.searchFilter.county[0] : search = this.state.searchFilter.county[0]
+    }
+    if (this.state.searchFilter.name[0]) {
+      (search !== '') ? search += '|' + this.state.searchFilter.name[0] : search = this.state.searchFilter.name[0]
+    }
+    console.log('searching for ' + search)
     var pageIndex = 1
     var pageSize = 50
     var request = `${url}?search=${search}&pageSize=${pageSize}&pageIndex=${pageIndex}`
@@ -166,7 +174,13 @@ class ContentContainer extends Component {
   fetchMoreHandler () {
     var url = 'http://localhost:3000/api/observations'
     // TODO: Legg inn filtersøk/sortering dersom vi skal håndtere det i databasen.
-    var search = this.state.searchFilter.name
+    var search = this.state.searchFilter.searchtext
+    if (this.state.searchFilter.county[0]) {
+      (search !== '') ? search += '|' + this.state.searchFilter.county[0] : search = this.state.searchFilter.county[0]
+    }
+    if (this.state.searchFilter.name[0]) {
+      (search !== '') ? search += '|' + this.state.searchFilter.name[0] : search = this.state.searchFilter.name[0]
+    }
     var pageIndex = Math.floor(this.state.observations.length / 50) + 1
     var pageSize = 50
     var request = `${url}?search=${search}&pageSize=${pageSize}&pageIndex=${pageIndex}`

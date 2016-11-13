@@ -22,6 +22,7 @@ class AddObservation extends Component {
       longitude: '',
       species: [],
       specie: {
+        Id: '',
         Name: '',
         ScientificName: ''
       },
@@ -61,6 +62,20 @@ class AddObservation extends Component {
     var url = 'http://localhost:3000/api/taxons'
     // Fetch is a modern replacement for XMLHttpRequest.
     fetch(`${url}`, {
+      method: 'GET',
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((data) => {
+      this.setState(Object.assign({}, this.state, { species: data }))
+    })
+    .catch((error) => {
+      this.setState(Object.assign({}, this.state, { error: error }))
+    })
+
+    var url2 = 'http://localhost:3000/api/id'
+    fetch(`${url2}`, {
       method: 'GET',
     })
     .then((response) => {
@@ -117,24 +132,19 @@ class AddObservation extends Component {
     }
 
     var data = {
-      TaxonId : navn.value.TaxonId,
-      Name: navn.value.PrefferedPopularname,
-      ScientificName : navn.value.ValidScientificName,
+      TaxonId : this.state.specie.Id,
+      Name: this.state.specie.Name,
+      ScientificName : this.state.specie.ScientificName,
       Count: antall.value,
       Notes: kommentar.value,
       County: fylke.value,
-      Municipality: munc.value,
       Locality: lokalitet.value,
-      Longitude: long.value,
-      Latitude: lat.value,
+      Longitude: long.value.substring(0,8),
+      Latitude: lat.value.substring(0,8),
       CollectedDate: this.dateFormatter(dato.value),
       User: this.state.username
     }
-
-    fetch('http://localhost/api/observations', {
-      body: JSON.stringify(data),
-      method: 'POST'
-    }).then(r => r.json()).then(console.log)
+    fetch('/api/observations', {method: 'POST',  headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)}).then(console.log)
   }
   /**
   * When a user clicks on the map, the corresponing longitude and latitude coordinates will appear
@@ -156,11 +166,15 @@ class AddObservation extends Component {
     let specieName = name
     let speciesFiltered = this.state.species.filter(s=>specieName===s.PrefferedPopularname)
     let specieScientificName = ''
+    let id = ''
 
     if (speciesFiltered.length && speciesFiltered[0].ValidScientificName)
       specieScientificName = speciesFiltered[0].ValidScientificName
+      id = speciesFiltered[0].Id
+
     this.setState({
       specie: {
+        Id : id,
         Name: specieName,
         ScientificName: specieScientificName
       }
@@ -182,32 +196,15 @@ class AddObservation extends Component {
         <select id="navn" required onChange={this.setSpecieHandler.bind(this)}>
           {
           this.state.species.filter(s=>s.PrefferedPopularname).map((specie, i) =>
-            <option
-              key={i}
-              value={specie.PrefferedPopularname}
-            >
-              {specie.PrefferedPopularname}</option>
+            <option key={i} value={specie.PrefferedPopularname}>{specie.PrefferedPopularname}</option>
           )}
         </select>
-        <input value={this.state.specie.ScientificName} readOnly disabled />
+        <input id='scientificName' value={this.state.specie.ScientificName} readOnly disabled />
         <br />Funndato:<br />
-        <input
-          type="date"
-          className="inputfelt"
-          placeholder="yyyy/mm/dd"
-          id="dato"
-          onChange={this.handleDateChange}
-          required
-        />
+        <input type="date" className="inputfelt" placeholder="yyyy/mm/dd" id="dato" onChange={this.handleDateChange} required/>
 
         <br />Antall:<br />
-        <input
-          type="number"
-          className="inputfelt"
-          placeholder="antall"
-          id="antall"
-          required
-        />
+        <input type="number" className="inputfelt" placeholder="antall" id="antall" required/>
 
         <br />Funnsted:<br />
         <select id="fylke" required>
@@ -218,48 +215,14 @@ class AddObservation extends Component {
         </select>
 
         <br />Stedsnavn:<br />
-        <input
-          type="text"
-          className="inputfelt"
-          placeholder="skriv inn funnsted"
-          id="lokalitet"
-          required
-        />
-
-        <br />Municipality:<br />
-        <input
-          type="text"
-          className="inputfelt"
-          placeholder="skriv inn funnsted"
-          id="munc"
-          required
-        />
+        <input type="text" className="inputfelt" placeholder="skriv inn funnsted" id="lokalitet" required />
 
         <br />Kommentar: <br />
-        <input
-          type="text"
-          className="inputfelt"
-          placeholder="skriv inn kommentar"
-          id="kommentar"
-        />
+        <input type="text" className="inputfelt" placeholder="skriv inn kommentar" id="kommentar" />
 
         <br />Latitude and Longitude:<br/>
-        <input
-          type="number"
-          className="inputfelt"
-          placeholder="Latitude"
-          id="lat"
-          value={this.state.latitude}
-          required
-        />
-        <input
-          type="number"
-          className="inputfelt"
-          placeholder="Longitude"
-          id="long"
-          value={this.state.longitude}
-          required
-        />
+        <input type="number" className="inputfelt" placeholder="Latitude" id="lat" value={this.state.latitude} required/>
+        <input type="number" className="inputfelt" placeholder="Longitude" id="long" value={this.state.longitude} required />
         <br/>
         <button onClick={this.props.toggleEventFunc} > Vis kart </button><br/>
 
