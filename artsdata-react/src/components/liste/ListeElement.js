@@ -22,7 +22,7 @@ class ListeElement extends Component {
       <div className="listeElement">
         <input type="checkbox" className={"toggle-checkbutton" + (this.props.data.User === localStorage['user'] ? " user" : "")} id={this.props.id} />
         <label htmlFor={this.props.id}>
-          <strong>{this.props.data.Name}</strong>
+          <p><strong>{this.props.data.Name}</strong></p> <p>- {this.props.data.Locality}</p>
         </label>
         <div className="notes">
           <dl>
@@ -34,9 +34,7 @@ class ListeElement extends Component {
             <dt>Registrert av</dt>
             <dd>{this.props.data.Collector}&nbsp;</dd>
             <dt>Sted</dt>
-            <dd>{this.props.data.Municipality}, {this.props.data.County} </dd>
-            <dt>Nøyaktig plassering</dt>
-            <dd> <a target="_blank" href={'https://www.google.com/maps/preview/@' + this.props.data.Latitude + ',' + this.props.data.Longitude + ',14z'}>{this.props.data.Locality}</a>&nbsp;</dd>
+            <dd>{this.props.data.Locality}, {this.props.data.County} </dd>
             <br />
             <dt>Beskrivelse</dt>
             <dd>{this.props.data.Notes}&nbsp;</dd>
