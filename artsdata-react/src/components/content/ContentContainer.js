@@ -3,6 +3,7 @@ import ListeContainer from '../liste/ListeContainer'
 import KartContainer from '../kart/KartContainer'
 import ListeSearch from '../liste/ListeSearch'
 import ListeFilter from '../liste/ListeFilter'
+import Auth from '../login/Auth'
 import './contentcontainer.css'
 import AddObservation from '../minside/AddObservation'
 
@@ -294,8 +295,10 @@ class ContentContainer extends Component {
 
         </div>
         <div id="contentbox">
-          <button onClick={this.toggleAddObsEvent.bind(this)} id="sexybutton"><strong>Legg til Observasjon</strong></button>
-          <button id="sexybutton"><strong>Vis mine observasjoner</strong></button>
+          <Auth>
+            <button onClick={this.toggleAddObsEvent.bind(this)} id="sexybutton"><strong>Legg til Observasjon</strong></button>
+            <button id="sexybutton"><strong>Vis mine observasjoner</strong></button>
+          </Auth>
           {addobs}
           {cont}
           <button onClick={this.fetchMoreHandler.bind(this)}>LoadMore</button>
