@@ -55,7 +55,7 @@ class UserInfo extends Component {
             required
           />
           <br />
-          <button onClick={this.handleSubmit} > Submit It </button>
+          <Button onClick={this.handleSubmit} > Submit It </Button>
         </form>
       </div>
     )

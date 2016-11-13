@@ -20,7 +20,7 @@ class LoginButton extends Component {
    */
   render () {
     return (
-      <Link to="/login">{this.props.children || 'Logg inn'}</Link>
+      <Link to="/login" className="buttons">{this.props.children || 'Logg inn'}</Link>
     )
   }
 }

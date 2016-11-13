@@ -3,6 +3,7 @@ import ListeContainer from '../liste/ListeContainer'
 import KartContainer from '../kart/KartContainer'
 import ListeSearch from '../liste/ListeSearch'
 import ListeFilter from '../liste/ListeFilter'
+import Button from '../buttons/Button'
 import './ContentContainer.css'
 import Auth from '../login/Auth'
 import AddObservation from '../minside/AddObservation'
@@ -281,14 +282,14 @@ class ContentContainer extends Component {
         <div id="sidebar">
 
           <h3>Velg Fremvisning</h3>
-          <button onClick={this.toggleEvent.bind(this)}>Kart/Liste</button>
+          <Button onClick={this.toggleEvent.bind(this)}>Kart/Liste</Button>
 
           <h3>Søk i databasen</h3>
           <ListeSearch changeHandler={this.changeEvent.bind(this)} />
 
           <h3>Sortering</h3>
-          <button name="navn" onClick={this.sortHandlerName.bind(this)}>Navn</button>
-          <button name="dato" onClick={this.sortHandlerName.bind(this)}>Dato</button>
+          <Button name="navn" onClick={this.sortHandlerName.bind(this)}>Navn</Button>
+          <Button name="dato" onClick={this.sortHandlerName.bind(this)}>Dato</Button>
 
           <ListeFilter title='Fylke' data={this.state.counties} filterHandler={this.filterEvent.bind(this)} />
           <ListeFilter title='Art' data={this.state.names} filterHandler={this.filterEvent.bind(this)} />
@@ -296,12 +297,12 @@ class ContentContainer extends Component {
         </div>
         <div id="contentbox">
           <Auth>
-            <button onClick={this.toggleAddObsEvent.bind(this)} id="sexybutton"><strong>Legg til Observasjon</strong></button>
-            <button id="sexybutton"><strong>Vis mine observasjoner</strong></button>
+            <Button onClick={this.toggleAddObsEvent.bind(this)} id="sexyButton"><strong>Legg til Observasjon</strong></Button>
+            <Button id="sexyButton"><strong>Vis mine observasjoner</strong></Button>
           </Auth>
           {addobs}
           {cont}
-          <button onClick={this.fetchMoreHandler.bind(this)}>LoadMore</button>
+          <Button onClick={this.fetchMoreHandler.bind(this)}>LoadMore</Button>
         </div>
       </div>
     )

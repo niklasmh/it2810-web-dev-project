@@ -37,11 +37,12 @@ class Header extends Component {
   render () {
     return (
       <div className="header">
-        <h1>Sjeldne arter i Norge</h1>
-        <IndexLink to="/" activeClassName="active"><LinkButton>Artsobservasjoner</LinkButton></IndexLink>
-        <Link to="/login" activeClassName="active"><LinkButton>Login</LinkButton></Link>
-        <Auth><LogoutButton /></Auth>
-        <NotAuth><LoginButton /></NotAuth>
+        <h1 className="title">Sjeldne arter i Norge</h1>
+        <div className="menu-btns">
+          <IndexLink to="/" activeClassName="active"><LinkButton>Artsobservasjoner</LinkButton></IndexLink>
+          <Auth><LogoutButton /></Auth>
+          <NotAuth><LoginButton /></NotAuth>
+        </div>
       </div>
     )
   }

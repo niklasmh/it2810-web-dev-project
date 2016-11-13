@@ -63,7 +63,7 @@ class LoginContainer extends Component {
         </div>
 
         <div id="login-submit">
-          <Button type="submit" id="loginBtn" clickHandler={this.handleLogin}>Login</Button>
+          <Button type="submit" id="loginBtn" onClick={this.handleLogin}>Login</Button>
           <Link to="/registrer">Registrer deg her</Link>
         </div>
         <p>{this.state.status}</p>

@@ -11,7 +11,13 @@
   display: inline-block;
 }
 
-.menu-btn .buttons {
+.menu-btns {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.menu-btns .buttons {
   background-color: transparent;
   box-shadow: none;
   margin: 0;

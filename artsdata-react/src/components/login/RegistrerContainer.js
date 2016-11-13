@@ -85,56 +85,54 @@ class RegistrerContainer extends Component {
   * @param: none
   */
 
-    handleSubmit () {
-        if(this.state.username < 3) {
-            this.setState({status: 'Fields are not vaild'})
-        }else{
-            fetch ('/api/users', {method: 'POST', headers: {'Content-Type': 'application/json'},body:JSON.stringify(this.state)})
-                .then((response) => {
-                return response.status
-                })
-                .then((data) => {
-                    console.log(data)
-                    if (data == 200) {
-                        this.setState(Object.assign({}, this.state, { status: 'Successfully registered, you will now be redirected to the login' }))
-                    }
-                    if(data == 404){
-                        this.setState(Object.assign({}, this.state, { status: 'User already exists' }))
-                    }
-                })
-                .catch((error) => {
-                }).then(() => {
-                  if (this.state.status === 'Successfully registered, you will now be redirected to the login') {
-                    setTimeout(function () {
-                      browserHistory.push('/login')
-                    }, 1500)
-                  }
-                })
-
+  handleSubmit () {
+    if(this.state.username < 3) {
+      this.setState({status: 'Fields are not vaild'})
+    } else {
+      fetch ('/api/users', {method: 'POST', headers: {'Content-Type': 'application/json'},body:JSON.stringify(this.state)})
+      .then((response) => {
+        return response.status
+      })
+      .then((data) => {
+        console.log(data)
+        if (data == 200) {
+          this.setState(Object.assign({}, this.state, { status: 'Successfully registered, you will now be redirected to the login' }))
         }
+        if(data == 404) {
+          this.setState(Object.assign({}, this.state, { status: 'User already exists' }))
+        }
+      })
+      .catch((error) => {
+      }).then(() => {
+        if (this.state.status === 'Successfully registered, you will now be redirected to the login') {
+          setTimeout(function () {
+            browserHistory.push('/login')
+          }, 1500)
+        }
+      })
     }
+  }
 
-    render () {
-        return (
-            <div className="registration-container module">
-                <h1>Registrer</h1>
-                <div className="registrationForm">
-                    <label htmlFor="username" className="registrationLabel">Username:</label>
-                    <input type="text" id="username" className="registrationInput" placeholder="Username" onChange={this.handleUsernameChange}/>
-                </div>
-                <div className="registrationForm">
-                    <label htmlFor="password" className="registrationLabel">Password:</label>
-                    <input type="password" id="password" className="registrationInput" placeholder="Password" onChange={this.handlePasswordChange}/>
-                </div>
-                <div className="registrationForm">
-                    <label htmlFor="email" className="registrationLabel">Email:</label>
-                    <input type="email" id="email" className="registrationInput" placeholder="Email" onChange={this.handleEmailChange}/>
-                </div>
-                <button type="submit" id="loginBtn" onClick={this.handleSubmit}>Registrer</button>
-                <p id="status">{this.state.status}</p>
-            </div>
-
-      )
+  render () {
+    return (
+      <div className="registration-container module">
+        <h1>Registrer</h1>
+        <div className="registrationForm">
+          <label htmlFor="username" className="registrationLabel">Username:</label>
+          <input type="text" id="username" className="registrationInput" placeholder="Username" onChange={this.handleUsernameChange}/>
+        </div>
+        <div className="registrationForm">
+          <label htmlFor="password" className="registrationLabel">Password:</label>
+          <input type="password" id="password" className="registrationInput" placeholder="Password" onChange={this.handlePasswordChange}/>
+        </div>
+        <div className="registrationForm">
+          <label htmlFor="email" className="registrationLabel">Email:</label>
+          <input type="email" id="email" className="registrationInput" placeholder="Email" onChange={this.handleEmailChange}/>
+        </div>
+        <Button type="submit" id="loginBtn" onClick={this.handleSubmit}>Registrer</Button>
+        <p id="status">{this.state.status}</p>
+      </div>
+    )
   }
 }
 
