@@ -92,16 +92,14 @@ class ContentContainer extends Component {
   }
 
   sortHandlerName (event) {
-    switch (this.state.sort) {
-      case 'name':
-        this.setState({sort: 'invName'})
+    switch (event.target.name) {
+      case 'navn':
+        (this.state.sort === 'name') ? this.setState({sort: 'invName'}) : this.setState({sort: 'name'})
         break
-      case 'invName':
-        this.setState({sort: 'name'})
+      case 'dato':
+        (this.state.sort === 'date') ? this.setState({sort: 'invDate'}) : this.setState({sort: 'date'})
         break
       default:
-        this.setState({sort: 'name'})
-        break
     }
   }
   /**
@@ -248,10 +246,22 @@ class ContentContainer extends Component {
           var x = a.Name.toLowerCase(), y = b.Name.toLowerCase()
           return x < y ? -1 : x > y ? 1 : 0
         })
-        break;
+        break
       case 'invName':
         observationsFiltered.sort(function (a, b) {
           var y = a.Name.toLowerCase(), x = b.Name.toLowerCase()
+          return x < y ? -1 : x > y ? 1 : 0
+        })
+        break
+      case 'date':
+        observationsFiltered.sort(function (a, b) {
+          var y = a.CollectedDate.toLowerCase(), x = b.CollectedDate.toLowerCase()
+          return x > y ? -1 : x < y ? 1 : 0
+        })
+        break
+      case 'invDate':
+        observationsFiltered.sort(function (a, b) {
+          var y = a.CollectedDate.toLowerCase(), x = b.CollectedDate.toLowerCase()
           return x < y ? -1 : x > y ? 1 : 0
         })
         break
@@ -275,8 +285,9 @@ class ContentContainer extends Component {
           <h3>Søk i databasen</h3>
           <ListeSearch changeHandler={this.changeEvent.bind(this)} />
 
-          <h3>Sorter på Navn</h3>
-          <button onClick={this.sortHandlerName.bind(this)}>Navn</button>
+          <h3>Sortering</h3>
+          <button name="navn" onClick={this.sortHandlerName.bind(this)}>Navn</button>
+          <button name="dato" onClick={this.sortHandlerName.bind(this)}>Dato</button>
 
           <ListeFilter title='Fylke' data={this.state.counties} filterHandler={this.filterEvent.bind(this)} />
           <ListeFilter title='Art' data={this.state.names} filterHandler={this.filterEvent.bind(this)} />

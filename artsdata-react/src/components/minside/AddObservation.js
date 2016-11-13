@@ -130,7 +130,6 @@ class AddObservation extends Component {
       alert('Nå har du ikke skrevet datoen på riktig format. Prøv på nytt!')
       return
     }
-
     var data = {
       TaxonId : this.state.specie.Id,
       Name: this.state.specie.Name,
@@ -204,6 +203,7 @@ class AddObservation extends Component {
         <h4>Ny Observasjon</h4>
         Art:<br />
         <select id="navn" required onChange={this.setSpecieHandler.bind(this)}>
+          <option key={-1}>Velg en art</option>
           {
           this.state.species.filter(s=>s.PrefferedPopularname).map((specie, i) =>
             <option key={i} value={specie.PrefferedPopularname}>{specie.PrefferedPopularname}</option>
