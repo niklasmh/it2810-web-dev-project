@@ -142,7 +142,7 @@ class AddObservation extends Component {
       Longitude: long.value.substring(0,8),
       Latitude: lat.value.substring(0,8),
       CollectedDate: this.dateFormatter(dato.value),
-      User: this.state.username
+      User: localStorage['user']
     }
     fetch('/api/observations', {method: 'POST', headers: {'Content-Type': 'application/json'},  bbody: JSON.stringify(data)})
         .then((response) => {
