@@ -25,7 +25,7 @@ class ContentContainer extends Component {
     this.state = {
       observations: [],
       searchFilter: {
-        name: '',
+        name: [],
         county: [],
         municipality: '',
         locality: ''
@@ -203,10 +203,18 @@ class ContentContainer extends Component {
     let observationsFiltered = this.state.observations
 
     if (this.state.searchFilter.county.length > 0) {
-      console.log('filter på county')
+      console.log('filtrer på county')
       observationsFiltered = observationsFiltered.filter(
         (item) => {
           return item.County.indexOf(this.state.searchFilter.county) !== -1
+        }
+      )
+    }
+    if (this.state.searchFilter.name.length > 0) {
+      console.log('filtrer på name')
+      observationsFiltered = observationsFiltered.filter(
+        (item) => {
+          return item.Name.indexOf(this.state.searchFilter.name) !== -1
         }
       )
     }
@@ -241,7 +249,7 @@ class ContentContainer extends Component {
           <h3>Velg Fremvisning</h3>
           <button onClick={this.toggleEvent.bind(this)}>Kart/Liste</button>
 
-          <h3>Søk etter art</h3>
+          <h3>Søk i databasen</h3>
           <ListeSearch changeHandler={this.changeEvent.bind(this)} />
 
           <h3>Sorter på Navn</h3>
@@ -253,6 +261,7 @@ class ContentContainer extends Component {
         </div>
         <div id="contentbox">
           <button onClick={this.toggleAddObsEvent.bind(this)} id="sexybutton"><strong>Legg til Observasjon</strong></button>
+          <button id="sexybutton"><strong>Vis mine observasjoner</strong></button>
           {addobs}
           {cont}
           <button onClick={this.fetchMoreHandler.bind(this)}>LoadMore</button>
