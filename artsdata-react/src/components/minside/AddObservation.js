@@ -157,11 +157,21 @@ class AddObservation extends Component {
     alert("Valgte koordinater: " + "\n" + "Latitude: " + position.lat + "\n" + "Longitude: " + position.lng + "\n" + "Lagt inn i skjema")
     this.setState({latitude: position.lat, longitude: position.lng})
   }
-  
+  /**
+  * calls and adds the evt arguments target value to the setSpecie method
+  *
+  * @param {Object} evt
+  *
+  */
   setSpecieHandler (evt) {
     this.setSpecie(evt.target.value)
   }
-
+  /**
+  * Sets the scientific name and ID for the argument given when choosing from a list of species.
+  *
+  * @param: {Object} name
+  *
+  */
   setSpecie (name) {
     let specieName = name
     let speciesFiltered = this.state.species.filter(s=>specieName===s.PrefferedPopularname)
