@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Link, IndexLink } from 'react-router'
+import { Link, IndexLink, browserHistory } from 'react-router'
 import './LoginContainer.css'
-
 class LoginContainer extends Component {
 
     constructor(props) {
@@ -40,6 +39,12 @@ class LoginContainer extends Component {
                 }
             })
             .catch((error) => {
+            }).then(() => {
+              if (this.state.status === 'Successful login') {
+                setTimeout(function () {
+                  browserHistory.push('/')
+                }, 1500)
+              }
             })
     }
 

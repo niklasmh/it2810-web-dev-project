@@ -8,6 +8,11 @@ import './MyPage.css'
  * @extends {Component}
  */
 class AddObservation extends Component {
+  /**
+  * Creates an instance of AddObservation
+  *
+  * @param: {any} props
+  */
 
   constructor (props) {
     super(props)
@@ -47,7 +52,12 @@ class AddObservation extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.fetchHandler()
   }
-
+  /**
+  * Fetches observations from the database.
+  *
+  * @param: none
+  *
+  */
   fetchHandler () {
     var url = 'http://localhost:3000/api/taxons'
     // Fetch is a modern replacement for XMLHttpRequest.
@@ -79,23 +89,43 @@ class AddObservation extends Component {
     })
   }
 
-  // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
+  /**
+  * Validates that the input string is a valid date formatted as "mm/dd/yyyy"
+  *
+  * @param: {Date} dateString
+  *
+  */
   isValidDate (dateString) {
     let date = new Date(dateString)
     return Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date.getTime())
   }
-
+  /**
+  * Sets the state of this.date to the target eventchange
+  *
+  * @param {event} event
+  *
+  */
   handleDateChange (event) {
     this.setState({date: event.target.value})
   }
-
+  /**
+  * Checks that the date given is in the correct fromat. returns a Date object in the preferred format.
+  *
+  * @param: {Date} date
+  *
+  * returns a Date object with the format as dd/mm/yyyy
+  */
   dateFormatter (date) {
     let obj = new Date(date)
     return obj.getDate() + '/' + obj.getMonth() + '/' + obj.getFullYear()
   }
-
+  /**
+  * Checks if all values in the input fields are correct before creating a data object that will be sent
+  * to the database. All values are retrieved from the input fields that corresponds to the different keys in the database.
+  *
+  * @param: {event} event
+  */
   handleSubmit (event) {
-    console.log(this.dateFormatter(dato.value), dato.value, this.isValidDate(dato.value))
     if (!this.isValidDate(dato.value)) {
       alert('Nå har du ikke skrevet datoen på riktig format. Prøv på nytt!')
       return
@@ -116,12 +146,18 @@ class AddObservation extends Component {
     }
     fetch('/api/observations', {method: 'POST',  headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)}).then(console.log)
   }
-
-  setPosition(position){
+  /**
+  * When a user clicks on the map, the corresponing longitude and latitude coordinates will appear
+  * and the long/lat fields will change their states to the same coordinates
+  *
+  * @param: {Coordiantes} position
+  *
+  */
+  setPosition (position) {
     alert("Valgte koordinater: " + "\n" + "Latitude: " + position.lat + "\n" + "Longitude: " + position.lng + "\n" + "Lagt inn i skjema")
     this.setState({latitude: position.lat, longitude: position.lng})
   }
-
+  
   setSpecieHandler (evt) {
     this.setSpecie(evt.target.value)
   }
