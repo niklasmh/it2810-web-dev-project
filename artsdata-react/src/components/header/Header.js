@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { Link, IndexLink } from 'react-router'
+
 import LinkButton from '../buttons/LinkButton'
+import Auth from '../login/Auth'
+import NotAuth from '../login/NotAuth'
+import LogoutButton from '../buttons/LogoutButton'
+import LoginButton from '../buttons/LoginButton'
 import './header.css'
 
 /**
@@ -36,6 +41,8 @@ class Header extends Component {
         <IndexLink to="/" activeClassName="active"><LinkButton>Artsobservasjoner</LinkButton></IndexLink>
         <Link to="/login" activeClassName="active"><LinkButton>Login</LinkButton></Link>
         <Link to="/minside" activeClassName="active"><LinkButton>Min SIde</LinkButton></Link>
+        <Auth><LogoutButton /></Auth>
+        <NotAuth><LoginButton /></NotAuth>
       </div>
     )
   }

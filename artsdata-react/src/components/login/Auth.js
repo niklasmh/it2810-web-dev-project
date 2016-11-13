@@ -4,13 +4,13 @@ class Auth extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      loggedin: localStorage['loggedin'] == 'true'
+      loggedin: !!(localStorage['user'] && localStorage['user'].length)
     }
   }
 
   render () {
     let content = null
-    if (this.state.loggedin)
+    if (!!(localStorage['user'] && localStorage['user'].length))
       content = this.props.children
 
     return (

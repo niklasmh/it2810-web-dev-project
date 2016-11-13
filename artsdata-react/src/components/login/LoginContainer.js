@@ -33,6 +33,7 @@ class LoginContainer extends Component {
             .then((data) => {
                 if(data.status == 200){
                     this.setState(Object.assign({}, this.state, { status: 'Successful login' }))
+                    localStorage['user'] = this.state.username
                 }
                 if(data.status == 404){
                     this.setState(Object.assign({}, this.state, { status: 'User or password does not match' }))
