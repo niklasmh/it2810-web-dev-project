@@ -74,19 +74,7 @@ class AddObservation extends Component {
       this.setState(Object.assign({}, this.state, { error: error }))
     })
 
-    var url2 = 'http://localhost:3000/api/id'
-    fetch(`${url2}`, {
-      method: 'GET',
-    })
-    .then((response) => {
-      return response.json()
-    })
-    .then((data) => {
-      this.setState(Object.assign({}, this.state, { species: data }))
-    })
-    .catch((error) => {
-      this.setState(Object.assign({}, this.state, { error: error }))
-    })
+
   }
 
   /**
@@ -250,6 +238,7 @@ class AddObservation extends Component {
         <input type="text" className="inputfelt" placeholder="skriv inn kommentar" id="kommentar" />
 
         <br />Latitude and Longitude:<br/>
+        (Trykk på kart for å velge koordinater)<br/>
         <input type="number" className="inputfelt" placeholder="Latitude" id="lat" value={this.state.latitude} required/>
         <input type="number" className="inputfelt" placeholder="Longitude" id="long" value={this.state.longitude} required />
         <br/>
