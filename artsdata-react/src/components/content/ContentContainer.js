@@ -308,8 +308,8 @@ class ContentContainer extends Component {
         </div>
         <div className="contentbox module">
           <Auth>
-            <Button onClick={this.toggleAddObsEvent.bind(this)} id="sexyButton"><strong>Legg til Observasjon</strong></Button>
-            <Button id="sexyButton" onClick={this.toggleOwnObsEvent.bind(this)}><strong>{buttonTxt}</strong></Button>
+            <Button onClick={this.toggleAddObsEvent.bind(this)}><strong>Legg til Observasjon</strong></Button>
+            <Button onClick={this.toggleOwnObsEvent.bind(this)}><strong>{buttonTxt}</strong></Button>
           </Auth>
           {addobs}
           {cont}
