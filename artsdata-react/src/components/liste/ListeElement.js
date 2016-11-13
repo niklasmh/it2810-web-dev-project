@@ -20,7 +20,7 @@ class ListeElement extends Component {
   render () {
     return (
       <div className="listeElement">
-        <input type="checkbox" className="toggle-checkbutton" id={this.props.id} />
+        <input type="checkbox" className={"toggle-checkbutton" + (this.props.data.User === localStorage['user'] ? " user" : "")} id={this.props.id} />
         <label htmlFor={this.props.id}>
           <p><strong>{this.props.data.Name}</strong></p> <p>- {this.props.data.Locality}</p>
         </label>
