@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 import { Link, IndexLink } from 'react-router'
-<<<<<<< HEAD
+
 import MenuButton from '../buttons/MenuButton'
 import './Header.css'
-=======
-
 import LinkButton from '../buttons/LinkButton'
 import Auth from '../login/Auth'
 import NotAuth from '../login/NotAuth'
 import LogoutButton from '../buttons/LogoutButton'
 import LoginButton from '../buttons/LoginButton'
-import './header.css'
->>>>>>> dev
 
 /**
  * Header is used to display a nagivation toggle button and a page title.
