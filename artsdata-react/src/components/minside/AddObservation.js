@@ -144,7 +144,7 @@ class AddObservation extends Component {
       CollectedDate: this.dateFormatter(dato.value),
       User: localStorage['user']
     }
-    fetch('/api/observations', {method: 'POST', headers: {'Content-Type': 'application/json'},  bbody: JSON.stringify(data)})
+    fetch('/api/observations', {method: 'POST', headers: {'Content-Type': 'application/json'},  body: JSON.stringify(data)})
         .then((response) => {
             return response
         })
@@ -160,7 +160,7 @@ class AddObservation extends Component {
         }).then(() => {
           if (this.state.status === 'Lagt inn i databasen') {
             setTimeout(function () {
-              browserHistory.push('/')
+              location.reload()
             }, 1500)
           }
         })
