@@ -19,6 +19,14 @@
   cursor: pointer;
 }
 
+.toggle-checkbutton.user + label {
+  background-color: #99ff99;
+}
+
+.toggle-checkbutton.user + label:hover {
+  background-color: #CCFFCC;
+}
+
 .toggle-checkbutton + label:hover {
   background-color: #dee;
 }
