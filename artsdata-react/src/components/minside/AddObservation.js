@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+
+import Button from '../buttons/Button'
 import './MyPage.css'
 
 /**
@@ -242,10 +244,10 @@ class AddObservation extends Component {
         <input type="number" className="inputfelt" placeholder="Latitude" id="lat" value={this.state.latitude} required/>
         <input type="number" className="inputfelt" placeholder="Longitude" id="long" value={this.state.longitude} required />
         <br/>
-        <button onClick={this.props.toggleEventFunc} > Vis kart </button><br/>
+        <Button onClick={this.props.toggleEventFunc}>Vis kart</Button><br/>
 
         <br />
-        <button onClick={this.handleSubmit} > Legg til observasjon </button>
+        <Button onClick={this.handleSubmit}>Legg til observasjon</Button>
         <p>{this.state.status}</p>
       </div>
     )

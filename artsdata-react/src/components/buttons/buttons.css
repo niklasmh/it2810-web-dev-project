@@ -1,5 +1,5 @@
 .buttons {
-  background-color: rgba(0, 0, 0, .2);
+  background-color: rgba(0, 0, 0, .1);
   box-shadow: 0 .5px 1px rgba(0, 0, 0, .8);
   padding: 6px 10px;
   margin: 4px;
@@ -9,6 +9,19 @@
   border: none;
   outline: none;
   display: inline-block;
+  transition-property: background-color box-shadow;
+  transition-duration: .2s;
+}
+
+.buttons:hover {
+  transition-duration: .05s;
+  background: rgba(0, 0, 0, .2);
+}
+
+.buttons:active {
+  transition-duration: .05s;
+  box-shadow: none;
+  background: rgba(0, 0, 0, .2);
 }
 
 .menu-btns {

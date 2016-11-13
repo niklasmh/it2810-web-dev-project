@@ -7,20 +7,15 @@
   margin-bottom: 1%;
 }
 
-h3{
-    background-color: #e8e8e8;
+h3 {
     width:100%;
 }
 
-.add-observation{
+.add-observation {
   background-color: #efefef;
 }
 
-.add-observation h3{
-  background-color: #e2e2e2;
-}
-
-.inputfelt{
+.inputfelt {
   width: 60%;
   margin:1%;
   margin-top: 0%;
