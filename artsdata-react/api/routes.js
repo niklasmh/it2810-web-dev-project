@@ -43,7 +43,7 @@ mongo.MongoClient.connect(url, function (err, database) {
   taxons = db.collection('taxons')
   observations = db.collection('observations')
   // TODO: Only call this method once to initiate the DB.
-  // populateDB(users, taxons, observations)
+  //populateDB(users, taxons, observations)
 })
 
 function populateDB (users, taxons, observations) {
@@ -258,6 +258,7 @@ router.post('/users', function (req, res) {
 router.get('/id', function (req, res) {
   res.end(req.session.uuid)
 })
+
 router.post('/users/login', function (req, res) {
   console.log('\r\nPOST new user')
   // TODO: Torjus
@@ -458,7 +459,7 @@ router.get('/observations/:id', function (req, res) {
  */
 router.post('/observations', function (req, res) {
   console.log('\r\nPOST new observation')
-  var obs = new observation.Observation(req.body)
+  var obs = req.body
 
   // TODO: What is "{w: 1}"?
   observations.insert(obs, {w: 1}, function (err, docs) {
