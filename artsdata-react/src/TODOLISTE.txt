@@ -8,19 +8,13 @@ KRAV VI MANGLER:
   * f.eks: implementere dynamisk lasting og min side
 
 ________________________
-
 * Sortere etter "mine observasjoner" (Torjus)
   * legg til / rediger?
 
 * Dokumentere kode (Andreas)
+* Skrive dokument om hvordan vi tilfredstiller kravene (Helene)
 
-* REPARERE artfilteret! (Håvard)
-  * søk funker ikke på alt. (Håvard)
-
-
-* legge til observasjoner (POST) (Thomas)
-  * Sette sånn at addobs tar inn innlogget bruker-ID når man lager obs.(Thomas)
-  * Gi feedback til bruker når den har lagt til.(Thomas)
+* søk funker ikke på alt - den laster ikke inn ting selv, søker kun på allerede innlasta (Håvard)
 
 * endre egne observasjoner (OUT)
 * hente ut egne observasjoner (GET)
@@ -29,12 +23,18 @@ ________________________
 * eget system for knapper som blir brukt konsekvent (niklas)
 
 LAV PRIORITET
+
 * Sidebar høyde blir lav når lista krymper... fix.
 * Endre brukerinformasjon..?
 * linter
 
 FERDIG:
-* Dynamisk lasting av data. (HÅVARD HAR FIKSA) 
+* legge til observasjoner (POST) (Thomas)
+  * Sette sånn at addobs tar inn innlogget bruker-ID når man lager obs.(Thomas)
+
+* REPARERE artfilteret! (Håvard)
+* Gi feedback til bruker når den har lagt til.(Helene)
+* Dynamisk lasting av data. (HÅVARD HAR FIKSA)
 * ordne så å velge en art i dropned på addobs genererer riktig ID og vitenskaplige navn (NIKLAS)
 * addobs forsvinner når man trykker på bakgrunnen, ikke bare knappen. Litt overkill... (Helene)
 * ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???) (HELENE)
