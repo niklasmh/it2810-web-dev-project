@@ -5,7 +5,6 @@ KRAV VI MANGLER:
   * innlogging
   * det blir registrert noe fra søkeaktiviteten
   * f.eks. hva brukeren har sett på eller søkene som er brukt.
-* sorter liste på minimum to forskjellge egenskaper. (HÅVARD FIKSER)
 * implementere "session"-håndtering (NIKLAS)
   * f.eks: implementere dynamisk lasting og min side
 
