@@ -51,10 +51,16 @@ class KartContainer extends Component {
     }
     return [[71.695960, 32.149458], [57.452945, 2.837935]]
   }
-  handleMapClick(event){
+
+  handleMapClick (event) {
     this.props.registerPositionFunc(event.latlng)
     //alert("Koordinater: " + event.latlng )
   }
+  /** renders the map where the KartContainer.js component is called and populates it with observations.
+  *
+  * @param: none
+  *
+  */
   render () {
     console.log('kartrender')
     let observations = this.props.data
