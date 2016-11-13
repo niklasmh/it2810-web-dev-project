@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import MyObservations from './MyObservations'
 import UserInfo from './UserInfo'
 
 /**
@@ -17,7 +16,6 @@ class MyPage extends Component {
     return (
       <div>
         <UserInfo />
-        <MyObservations />
       </div>
     )
   }

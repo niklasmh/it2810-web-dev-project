@@ -4,6 +4,7 @@ import KartContainer from '../kart/KartContainer'
 import ListeSearch from '../liste/ListeSearch'
 import ListeFilter from '../liste/ListeFilter'
 import './ContentContainer.css'
+import Auth from '../login/Auth'
 import AddObservation from '../minside/AddObservation'
 
 /**
@@ -25,15 +26,48 @@ class ContentContainer extends Component {
     this.state = {
       observations: [],
       searchFilter: {
-        name: '',
+        searchtext: '',
+        name: [],
         county: [],
         municipality: '',
         locality: ''
       },
       sort: '',
-      counties: [],
-      names: [],
-      toggleContent: true
+      counties: [
+        'Akershus',
+        'Aust-Agder',
+        'Buskerud',
+        'Finnmark',
+        'Hedmark',
+        'Hordaland',
+        'Møre og Romsdal',
+        'Nord-Trøndelag',
+        'Nordland',
+        'Oppland',
+        'Oslo',
+        'Rogaland',
+        'Sogn og Fjordane',
+        'Sør-Trøndelag',
+        'Telemark',
+        'Troms',
+        'Vest-Agder',
+        'Vestfold',
+        'Østfold'
+      ],
+      names: [
+        'villsvin',
+        'storflaggermus',
+        'slåttehumle',
+        'moskusfe',
+        'snømus',
+        'fiskeørn',
+        'gaupe',
+        'gulflankedelfin',
+        'bredøre',
+        'piggsvin'
+      ],
+      toggleContent: true,
+      toggleAddObs: false
     }
     this.fetchHandler()
   }
@@ -44,53 +78,74 @@ class ContentContainer extends Component {
     })
   }
 
+  toggleAddObsEvent (event) {
+    this.setState({
+      toggleAddObs: !this.state.toggleAddObs
+    })
+  }
+
   changeEvent (event) {
     var newSearchFilter = this.state.searchFilter
-    newSearchFilter.name = event.target.value
+    newSearchFilter.searchtext = event.target.value
     this.setState({
       searchFilter: newSearchFilter
     }, this.fetchHandler())
   }
 
   sortHandlerName (event) {
-    switch (this.state.sort) {
-      case 'name':
-        this.setState({sort: 'invName'})
+    switch (event.target.name) {
+      case 'navn':
+        (this.state.sort === 'name') ? this.setState({sort: 'invName'}) : this.setState({sort: 'name'})
         break
-      case 'invName':
-        this.setState({sort: 'name'})
+      case 'dato':
+        (this.state.sort === 'date') ? this.setState({sort: 'invDate'}) : this.setState({sort: 'date'})
         break
       default:
-        this.setState({sort: 'name'})
-        break
     }
   }
-
+  /**
+  * Filters observations in the list based on the current filter options
+  *
+  * @param: {event} event
+  *
+  * sets the searchFilter based on the event-argument
+  */
   filterEvent (event) {
     var newSearchFilter = this.state.searchFilter
     switch (event.target.name) {
-      case 'Fylke':
-        newSearchFilter.county = []
-        newSearchFilter.county.push(event.target.value)
-        this.setState({
-          searchFilter: newSearchFilter
-        })
-        break
       case 'Art':
         newSearchFilter.name = []
         newSearchFilter.name.push(event.target.value)
         this.setState({
           searchFilter: newSearchFilter
-        })
+        }, this.fetchHandler())
+        break
+      case 'Fylke':
+        newSearchFilter.county = []
+        newSearchFilter.county.push(event.target.value)
+        this.setState({
+          searchFilter: newSearchFilter
+        }, this.fetchHandler())
         break
       default:
     }
   }
-
+  /**
+  * retrieves data from the database based on searchFilter.name
+  *
+  * @param: none
+  */
   fetchHandler () {
     var url = 'http://localhost:3000/api/observations'
     // TODO: Legg inn filtersøk/sortering dersom vi skal håndtere det i databasen.
-    var search = this.state.searchFilter.name
+    var search = this.state.searchFilter.searchtext
+    if (this.state.searchFilter.county[0]) {
+      (search !== '') ? search += '|' + this.state.searchFilter.county[0] : search = this.state.searchFilter.county[0]
+    }
+    if (this.state.searchFilter.name[0]) {
+      (search !== '') ? search += '|' + this.state.searchFilter.name[0] : search = this.state.searchFilter.name[0]
+    }
+    console.log('searching for ' + search)
     var pageIndex = 1
     var pageSize = 50
     var request = `${url}?search=${search}&pageSize=${pageSize}&pageIndex=${pageIndex}`
@@ -106,13 +161,25 @@ class ContentContainer extends Component {
     })
     .catch((error) => {
       this.setState(Object.assign({}, this.state, { error: error }))
-    }).then(() => { this.filterProps() })
-  }
+    })
 
+  }
+  /**
+  * fetches more results from the database based on the searchFilter. this one is used
+  * to fetch more observations from the database if the user wants more observations
+  *
+  * @param: none
+  */
   fetchMoreHandler () {
     var url = 'http://localhost:3000/api/observations'
     // TODO: Legg inn filtersøk/sortering dersom vi skal håndtere det i databasen.
-    var search = this.state.searchFilter.name
+    var search = this.state.searchFilter.searchtext
+    if (this.state.searchFilter.county[0]) {
+      (search !== '') ? search += '|' + this.state.searchFilter.county[0] : search = this.state.searchFilter.county[0]
+    }
+    if (this.state.searchFilter.name[0]) {
+      (search !== '') ? search += '|' + this.state.searchFilter.name[0] : search = this.state.searchFilter.name[0]
+    }
     var pageIndex = Math.floor(this.state.observations.length / 50) + 1
     var pageSize = 50
     var request = `${url}?search=${search}&pageSize=${pageSize}&pageIndex=${pageIndex}`
@@ -129,21 +196,10 @@ class ContentContainer extends Component {
     })
     .catch((error) => {
       this.setState(Object.assign({}, this.state, { error: error }))
-    }).then(() => { this.filterProps() })
+    })
   }
-
-  filterProps () {
-    this.state.observations.forEach(
-      (item) => {
-        if (this.state.counties.indexOf(item.County) === -1) {
-          this.state.counties.push(item.County)
-        }
-        if (this.state.names.indexOf(item.Name) === -1) {
-          this.state.names.push(item.Name)
-        }
-      }
-    )
-    this.forceUpdate()
+  sendPosition(position){
+    this.refs.addobs.setPosition(position)
   }
 
   /**
@@ -159,25 +215,54 @@ class ContentContainer extends Component {
 
     let observationsFiltered = this.state.observations
 
+    if (this.state.searchFilter.name.length > 0) {
+      console.log('filtrer på name')
+      // console.log(this.state.searchFilter.name.length)
+      observationsFiltered = observationsFiltered.filter(
+        (item) => {
+          return item.Name.indexOf(this.state.searchFilter.name) !== -1
+        }
+      )
+    }
+
     if (this.state.searchFilter.county.length > 0) {
-      console.log('filter på county')
+      console.log('filtrer på county')
+      // console.log(this.state.searchFilter.name.length)
       observationsFiltered = observationsFiltered.filter(
         (item) => {
           return item.County.indexOf(this.state.searchFilter.county) !== -1
         }
       )
     }
-
+    /* Decides if the user wants to sort the list of observations in any way.
+    * this.state.sort decides if the list should be sorted based on its value.
+    *
+    * @param: this.state.sort
+    *
+    * returns: a returned sorted list based on the argument given.
+    */
     switch (this.state.sort) {
       case 'name':
         observationsFiltered.sort(function (a, b) {
           var x = a.Name.toLowerCase(), y = b.Name.toLowerCase()
           return x < y ? -1 : x > y ? 1 : 0
         })
-        break;
+        break
       case 'invName':
         observationsFiltered.sort(function (a, b) {
           var y = a.Name.toLowerCase(), x = b.Name.toLowerCase()
+          return x < y ? -1 : x > y ? 1 : 0
+        })
+        break
+      case 'date':
+        observationsFiltered.sort(function (a, b) {
+          var y = a.CollectedDate.toLowerCase(), x = b.CollectedDate.toLowerCase()
+          return x > y ? -1 : x < y ? 1 : 0
+        })
+        break
+      case 'invDate':
+        observationsFiltered.sort(function (a, b) {
+          var y = a.CollectedDate.toLowerCase(), x = b.CollectedDate.toLowerCase()
           return x < y ? -1 : x > y ? 1 : 0
         })
         break
@@ -185,7 +270,11 @@ class ContentContainer extends Component {
     }
 
     var cont = ''
-    this.state.toggleContent ? cont = <ListeContainer data={observationsFiltered} /> : cont = <KartContainer data={observationsFiltered} />
+    this.state.toggleContent ? cont = <ListeContainer data={observationsFiltered} /> : cont = <KartContainer data={observationsFiltered} registerPositionFunc={this.sendPosition.bind(this)} />
+
+    var addobs = ''
+    this.state.toggleAddObs ? addobs = <AddObservation ref='addobs' toggleEventFunc={this.toggleEvent.bind(this)}/> : addobs = ''
+
 
     return (
       <div id="flexy">
@@ -194,23 +283,23 @@ class ContentContainer extends Component {
           <h3>Velg Fremvisning</h3>
           <button onClick={this.toggleEvent.bind(this)}>Kart/Liste</button>
 
-          <h3>Søk etter art</h3>
+          <h3>Søk i databasen</h3>
           <ListeSearch changeHandler={this.changeEvent.bind(this)} />
 
-          <h3>Sorter på Navn</h3>
-          <button onClick={this.sortHandlerName.bind(this)}>Navn</button>
+          <h3>Sortering</h3>
+          <button name="navn" onClick={this.sortHandlerName.bind(this)}>Navn</button>
+          <button name="dato" onClick={this.sortHandlerName.bind(this)}>Dato</button>
 
           <ListeFilter title='Fylke' data={this.state.counties} filterHandler={this.filterEvent.bind(this)} />
           <ListeFilter title='Art' data={this.state.names} filterHandler={this.filterEvent.bind(this)} />
 
         </div>
         <div id="contentbox">
-          <input type="checkbox" className="toggle-checkbutton" id="skjul" />
-          <label htmlFor="skjul" id="addbox">
-            <strong>Legg til Observasjon</strong>
-            <AddObservation id="skjulmeg" />
-          </label>
-
+          <Auth>
+            <button onClick={this.toggleAddObsEvent.bind(this)} id="sexybutton"><strong>Legg til Observasjon</strong></button>
+            <button id="sexybutton"><strong>Vis mine observasjoner</strong></button>
+          </Auth>
+          {addobs}
           {cont}
           <button onClick={this.fetchMoreHandler.bind(this)}>LoadMore</button>
         </div>

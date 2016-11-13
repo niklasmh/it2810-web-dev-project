@@ -1,38 +1,48 @@
 _______________________
 KRAV VI MANGLER:
-* Dynamisk lasting av data. (HÅVARD FIKSER)
-  Eksempel: liste viser de 10 første treffene,flere lastes når brukeren scroller (HÅVARD FIKSER DETTE OGSÅ)
-  eller ved blar i sider. (JADA)
-* "min side" funksjonalitet: innlogging hvor det blir registrert noe fra
-  søkeaktiviteten f.eks. hva brukeren har sett på eller søkene som er brukt.
-* Den listebaserte visningen skal kunne sorteres på minimum to forskjellge egenskaper. (HÅVARD FIKSER)
-* må implementere "session"-håndtering
-  som vi f.eks. trenger for å implementere dynamisk lasting og min side
+* Dynamisk lasting av data. (HÅVARD FIKSER) (DONE tRUR EG?)
+* "min side" funksjonalitet:
+  * innlogging
+  * det blir registrert noe fra søkeaktiviteten
+  * f.eks. hva brukeren har sett på eller søkene som er brukt.
+* implementere "session"-håndtering (NIKLAS)
+  * f.eks: implementere dynamisk lasting og min side
 
 ________________________
-* Sidebar høyde blir lav når lista krymper... fix.
-* ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???)
-* Flere sorteringer
-* ordne så å velge en art i dropned på addobs genererer riktig ID og vitenskaplige navn (HELENE)
-* Hente ut koordinat fra leaflet, som kan puttes inn i addobs. (HELENE)
-* Sette sånn at addobs tar inn innlogget bruker-ID når man lager obs.
 
-* legge til observasjoner (POST)
+* Sortere etter "mine observasjoner" (Torjus)
+  * legg til / rediger?
+
+* Dokumentere kode (Andreas)
+
+* REPARERE artfilteret! (Håvard)
+  * søk funker ikke på alt. (Håvard)
+
+
+* legge til observasjoner (POST) (Thomas)
+  * Sette sånn at addobs tar inn innlogget bruker-ID når man lager obs.(Thomas)
+  * Gi feedback til bruker når den har lagt til.(Thomas)
+
 * endre egne observasjoner (OUT)
 * hente ut egne observasjoner (GET)
 * slette egne observasjoner (DELETE)
 
-* Uten søk skal get/observations gi siste N observasjoner (HÅVARD ER FERDIG)
-* Med søk skal det gi alle som har match (HÅVARD ER FERDIG)
-
-* eget system for knapper som blir brukt konsekvent (NIKLAS ER FERDIG)
+* eget system for knapper som blir brukt konsekvent (niklas)
 
 LAV PRIORITET
+* Sidebar høyde blir lav når lista krymper... fix.
 * Endre brukerinformasjon..?
 * linter
 
 FERDIG:
+* ordne så å velge en art i dropned på addobs genererer riktig ID og vitenskaplige navn (NIKLAS)
+* addobs forsvinner når man trykker på bakgrunnen, ikke bare knappen. Litt overkill... (Helene)
+* ENCODING I DATABASEN. ÆØÅ er nå spørsmålstegn. (Men kun hos helene???) (HELENE)
+* Hente ut koordinat fra leaflet, som kan puttes inn i addobs. (HELENE)
+* Uten søk skal get/observations gi siste N observasjoner (HÅVARD ER FERDIG)
+* Med søk skal det gi alle som har match (HÅVARD ER FERDIG)
 * Skifte navn på maincontent linken
 * FLYTTE ADDOBS.inn i hovedsiden.
 * Rydd opp i listefiltersøkingen: (COMPLETE)
 * sorteringen er nå enveis. mao, vi kan ikke se den sortere.  (COMPLETE)
+* sorter liste på minimum to forskjellge egenskaper. (HÅVARD FIKSER/ER FERDIG)

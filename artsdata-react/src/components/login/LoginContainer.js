@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Link, IndexLink } from 'react-router'
-
 import Button from '../buttons/Button'
+import { Link, IndexLink, browserHistory } from 'react-router'
 import './LoginContainer.css'
-
 class LoginContainer extends Component {
 
   constructor(props) {
@@ -28,19 +26,27 @@ class LoginContainer extends Component {
   }
 
   handleLogin() {
-    fetch('/api/users/login', {method: 'POST', headers: {'Content-Type': 'application/json'}, body:JSON.stringify(this.state)})
+    fetch('/api/users/login', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(this.state)})
     .then((response) => {
       return response
     })
     .then((data) => {
       if(data.status == 200){
         this.setState(Object.assign({}, this.state, { status: 'Successful login' }))
+        localStorage['user'] = this.state.username
       }
       if(data.status == 404){
         this.setState(Object.assign({}, this.state, { status: 'User or password does not match' }))
       }
     })
     .catch(console.log)
+    .then(() => {
+      if (this.state.status === 'Successful login') {
+        setTimeout(function () {
+          browserHistory.push('/')
+        }, 1500)
+      }
+    })
   }
 
   render () {
